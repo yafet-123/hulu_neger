@@ -17,8 +17,8 @@ export default function VerticalNavbar(){
     const SideBarList = [
         { link: "/Admin", icon: <AiFillDashboard size={25}/>, name: "Dashboard",},
         { link: "/Admin/User", icon: <AiOutlineUser size={25}/>, name: "User",},
-        { link: "/Admin/JobAdd", icon: <AiOutlineFolderAdd size={25}/>, name: "Add Job" },
-        { link: "/Admin/JobDisplay", icon: <BsDisplay size={25}/>, name: "Display Job" },
+        { link: "/Admin/Job/Add", icon: <AiOutlineFolderAdd size={25}/>, name: "Add Job" },
+        { link: "/Admin/Job/Display", icon: <BsDisplay size={25}/>, name: "Display Job" },
         { link: "/Admin/Category", icon: <MdOutlineCategory size={25}/>, name: "Category" },
         { link: "/Admin/Location", icon: <MdLocationOn size={25}/>, name: "Location" },
         { link: "/Admin/NewsCategory", icon: <BiNews size={25}/>, name: "News Category" },
