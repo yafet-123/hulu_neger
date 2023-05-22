@@ -1,6 +1,6 @@
 "use client"
 import React, {useState,useEffect} from "react";
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/navigation'
 import { FaBlogger,FaBlog } from "react-icons/fa"
 import { AiOutlineClose, AiOutlineMail, AiOutlineMenu, AiFillDashboard, AiOutlineUser, AiOutlineFolderAdd, AiOutlineHtml5 } from "react-icons/ai";
 import { DiJavascript1, DiPython } from "react-icons/di"
@@ -13,7 +13,7 @@ import { FiLogOut } from "react-icons/fi"
 import { BiDownArrow, BiNews } from "react-icons/bi"
 import { BsDisplay, BsFunnelFill } from 'react-icons/bs'
 
-export function VerticalNavbar({onChange, data}){
+export default function VerticalNavbar(){
     const SideBarList = [
         { link: "/Admin", icon: <AiFillDashboard size={25}/>, name: "Dashboard",},
         { link: "/Admin/User", icon: <AiOutlineUser size={25}/>, name: "User",},
@@ -40,11 +40,10 @@ export function VerticalNavbar({onChange, data}){
         setsideBar(!sideBar);
     };
     const path = router.pathname
-    console.log(data)
 
 	return(
             <div className={`flex h-full sticky top-0 bottom-0 ${sideBar ? "w-16 lg:w-28" : "w-16 lg:w-96"} pt-24`}>
-                <nav className="w-full h-screen flex flex-col py-8 lg:px-4 bg-[#e6e6e6] dark:bg-[#02201D] scroll_width">
+                <nav className="w-full h-screen flex flex-col py-8 lg:px-4 bg-transparent dark:bg-[#02201D] scroll_width">
                     <div className="flex justify-between ml-2 lg:ml-5">
                         <h1 className={`text-2xl font-bold text-black dark:text-white ${sideBar ? "hidden" : "hidden lg:flex"}`}>Admin Page</h1>
                         <button 
@@ -77,9 +76,6 @@ export function VerticalNavbar({onChange, data}){
                         </ul>
                     </div>
                     <div className="mt-auto flex flex-col">
-                        
-
-                        
                         
                     </div>
                 </nav>

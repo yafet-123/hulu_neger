@@ -16,8 +16,8 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="flex">
-        <main className='app'>
+      <body className="">
+        <main className='flex app'>
           <div><VerticalNavbar/></div>
           <div>{children}</div>
         </main>
