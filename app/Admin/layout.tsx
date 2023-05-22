@@ -15,13 +15,9 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
-      <body className="">
-        <main className='flex app'>
-          <div><VerticalNavbar/></div>
-          <div>{children}</div>
-        </main>
-      </body>
-    </html>
+    <div className='flex'>
+      <VerticalNavbar/>
+      { children }
+    </div>
   )
 }

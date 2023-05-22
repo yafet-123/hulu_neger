@@ -43,7 +43,7 @@ export default function VerticalNavbar(){
 
 	return(
             <div className={`flex h-full sticky top-0 bottom-0 ${sideBar ? "w-16 lg:w-28" : "w-16 lg:w-96"} pt-24`}>
-                <nav className="w-full h-screen flex flex-col py-8 lg:px-4 bg-transparent dark:bg-[#02201D] scroll_width">
+                <nav className="w-full h-screen flex flex-col lg:px-4 bg-transparent dark:bg-[#02201D] scroll_width">
                     <div className="flex justify-between ml-2 lg:ml-5">
                         <h1 className={`text-2xl font-bold text-black dark:text-white ${sideBar ? "hidden" : "hidden lg:flex"}`}>Admin Page</h1>
                         <button 
@@ -59,9 +59,7 @@ export default function VerticalNavbar(){
                                 <li className="mb-5" key={index}>
                                     <button 
                                         onClick = {()=>{
-                                            router.push({
-                                                pathname:side.link,
-                                            })
+                                            router.push(side.link)
                                         }}
                                         className={ side.link == path ? "lg:w-full bg-white flex items-center px-4 py-2 lg:py-4 text-xs lg:text-sm text-black rounded-xl":
                                         "lg:w-full flex items-center px-4 py-2 lg:py-4 text-xs lg:text-sm text-black hover:text-white dark:text-white hover:bg-[#009688] rounded-xl" }
