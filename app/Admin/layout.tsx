@@ -1,6 +1,7 @@
 import { Inter } from 'next/font/google'
 import type { Metadata } from 'next';
-import './globals.css'
+import '../globals.css'
+import VerticalNavbar from "@/components/Admin/Common/VerticalNavbar"
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {
@@ -15,12 +16,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>
-        <div className='main'>
-          <div className='gradient' />
-        </div>
+      <body className="flex">
         <main className='app'>
-          {children}
+          <div><VerticalNavbar/></div>
+          <div>{children}</div>
         </main>
       </body>
     </html>
