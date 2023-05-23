@@ -15,9 +15,14 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <div className='flex'>
-      <VerticalNavbar/>
-      { children }
-    </div>
+    <main className='flex'>
+      <div>
+        {/* @ts-ignore */}
+        <VerticalNavbar />
+      </div>
+      <div>
+        { children }
+      </div>
+    </main>
   )
 }

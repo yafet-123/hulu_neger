@@ -1,6 +1,7 @@
 "use client"
 import React, {useState,useEffect} from "react";
 import { useRouter } from 'next/navigation'
+import Link from 'next/link'
 import { FaBlogger,FaBlog } from "react-icons/fa"
 import { AiOutlineClose, AiOutlineMail, AiOutlineMenu, AiFillDashboard, AiOutlineUser, AiOutlineFolderAdd, AiOutlineHtml5 } from "react-icons/ai";
 import { DiJavascript1, DiPython } from "react-icons/di"
@@ -12,6 +13,7 @@ import Link from 'next/link'
 import { FiLogOut } from "react-icons/fi"
 import { BiDownArrow, BiNews } from "react-icons/bi"
 import { BsDisplay, BsFunnelFill } from 'react-icons/bs'
+
 
 export default function VerticalNavbar(){
     const SideBarList = [
@@ -57,10 +59,8 @@ export default function VerticalNavbar(){
                         <ul>
                             {SideBarList.map((side, index) => (
                                 <li className="mb-5" key={index}>
-                                    <button 
-                                        onClick = {()=>{
-                                            router.push(side.link)
-                                        }}
+                                    <Link 
+                                        href={side.link}
                                         className={ side.link == path ? "lg:w-full bg-white flex items-center px-4 py-2 lg:py-4 text-xs lg:text-sm text-black rounded-xl":
                                         "lg:w-full flex items-center px-4 py-2 lg:py-4 text-xs lg:text-sm text-black hover:text-white dark:text-white hover:bg-[#009688] rounded-xl" }
                                     >
@@ -68,7 +68,7 @@ export default function VerticalNavbar(){
                                             <span className={`ml-0 lg:ml-4 font-semibold ${sideBar ? 'hidden' : 'hidden lg:flex' } `}>
                                                 {side.name}
                                             </span>
-                                    </button>
+                                    </Link>
                                 </li>
                             ))}
                         </ul>
