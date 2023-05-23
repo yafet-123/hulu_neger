@@ -3,6 +3,9 @@ import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import React, {useState,useEffect} from "react";
 
+// font awesome icon
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faBars } from '@fortawesome/pro-solid-svg-icons'
 
 export default function VerticalNavbar(){
     const SideBarList = [
@@ -41,7 +44,7 @@ export default function VerticalNavbar(){
                         onClick={handleSideBar} 
                         className={`flex text-black dark:text-white hover:text-slate-800 focus:outline-none ${ sideBar ? "flex justify-center items-center" : ""} `}
                     >
-                        
+                        <FontAwesomeIcon icon={faBars} flip />
                     </button>
                 </div>
 
