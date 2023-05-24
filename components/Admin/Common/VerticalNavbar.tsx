@@ -8,23 +8,24 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBars,faHouse,faUser,faLocationCrosshairs, faNewspaper, faTypewriter,faCameraMovie,
     faJavaScript,faCode,faCSS3Logo,faBlog , faPython} from '@fortawesome/free-solid-svg-icons'
 
+// beat for icon
 export default function VerticalNavbar(){
     const SideBarList = [
-        { link: "/Admin", icons:<FontAwesomeIcon icon={faHouse} beat size="xl" />, name: "Dashboard",},
-        { link: "/Admin/User", icons:<FontAwesomeIcon icon={faUser} beat size="xl"/>,  name: "User",},
+        { link: "/Admin", icons:<FontAwesomeIcon icon={faHouse} size="xl" />, name: "Dashboard",},
+        { link: "/Admin/User", icons:<FontAwesomeIcon icon={faUser} size="xl"/>,  name: "User",},
         { link: "/Admin/Job/Add",  name: "Add Job" },
         { link: "/Admin/Job/Display",  name: "Display Job" },
         { link: "/Admin/Category",  name: "Category" },
-        { link: "/Admin/Location",icons:<FontAwesomeIcon icon={faLocationCrosshairs} beat size="xl" />,  name: "Location" },
+        { link: "/Admin/Location",icons:<FontAwesomeIcon icon={faLocationCrosshairs} size="xl" />,  name: "Location" },
         { link: "/Admin/NewsCategory", name: "News Category" },
-        { link: "/Admin/News", icons:<FontAwesomeIcon icon={faNewspaper} beat size="xl" />,  name: "News" },
+        { link: "/Admin/News", icons:<FontAwesomeIcon icon={faNewspaper} size="xl" />,  name: "News" },
         { link: "/Admin/EntertainmentCategory",  name: "Entertainment Category" },
         { link: "/Admin/Entertainment", name: "Entertainment" },
-        { link: "/Admin/HTmlCourse",icons:<FontAwesomeIcon icon={faCode} beat size="xl" />,  name: "HTML Course" },
+        { link: "/Admin/HTmlCourse",icons:<FontAwesomeIcon icon={faCode} size="xl" />,  name: "HTML Course" },
         { link: "/Admin/CSSCourse", name: "CSS Course" },
         { link: "/Admin/JavascriptCourses", name: "JavaScript Course" },
         { link: "/Admin/PythonCourses", name: "Python Course" },
-        { link: "/Admin/BlogsCategory",icons:<FontAwesomeIcon icon={faBlog} beat size="xl" />,  name: "Blogs Category" },
+        { link: "/Admin/BlogsCategory",icons:<FontAwesomeIcon icon={faBlog} size="xl" />,  name: "Blogs Category" },
         { link: "/Admin/Blogs",  name: "Blogs" },
         { link: "/Admin/AiSearchCategory",  name: "AiSearch Category" },
         { link: "/Admin/AiSearch",  name: "AiSearch" },
