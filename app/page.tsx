@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import React from 'react'
+import prisma from '@/utils/prismaClient'
 
 export default function HomePage() {
   return (
