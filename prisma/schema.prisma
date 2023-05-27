@@ -9,3 +9,309 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model Category {
+  category_id  Int           @id @default(autoincrement())
+  CategoryName String        @db.VarChar(255)
+  user_id      Int?
+  CreatedDate  DateTime?     @default(now()) @db.Timestamptz(6)
+  ModifiedDate DateTime?     @default(now()) @db.Timestamptz(6)
+  User         User?         @relation(fields: [user_id], references: [user_id], onUpdate: NoAction)
+  JobCategory  JobCategory[]
+}
+  
+model Job {
+  job_id          Int           @id @default(autoincrement())
+  CompanyName     String?       @db.VarChar(255)
+  Image           String?       @db.VarChar(255)
+  JobsName        String?       @db.VarChar(255)          
+  CareerLevel     String?       @db.VarChar(255)
+  Salary          String?       @db.VarChar(255)
+  Descreption     String?
+  shortDescreption String?
+  view            Int           @default(0)
+  DeadLine        String?     
+  CreatedDate     DateTime?     @default(now()) @db.Timestamptz(6)
+  ModifiedDate    DateTime?     @default(now()) @db.Timestamptz(6)
+  user_id         Int
+  User            User          @relation(fields: [user_id], references: [user_id], onDelete: Cascade, onUpdate: Cascade)
+  JobLocation     JobLocation[]
+  JobCategory     JobCategory[]
+}
+
+model Location {
+  location_id     Int           @id @default(autoincrement())
+  LocationName    String        @db.VarChar(255)
+  Image           String?       @db.VarChar(255)
+  user_id         Int
+  CreatedDate     DateTime?     @default(now()) @db.Timestamptz(6)
+  ModifiedDate    DateTime?     @default(now()) @db.Timestamptz(6)
+  User            User          @relation(fields: [user_id], references: [user_id], onDelete: Cascade, onUpdate: Cascade)
+  JobLocation     JobLocation[]
+}
+
+model JobLocation {
+  job_location_id  Int       @id @default(autoincrement())
+  user_id          Int?
+  location_id      Int
+  job_id           Int
+  CreatedDate      DateTime? @default(now()) @db.Timestamptz(6)
+  ModifiedDate     DateTime? @default(now()) @db.Timestamptz(6)
+  Location         Location  @relation(fields: [location_id], references: [location_id], onDelete: Cascade, onUpdate: Cascade)
+  Job              Job       @relation(fields: [job_id], references: [job_id], onDelete: Cascade, onUpdate: Cascade)
+  User             User?     @relation(fields: [user_id], references: [user_id], onUpdate: NoAction)
+}
+
+
+model User {
+  user_id      Int           @id @default(autoincrement())
+  UserName     String        @unique @db.VarChar(255)
+  email        String?       @unique @db.VarChar(255)
+  resetToken   String?       @unique @db.VarChar(255)
+  Password     String        @db.VarChar(255)
+  role         String?       @db.VarChar(255)
+  CreatedDate  DateTime?     @default(now()) @db.Timestamptz(6)
+  ModifiedDate DateTime?     @default(now()) @db.Timestamptz(6)
+  Category     Category[]
+  Entertainment Entertainment[]
+  EntertainmentCategory EntertainmentCategory[]
+  EntertainmentCategoryRelationship EntertainmentCategoryRelationship[]
+  News                        News[]
+  NewsCategory                NewsCategory[]
+  NewsCategoryRelationship    NewsCategoryRelationship[]
+  JobCategory                 JobCategory[]
+  JobLocation                 JobLocation[]
+  Job                         Job[]
+  Location                    Location[]
+  HTMLCourse                  HTMLCourse[]
+  CSSCourse                   CSSCourse[]
+  JavascriptCourse            JavascriptCourse[]
+  PythonCourse                PythonCourse[]
+  Blogs                       Blogs[]
+  BlogsCategory               BlogsCategory[]
+  BlogsCategoryRelationship   BlogsCategoryRelationship[]
+  Detail                      Detail[]
+  AiCategory                  AiCategory[]
+  DetailCategory              DetailCategory[]
+}
+
+model JobCategory {
+  job_category_id  Int       @id @default(autoincrement())
+  user_id      Int?
+  category_id  Int
+  job_id       Int
+  CreatedDate  DateTime? @default(now()) @db.Timestamptz(6)
+  ModifiedDate DateTime? @default(now()) @db.Timestamptz(6)
+  Category     Category  @relation(fields: [category_id], references: [category_id], onDelete: Cascade, onUpdate: Cascade)
+  Job          Job       @relation(fields: [job_id], references: [job_id], onDelete: Cascade, onUpdate: Cascade)
+  User         User?     @relation(fields: [user_id], references: [user_id], onUpdate: NoAction)
+}
+
+model Blogs {
+  blogs_id                     Int           @id @default(autoincrement()) 
+  Header                       String?
+  Image                        String?       @db.VarChar(255)
+  ShortDescription             String?           
+  Description                  String?
+  view                         Int           @default(0)      
+  user_id                      Int
+  CreatedDate                  DateTime?     @default(now()) @db.Timestamptz(6)
+  ModifiedDate                 DateTime?     @default(now()) @db.Timestamptz(6)    
+  User                         User          @relation(fields: [user_id], references: [user_id], onDelete: Cascade, onUpdate: Cascade)  
+  BlogsCategoryRelationship    BlogsCategoryRelationship[]
+}
+
+model BlogsCategory {
+  category_id                   Int           @id @default(autoincrement())
+  CategoryName                  String        @db.VarChar(255)
+  user_id                       Int?
+  CreatedDate                   DateTime?     @default(now()) @db.Timestamptz(6)
+  ModifiedDate                  DateTime?     @default(now()) @db.Timestamptz(6)
+  User                          User?         @relation(fields: [user_id], references: [user_id], onUpdate: NoAction)
+  BlogsCategoryRelationship      BlogsCategoryRelationship[]
+}
+
+model BlogsCategoryRelationship{
+  blogs_category_id Int           @id @default(autoincrement())
+  user_id           Int?
+  category_id       Int
+  blogs_id          Int
+  CreatedDate       DateTime?     @default(now()) @db.Timestamptz(6)
+  ModifiedDate      DateTime?     @default(now()) @db.Timestamptz(6)
+  BlogsCategory     BlogsCategory  @relation(fields: [category_id], references: [category_id], onDelete: Cascade, onUpdate: Cascade)
+  Blogs             Blogs          @relation(fields: [blogs_id], references: [blogs_id], onDelete: Cascade, onUpdate: Cascade)
+  User              User?         @relation(fields: [user_id], references: [user_id], onUpdate: NoAction)
+}
+
+model News {
+  news_id                      Int           @id @default(autoincrement()) 
+  Header                       String?
+  Image                        String?       @db.VarChar(255)
+  ShortDescription             String?           
+  Description                  String?
+  view                         Int           @default(0)      
+  user_id                      Int
+  CreatedDate                  DateTime?     @default(now()) @db.Timestamptz(6)
+  ModifiedDate                 DateTime?     @default(now()) @db.Timestamptz(6)    
+  User                         User          @relation(fields: [user_id], references: [user_id], onDelete: Cascade, onUpdate: Cascade)  
+  NewsCategoryRelationship     NewsCategoryRelationship[]
+}
+
+model NewsCategory {
+  category_id                   Int           @id @default(autoincrement())
+  CategoryName                  String        @db.VarChar(255)
+  user_id                       Int?
+  CreatedDate                   DateTime?     @default(now()) @db.Timestamptz(6)
+  ModifiedDate                  DateTime?     @default(now()) @db.Timestamptz(6)
+  User                          User?         @relation(fields: [user_id], references: [user_id], onUpdate: NoAction)
+  NewsCategoryRelationship      NewsCategoryRelationship[]
+}
+
+model NewsCategoryRelationship{
+  news_category_id  Int           @id @default(autoincrement())
+  user_id           Int?
+  category_id       Int
+  news_id           Int
+  CreatedDate       DateTime?     @default(now()) @db.Timestamptz(6)
+  ModifiedDate      DateTime?     @default(now()) @db.Timestamptz(6)
+  NewsCategory      NewsCategory  @relation(fields: [category_id], references: [category_id], onDelete: Cascade, onUpdate: Cascade)
+  News              News          @relation(fields: [news_id], references: [news_id], onDelete: Cascade, onUpdate: Cascade)
+  User              User?         @relation(fields: [user_id], references: [user_id], onUpdate: NoAction)
+}
+
+model Entertainment {
+  entertainment_id             Int           @id @default(autoincrement()) 
+  Header                       String?
+  Image                        String?       @db.VarChar(255)
+  ShortDescription             String?           
+  Description                  String?
+  view                         Int           @default(0)      
+  user_id                      Int
+  CreatedDate                  DateTime?     @default(now()) @db.Timestamptz(6)
+  ModifiedDate                 DateTime?     @default(now()) @db.Timestamptz(6)
+  User                         User          @relation(fields: [user_id], references: [user_id], onDelete: Cascade, onUpdate: Cascade)  
+  EntertainmentCategoryRelationship          EntertainmentCategoryRelationship[]
+}
+
+model EntertainmentCategory {
+  category_id                   Int           @id @default(autoincrement())
+  CategoryName                  String        @db.VarChar(255)
+  user_id                       Int?
+  CreatedDate                   DateTime?     @default(now()) @db.Timestamptz(6)
+  ModifiedDate                  DateTime?     @default(now()) @db.Timestamptz(6)
+  User                          User?         @relation(fields: [user_id], references: [user_id], onUpdate: NoAction)
+  EntertainmentCategoryRelationship      EntertainmentCategoryRelationship[]
+}
+
+model EntertainmentCategoryRelationship{
+  entertainment_category_id   Int           @id @default(autoincrement())
+  user_id                     Int?
+  category_id                 Int
+  entertainment_id            Int
+  CreatedDate       DateTime?     @default(now()) @db.Timestamptz(6)
+  ModifiedDate      DateTime?     @default(now()) @db.Timestamptz(6)
+  EntertainmentCategory      EntertainmentCategory  @relation(fields: [category_id], references: [category_id], onDelete: Cascade, onUpdate: Cascade)
+  Entertainment              Entertainment          @relation(fields: [entertainment_id], references: [entertainment_id], onDelete: Cascade, onUpdate: Cascade)
+  User                       User?                  @relation(fields: [user_id], references: [user_id], onUpdate: NoAction)
+}
+
+model HTMLCourse {
+  course_id                    Int           @id @default(autoincrement()) 
+  title                        String?              
+  user_id                      Int
+  content                      String?
+  CreatedDate                  DateTime?     @default(now()) @db.Timestamptz(6)
+  ModifiedDate                 DateTime?     @default(now()) @db.Timestamptz(6)    
+  User                         User          @relation(fields: [user_id], references: [user_id], onDelete: Cascade, onUpdate: Cascade)  
+}
+
+model CSSCourse {
+  course_id                    Int           @id @default(autoincrement()) 
+  title                        String?              
+  user_id                      Int
+  content                      String?
+  CreatedDate                  DateTime?     @default(now()) @db.Timestamptz(6)
+  ModifiedDate                 DateTime?     @default(now()) @db.Timestamptz(6)    
+  User                         User          @relation(fields: [user_id], references: [user_id], onDelete: Cascade, onUpdate: Cascade)  
+}
+
+model JavascriptCourse {
+  course_id                    Int           @id @default(autoincrement()) 
+  title                        String?              
+  user_id                      Int
+  content                      String?
+  CreatedDate                  DateTime?     @default(now()) @db.Timestamptz(6)
+  ModifiedDate                 DateTime?     @default(now()) @db.Timestamptz(6)    
+  User                         User          @relation(fields: [user_id], references: [user_id], onDelete: Cascade, onUpdate: Cascade)  
+}
+
+model PythonCourse {
+  course_id                    Int           @id @default(autoincrement()) 
+  title                        String?              
+  user_id                      Int
+  content                      String?
+  CreatedDate                  DateTime?     @default(now()) @db.Timestamptz(6)
+  ModifiedDate                 DateTime?     @default(now()) @db.Timestamptz(6)    
+  User                         User          @relation(fields: [user_id], references: [user_id], onDelete: Cascade, onUpdate: Cascade)  
+}
+
+
+
+model AiCategory {
+  category_id     Int           @id @default(autoincrement())
+  CategoryName    String        @db.VarChar(255)
+  user_id         Int
+  createdAt       DateTime?     @default(now()) @db.Timestamptz(6)
+  updatedAt       DateTime?     @default(now()) @db.Timestamptz(6)
+  User            User         @relation(fields: [user_id], references: [user_id], onUpdate: NoAction)
+  DetailCategory  DetailCategory[]
+}
+
+model Detail {
+  detail_id       Int           @id @default(autoincrement())
+  Header          String        @db.VarChar(255)
+  description     String?       @db.VarChar(255)
+  like            Int          
+  link            String        @db.VarChar(255)
+  service         String[]      
+  user_id         Int
+  createdAt       DateTime?     @default(now()) @db.Timestamptz(6)
+  updatedAt       DateTime?     @default(now()) @db.Timestamptz(6)
+  User            User          @relation(fields: [user_id], references: [user_id], onDelete: Cascade, onUpdate: Cascade)
+  DetailCategory  DetailCategory[]
+  Comment         Comment[]
+}
+
+model DetailCategory {
+  detail_category_id  Int       @id @default(autoincrement())
+  user_id             Int
+  category_id         Int
+  detail_id           Int
+  createdAt           DateTime?   @default(now()) @db.Timestamptz(6)
+  updatedAt           DateTime?   @default(now()) @db.Timestamptz(6)
+  AiCategory          AiCategory  @relation(fields: [category_id], references: [category_id], onDelete: Cascade, onUpdate: Cascade)
+  Detail              Detail      @relation(fields: [detail_id], references: [detail_id], onDelete: Cascade, onUpdate: Cascade)
+  User                User       @relation(fields: [user_id], references: [user_id], onUpdate: NoAction)
+}
+
+model Comment {
+  id        Int      @id @default(autoincrement())
+  content   String
+  createdAt DateTime? @default(now()) @db.Timestamptz(6)
+  updatedAt DateTime? @default(now()) @db.Timestamptz(6)
+  Author    Author   @relation(fields: [author_id], references: [author_id], onDelete: Cascade, onUpdate: Cascade)
+  author_id Int
+  Detail    Detail   @relation(fields: [detail_id], references: [detail_id], onDelete: Cascade, onUpdate: Cascade)
+  detail_id Int
+}
+
+
+model Author {
+  author_id Int      @id @default(autoincrement())
+  name      String
+  email     String   @unique
+  password  String
+  createdAt DateTime? @default(now())
+  updatedAt DateTime? @default(now()) @db.Timestamptz(6)
+  comments  Comment[]
+}
