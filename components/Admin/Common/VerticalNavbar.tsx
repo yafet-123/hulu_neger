@@ -34,7 +34,7 @@ export default function VerticalNavbar(){
                 </div>
 
                 <div className="mt-10">
-                    <ul className="flex flex-row lg:flex-col w-full lg:w-60 lg:h-[30rem] sticky top-0 bottom-0 scroll_width">
+                    <ul className="flex flex-row lg:flex-col w-full lg:w-60 lg:h-[50rem] sticky top-0 bottom-0 scroll_width">
                         {SideBarList.map((side, index) => (
                             <li className="mb-5" key={index}>
                                 <Link

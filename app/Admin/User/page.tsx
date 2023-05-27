@@ -5,8 +5,10 @@ import Form from "@/components/Admin/User/Form";
 import { useState } from "react";
 
 export default function AdminUserHome() {
+  const [typepassword, setTypepassword] = useState('password');
+  const [typepasswordconfirm, setTypepasswordconfirm] = useState('password');
   const [submitting, setIsSubmitting] = useState(false);
-  const [post, setPost] = useState({ prompt: "", tag: "" });
+  const [user, setUser] = useState({ UserName: "", confirmPassword:"",password: "",email:"" });
   const createPrompt = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
@@ -15,9 +17,9 @@ export default function AdminUserHome() {
       const response = await fetch("/api/prompt/new", {
         method: "POST",
         body: JSON.stringify({
-          prompt: post.prompt,
+          prompt: user.UserName,
           userId: session?.user.id,
-          tag: post.tag,
+          tag: user.tag,
         }),
       });
 
@@ -31,13 +33,17 @@ export default function AdminUserHome() {
     }
   };
   return(
-    <section className='w-full flex-center flex-col pt-24'>
+    <section className='w-full flex-col pt-24'>
       <Form
         type='Create'
-        post={post}
-        setPost={setPost}
+        user={user}
+        setUser={setUser}
         submitting={submitting}
         handleSubmit={createPrompt}
+        typepassword={typepassword}
+        setTypepassword={setTypepassword}
+        typepasswordconfirm={typepasswordconfirm}
+        setTypepasswordconfirm={setTypepasswordconfirm}
       />
     </section>
   )

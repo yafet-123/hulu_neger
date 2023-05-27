@@ -15,8 +15,8 @@ export default function AdminRootLayout({
   children: React.ReactNode
 }) {
   return (
-    <main className='flex flex-col lg:flex-row ml-5'>
-      <div className="">
+    <main className='flex flex-col lg:flex-row'>
+      <div className="pr-20">
         {/* @ts-ignore */}
         <VerticalNavbar />
       </div>

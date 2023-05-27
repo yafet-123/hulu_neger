@@ -1,50 +1,110 @@
 import Link from "next/link";
- 
-const Form = ({ type, post, setPost, submitting, handleSubmit }) => {
+import {FiEye, FiEyeOff} from 'react-icons/fi'
+
+const Form = ({ type, user, setUser, submitting, handleSubmit,typepassword,setTypepassword,typepasswordconfirm,setTypepasswordconfirm }) => {
   return (
-    <section className='w-full max-w-full flex-start flex-col'>
+    <section className='w-full flex-start flex-col'>
       <h1 className='head_text text-left'>
-        <span className='blue_gradient'>{type} Post</span>
+        <span className='blue_gradient'>{type} User</span>
       </h1>
       <p className='desc text-left max-w-md'>
-        {type} and share amazing prompts with the world, and let your
-        imagination run wild with any AI-powered platform
+        {type} the user that can create , update , edit and delete jobs , courses and other
       </p>
 
       <form
         onSubmit={handleSubmit}
-        className='mt-10 w-full max-w-2xl flex flex-col gap-7 glassmorphism'
+        className='mt-10 w-full flex flex-col gap-7 glassmorphism'
       >
-        <label>
-          <span className='font-satoshi font-semibold text-base text-gray-700'>
-            Your AI Prompt
-          </span>
-
-          <textarea
-            value={post.prompt}
-            onChange={(e) => setPost({ ...post, prompt: e.target.value })}
-            placeholder='Write your post here'
+        <div className="relative">
+          <input 
+            id="username" 
+            type="text" 
+            value={user.UserName}
             required
-            className='form_textarea '
+            className="block w-full px-3 text-sm lg:text-xl text-black bg-white py-4 border-2 border-black rounded-xl appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-500 peer" placeholder=" "
+            onChange={(e) => setUser({ ...user, UserName: e.target.value })}
           />
-        </label>
+          <label 
+              htmlFor="floating_outlined" 
+              className="absolute text-sm lg:text-xl text-black duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
+          >
+              UserName
+          </label>
+        </div>
 
-        <label>
-          <span className='font-satoshi font-semibold text-base text-gray-700'>
-            Field of Prompt{" "}
-            <span className='font-normal'>
-              (#product, #webdevelopment, #idea, etc.)
-            </span>
-          </span>
-          <input
-            value={post.tag}
-            onChange={(e) => setPost({ ...post, tag: e.target.value })}
-            type='text'
-            placeholder='#Tag'
+        <div className="relative">
+          <input 
+            id="email" 
+            type="email" 
             required
-            className='form_input'
+            className="block w-full px-3 text-sm lg:text-xl text-black bg-white py-4 border-2 border-black rounded-xl appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-500 peer" placeholder=" "
+            value={user.email}
+            onChange={(e) => setUser({ ...user, email: e.target.value })}
           />
-        </label>
+
+          <label 
+              htmlFor="floating_outlined" 
+              className="absolute text-sm lg:text-xl text-black duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
+          >
+              Email
+          </label>
+        </div>
+
+        <div className="relative">
+          <input 
+              id="password" 
+              required
+              type={typepassword}
+              className="block w-full px-3 text-sm lg:text-xl text-black dark:text-white bg-white py-4 border-2 border-black rounded-xl appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-500 peer" placeholder=" "
+              value={user.password}
+              onChange={(e) => setUser({ ...user, password: e.target.value })}
+          />
+          <div className="absolute right-10 text-sm lg:text-xl text-black duration-300 transform -translate-y-4 scale-75 top-1/2">
+              {typepassword==="password"?(
+                  <span className='icon-span' onClick={()=>setTypepassword("text")}>
+                    <FiEye size={30} />
+                  </span>
+              ):(
+                  <span className='icon-span' onClick={()=>setTypepassword("password")}>
+                    <FiEyeOff size={30} />
+                  </span>
+              )}
+          </div>
+          <label 
+              htmlFor="floating_outlined" 
+              className="absolute text-sm lg:text-xl text-black duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
+          >
+              Password
+          </label>
+        </div>
+
+        <div className="relative">
+          <input 
+              id="ConfirmPassword" 
+              required
+              type={typepasswordconfirm}
+              className="block w-full px-3 text-sm lg:text-xl text-black dark:text-white bg-white py-4 border-2 border-black rounded-xl appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-500 peer" placeholder=" "
+              value={user.confirmPassword}
+              onChange={(e) => setUser({ ...user, confirmPassword: e.target.value })}
+          />
+          <div className="absolute right-10 text-sm lg:text-xl text-black duration-300 transform -translate-y-4 scale-75 top-1/2">
+            {typepasswordconfirm==="password"?(
+                <span className='icon-span' onClick={()=>setTypepasswordconfirm("text")}>
+                  <FiEye size={30} />
+                </span>
+            ):(
+                <span className='icon-span' onClick={()=>setTypepasswordconfirm("password")}>
+                  <FiEyeOff size={30} />
+                </span>
+            )}
+          </div>
+            <label 
+                htmlFor="floating_outlined" 
+                className="absolute text-sm lg:text-xl text-black duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
+            >
+                Confirm Password
+            </label>
+        </div>
 
         <div className='flex-end mx-3 mb-5 gap-4'>
           <Link href='/' className='text-gray-500 text-sm'>
