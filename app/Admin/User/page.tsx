@@ -33,7 +33,7 @@ export default function AdminUserHome() {
     }
   };
   return(
-    <section className='w-full flex-col pt-24'>
+    <section className='w-full pt-24'>
       <Form
         type='Create'
         user={user}

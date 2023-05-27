@@ -3,7 +3,7 @@ import {FiEye, FiEyeOff} from 'react-icons/fi'
 
 const Form = ({ type, user, setUser, submitting, handleSubmit,typepassword,setTypepassword,typepasswordconfirm,setTypepasswordconfirm }) => {
   return (
-    <section className='w-full flex-start flex-col'>
+    <section className='w-full flex-col'>
       <h1 className='head_text text-left'>
         <span className='blue_gradient'>{type} User</span>
       </h1>
@@ -15,7 +15,8 @@ const Form = ({ type, user, setUser, submitting, handleSubmit,typepassword,setTy
         onSubmit={handleSubmit}
         className='mt-10 w-full flex flex-col gap-7 glassmorphism'
       >
-        <div className="relative">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
+        <div className="relative mb-10">
           <input 
             id="username" 
             type="text" 
@@ -32,7 +33,7 @@ const Form = ({ type, user, setUser, submitting, handleSubmit,typepassword,setTy
           </label>
         </div>
 
-        <div className="relative">
+        <div className="relative mb-10">
           <input 
             id="email" 
             type="email" 
@@ -50,7 +51,7 @@ const Form = ({ type, user, setUser, submitting, handleSubmit,typepassword,setTy
           </label>
         </div>
 
-        <div className="relative">
+        <div className="relative mb-10">
           <input 
               id="password" 
               required
@@ -78,7 +79,7 @@ const Form = ({ type, user, setUser, submitting, handleSubmit,typepassword,setTy
           </label>
         </div>
 
-        <div className="relative">
+        <div className="relative mb-10">
           <input 
               id="ConfirmPassword" 
               required
@@ -104,6 +105,7 @@ const Form = ({ type, user, setUser, submitting, handleSubmit,typepassword,setTy
             >
                 Confirm Password
             </label>
+        </div>
         </div>
 
         <div className='flex-end mx-3 mb-5 gap-4'>
