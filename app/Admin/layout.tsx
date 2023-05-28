@@ -16,11 +16,11 @@ export default function AdminRootLayout({
 }) {
   return (
     <div className='flex flex-col lg:flex-row w-full'>
-      <div className="pr-10">
+      <div className="">
         {/* @ts-ignore */}
         <VerticalNavbar />
       </div>
-      <div>
+      <div className="w-full px-10">
         { children }
       </div>
     </div>

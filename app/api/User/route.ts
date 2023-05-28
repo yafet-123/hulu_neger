@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import prisma from '@/utils/prismaClient'
+import prisma from '@/utils/db.server'
 
 export const GET = async (req: NextApiRequest, res: NextApiResponse) => {
   	try {

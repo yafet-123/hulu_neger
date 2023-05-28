@@ -7,24 +7,30 @@ import { useState } from "react";
 export default function AdminUserHome() {
   const [typepassword, setTypepassword] = useState('password');
   const [typepasswordconfirm, setTypepasswordconfirm] = useState('password');
+  const [passworderror,setpassworderror] = useState("")
   const [submitting, setIsSubmitting] = useState(false);
   const [user, setUser] = useState({ UserName: "", confirmPassword:"",password: "",email:"" });
-  const createPrompt = async (e) => {
+  const createUser = async (e) => {
     e.preventDefault();
+    console.log(user.UserName)
     setIsSubmitting(true);
-
     try {
-      const response = await fetch("/api/prompt/new", {
-        method: "POST",
-        body: JSON.stringify({
-          prompt: user.UserName,
-          userId: session?.user.id,
-          tag: user.tag,
-        }),
-      });
+      if(user.confirmPassword === user.password){
+        const response = await fetch("/api/User/Add", {
+          method: "POST",
+          body: JSON.stringify({
+            UserName: user.UserName,
+            Password: user.password,
+            email: user.email,
+            role:'admin'
+          }),
+        });
 
-      if (response.ok) {
-        router.push("/");
+        if (response.ok) {
+          router.push("/");
+        }
+      }else{
+        setpassworderror("Password and confirm password should be same.")
       }
     } catch (error) {
       console.log(error);
@@ -33,13 +39,13 @@ export default function AdminUserHome() {
     }
   };
   return(
-    <section className='w-full pt-24'>
+    <section className='w-full box-border pt-24'>
       <Form
         type='Create'
         user={user}
         setUser={setUser}
         submitting={submitting}
-        handleSubmit={createPrompt}
+        handleSubmit={createUser}
         typepassword={typepassword}
         setTypepassword={setTypepassword}
         typepasswordconfirm={typepasswordconfirm}
