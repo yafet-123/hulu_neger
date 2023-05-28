@@ -20,7 +20,7 @@ export default function AdminRootLayout({
         {/* @ts-ignore */}
         <VerticalNavbar />
       </div>
-      <div className="w-full px-10">
+      <div className="w-full px-20">
         { children }
       </div>
     </div>
