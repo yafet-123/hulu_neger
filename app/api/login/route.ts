@@ -3,7 +3,7 @@ import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
 import { StatusCodes } from "http-status-codes";
 
-export default async function handleaddlogin:React.FC(req: NextApiRequest, res: NextApiResponse){
+export default async function handleaddlogin(req: NextApiRequest, res: NextApiResponse){
 	const { username, password } = req.body;
 
 	if (!username || !password) {

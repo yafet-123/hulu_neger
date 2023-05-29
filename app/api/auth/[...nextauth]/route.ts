@@ -1,8 +1,7 @@
 import NextAuth from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
-import axios from 'axios';
 
-export default NextAuth({
+const handler = NextAuth({
     session:{
         strategy:"jwt"
     },
@@ -18,9 +17,12 @@ export default NextAuth({
                 };
                 
                 let user
-                const res = await axios.post(`${process.env.NEXTAUTH_URL}/api/login`,{
-                    "username": payload.username,
-                    "password": payload.password
+                const res = await fetch(`${process.env.NEXTAUTH_URL}/api/login`,{
+                    method: "POST",
+                    body: JSON.stringify({
+                        "username": payload.username,
+                        "password": payload.password
+                    }),
                 }).then(function (response) {
                     user = response.data
                     
@@ -58,3 +60,5 @@ export default NextAuth({
         },
     },   
 });
+
+export { handler as GET, handler as POST }
