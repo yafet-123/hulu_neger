@@ -6,7 +6,7 @@ import bcrypt from "bcryptjs";
 export const POST = async (req: NextApiRequest, res: NextApiResponse) => {
     const { UserName , Password, email, role } = await req.json();
     try {
-        console.log(role)
+        console.log("role")
         const data = await prisma.User.create({
             data:{
                 UserName:UserName,
@@ -15,13 +15,8 @@ export const POST = async (req: NextApiRequest, res: NextApiResponse) => {
                 role:role
             },
         });
-        console.log(data)
-        // take the username and password and save it , the password is bcrypt
-        const token = jwt.sign(
-            { userId: data.user_id, user: data.UserName },process.env.JWT_SECRET,
-                {expiresIn: process.env.JWT_LIFETIME,}
-        );
-        console.log(token)
+        console.log("data")
+
 
         return new Response(JSON.stringify(data), { status: 201 })
     } catch (error) {

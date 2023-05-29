@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import React, {useState,useEffect} from "react";
 
-export default function VerticalNavbar(){
+const VerticalNavbar:React.FC = () => {
     const SideBarList = [
         { link: "/Admin", name: "Dashboard",},
         { link: "/Admin/User",  name: "User",},
@@ -54,3 +54,5 @@ export default function VerticalNavbar(){
         </div>
 	)
 }
+
+export default VerticalNavbar

@@ -4,13 +4,14 @@ import Image from "next/image";
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { AiOutlineClose, AiOutlineMenu } from 'react-icons/ai';
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import ThemeToggler from './ThemeToggler';
-import {signIn} from 'next-auth/react'
+import { useSession, signIn, signOut  } from "next-auth/react";
 
-export function Navbar() {
+const Navbar: React.FC = () => {
   const [open, setOpen] = useState(false);
-  const [NavabarText,setNavabarText] = useState("")
+  const [colorChange, setColorchange] = useState<boolean>(false);
+  const [NavabarText,setNavabarText] = useState<string>("")
   const router = useRouter();
   const handleNav = () => {
     setNav(!nav)
@@ -25,8 +26,6 @@ export function Navbar() {
     { path: "/AiSearch", name: "AiSearch" },
     { path: "/Blogs", name: "Blogs" },
   ];
-
-  const [colorChange, setColorchange] = useState(false);
 
   const changeNavbarColor = () => {
     if (window.scrollY >= 60) {
@@ -84,11 +83,9 @@ export function Navbar() {
                   key={link.name}
                   className="md:ml-6 text-lg font-medium md:my-0 my-7"
                 >
-                  <Link href={link.path}>
-                    <a
+                  <Link href={link.path}
                       onClick={(e) => setNavabarText(link.text)}
                       className={
-                        
                         router.pathname == link.path || ( router.pathname == "/DisplayJobs" && "/Jobs" == link.path ) || 
                         ( router.pathname == "/JobsByCategory" && "/Jobs" == link.path ) || ( router.pathname == "/JobsByLocation" && "/Jobs" == link.path ) ||
                         ( router.pathname == "/AdvanceSearch" && "/Jobs" == link.path ) || ( router.pathname == "/AiSearch" && "/AiSearch" == link.path )  ||
@@ -102,11 +99,29 @@ export function Navbar() {
                       }
                     >
                       {link.name}
-                    </a>
                   </Link>
                 </li>
               ))}
 
+              <div className='flex flex-col lg:flex-row gap-3 lg:gap-5 justify-center'>
+                <button 
+                  type='button' 
+                  onClick={() => signOut({ callbackUrl: '/auth/signin'})} 
+                  className='outline_btn'
+                >
+                  Sign Out
+                </button>
+
+                <Link href='/profile'>
+                  <Image
+                    src="/images/logo6.png"
+                    width={75}
+                    height={75}
+                    className='rounded-full'
+                    alt='profile'
+                  />
+                </Link>
+              </div>
               <div className="flex ">
                 <ThemeToggler />
               </div>
@@ -117,3 +132,5 @@ export function Navbar() {
     </nav>
   );
 }
+
+export default Navbar

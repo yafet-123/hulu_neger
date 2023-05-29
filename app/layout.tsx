@@ -2,9 +2,7 @@ import { Inter } from 'next/font/google'
 import type { Metadata } from 'next';
 import './globals.css'
 const inter = Inter({ subsets: ['latin'] })
-import { config } from '@fortawesome/fontawesome-svg-core'
-import '@fortawesome/fontawesome-svg-core/styles.css'
-config.autoAddCss = false
+import Provider from "@/components/common/Provider";
 
 export const metadata = {
   title: 'Create Next App',
@@ -19,12 +17,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <div className='main'>
-          <div className='gradient' />
-        </div>
-        <main className='app'>
-          {children}
-        </main>
+        <Provider>
+          <div className='main'>
+            <div className='gradient' />
+          </div>
+          <main className='app'>
+            {children}
+          </main>
+        </Provider>
       </body>
     </html>
   )
