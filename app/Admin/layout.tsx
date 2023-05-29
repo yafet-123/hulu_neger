@@ -2,6 +2,7 @@ import { Inter } from 'next/font/google'
 import type { Metadata } from 'next';
 import '../globals.css'
 import VerticalNavbar from "@/components/Admin/Common/VerticalNavbar"
+import Navbar from "@/components/Admin/Common/Navbar"
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {
@@ -16,6 +17,7 @@ export default function AdminRootLayout({
 }) {
   return (
     <div className='flex flex-col lg:flex-row w-full'>
+      <Navbar />
       <div className="">
         {/* @ts-ignore */}
         <VerticalNavbar />

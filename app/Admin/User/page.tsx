@@ -1,5 +1,4 @@
 "use client";
-
 import Image from 'next/image'
 import Form from "@/components/Admin/User/Form";
 import { useState } from "react";
@@ -14,28 +13,28 @@ export default function AdminUserHome() {
     e.preventDefault();
     console.log(user.UserName)
     setIsSubmitting(true);
-    try {
-      if(user.confirmPassword === user.password){
-        const response = await fetch("/api/User/Add", {
-          method: "POST",
-          body: JSON.stringify({
-            UserName: user.UserName,
-            Password: user.password,
-            email: user.email,
-            role:'admin'
-          }),
-        });
+    if(user.confirmPassword === user.password){
+      try {
+          const response = await fetch("/api/User/Add", {
+            method: "POST",
+            body: JSON.stringify({
+              UserName: user.UserName,
+              Password: user.password,
+              email: user.email,
+              role:'admin'
+            }),
+          });
 
-        if (response.ok) {
-          router.push("/");
-        }
-      }else{
-        setpassworderror("Password and confirm password should be same.")
+          if (response.ok) {
+            router.push("/");
+          }
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setIsSubmitting(false);
       }
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setIsSubmitting(false);
+    }else{
+      setpassworderror("Password and confirm password should be same.")
     }
   };
   return(

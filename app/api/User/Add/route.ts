@@ -21,8 +21,9 @@ export const POST = async (req: NextApiRequest, res: NextApiResponse) => {
             { userId: data.user_id, user: data.UserName },process.env.JWT_SECRET,
                 {expiresIn: process.env.JWT_LIFETIME,}
         );
+        console.log(token)
 
-        return new Response(JSON.stringify(data), { status: 200 })
+        return new Response(JSON.stringify(data), { status: 201 })
     } catch (error) {
         return new Response("Failed to create a new User", { status: 500 });
     }
