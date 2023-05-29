@@ -1,64 +1,36 @@
 import NextAuth from 'next-auth';
-import CredentialsProvider from 'next-auth/providers/credentials';
-
+import GoogleProvider from 'next-auth/providers/google';
+import prisma from '@/utils/db.server'
 const handler = NextAuth({
-    session:{
-        strategy:"jwt"
+  providers: [
+    GoogleProvider({
+      clientId : process.env.GOOGLE_ID,
+      clientSecret : process.env.GOOGLE_CLIENT_SECRET,
+    }),
+  ],
+  callbacks: {
+    async session({ session }) {
+      // store the user id from MongoDB to session
+      const sessionUser = await prisma.User.findUnique({where: { email: session.user.email },});
+      session.user.id = sessionUser.user_id.toString();
+      // session.user have all the information from the database and inaddition we send the mongoose id
+      return session;
     },
-    providers: [
-        CredentialsProvider({
-            id: 'credentials',
-            name: 'my-project',
-            credentials: {},
-            async authorize(credentials, req) {
-                const payload = {
-                    username: credentials.username,
-                    password: credentials.password,
-                };
-                
-                let user
-                const res = await fetch(`${process.env.NEXTAUTH_URL}/api/login`,{
-                    method: "POST",
-                    body: JSON.stringify({
-                        "username": payload.username,
-                        "password": payload.password
-                    }),
-                }).then(function (response) {
-                    user = response.data
-                    
-                }).catch(function (error) {
-                    throw new Error('Login Failed')
-                });
-
-                return user
-            },
-        }),
-    ],
-    secret: process.env.NEXTAUTH_SECRET,
-    pages: {
-        signIn: 'auth/signin',
-        error: 'auth/error',
+    async signIn({ account, profile, user, credentials }) {
+      try {
+        console.log("user")
+        const userExists = await prisma.User.findUnique({where: { email: profile.email },});
+        // if not, create a new document and save user in MongoDB
+        if (!userExists) {
+          throw new Error('User not found in the database');
+        }
+        return true
+      } catch (error) {
+        console.log("Error checking if user exists: ", error.message);
+        return false
+      }
     },
-    callbacks: {
-        async jwt({ token, user }) {
-            if (user) {
-                token.userId = user.userId;
-                token.accessToken = user.token;
-                token.role = user.role;
-            }
-            return token;
-        },
-
-        async session({ session, token }) {
-            session.user.accessToken = token.accessToken;
-            session.user.refreshToken = token.refreshToken;
-            session.user.user_id = token.userId;
-            session.user.role = token.role;
-            session.user.accessTokenExpires = token.accessTokenExpires;
-            
-            return session;
-        },
-    },   
-});
+  }
+})
 
 export { handler as GET, handler as POST }
