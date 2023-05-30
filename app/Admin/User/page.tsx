@@ -33,7 +33,7 @@ export default function AdminUserHome() {
     }
   };
   return(
-    <section className='w-full box-border pt-24'>
+    <section className='w-full box-border lg:pt-24'>
       <Form
         type='Create'
         user={user}
@@ -41,6 +41,8 @@ export default function AdminUserHome() {
         submitting={submitting}
         handleSubmit={createUser}
       />
+
+      
     </section>
   )
 }

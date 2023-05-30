@@ -1,5 +1,4 @@
 import Link from "next/link";
-import {FiEye, FiEyeOff} from 'react-icons/fi'
 
 const Form = ({ type, user, setUser, submitting, handleSubmit }) => {
   return (

@@ -25,6 +25,8 @@ const Navbar: React.FC = () => {
     setNav(!nav)
   };
 
+  console.log(session)
+
   const NavbarTopic = [
     { path: "/", name: "Home" },
     { path: "/Jobs", name: "Jobs" },
