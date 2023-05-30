@@ -4,6 +4,9 @@ const nextConfig = {
   images: {
     domains: ['lh3.googleusercontent.com'],
   },
+  images: {
+    domains: ['lh3.googleusercontent.com', 'avatars.githubusercontent.com'],
+  },
   webpack(config) {
     config.experiments = {
       ...config.experiments,

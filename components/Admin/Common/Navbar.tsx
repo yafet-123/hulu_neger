@@ -129,7 +129,7 @@ const Navbar: React.FC = () => {
                     </Link>
                   </div>
                 ) : (
-                  <>
+                  <div className="flex flex-col lg:flex-row">
                     {providers &&
                     // bring the providers then list them  in this particular example it is only one
                       Object.values(providers).map((provider) => (
@@ -139,12 +139,12 @@ const Navbar: React.FC = () => {
                           onClick={() => {
                             signIn(provider.id);
                           }}
-                          className='black_btn'
+                          className='black_btn my-2 lg:mx-1'
                         >
-                          Sign in
+                          {provider.name}
                         </button>
                       ))}
-                  </>
+                  </div>
                 )}
               </div>
               <div className="flex ">
