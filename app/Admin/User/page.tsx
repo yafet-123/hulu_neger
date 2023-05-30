@@ -1,15 +1,30 @@
 "use client";
 import Image from 'next/image'
 import Form from "@/components/Admin/User/Form";
-import { useState } from "react";
+import UserDisplay from "@/components/Admin/User/UserDisplay";
+import { useState,useEffect } from "react";
 
 interface User {
   UserName:string;
   email:string;
 }
 
+const UserCardList = ({ data }) => {
+  return (
+    <div className='mt-16 prompt_layout'>
+      {data.map((user) => (
+        <UserDisplay
+          key={user.user_id}
+          user={user}
+        />
+      ))}
+    </div>
+  );
+};
+
 export default function AdminUserHome() {
   const [submitting, setIsSubmitting] = useState(false);
+  const [allUsers, setAllUsers] = useState([]);
   const [user, setUser] = useState<User>({ UserName: "",email:"" });
   const createUser = async (e) => {
     e.preventDefault();
@@ -32,6 +47,17 @@ export default function AdminUserHome() {
       setIsSubmitting(false);
     }
   };
+
+  const fetchUsers = async () => {
+    const response = await fetch("/api/User");
+    const data = await response.json();
+
+    setAllUsers(data);
+  };
+
+  useEffect(() => {
+    fetchUsers();
+  }, []);
   return(
     <section className='w-full box-border lg:pt-24'>
       <Form
@@ -42,7 +68,7 @@ export default function AdminUserHome() {
         handleSubmit={createUser}
       />
 
-      
+      <UserCardList data={allUsers} />
     </section>
   )
 }
