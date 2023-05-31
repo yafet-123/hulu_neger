@@ -12,8 +12,8 @@ const UserDisplay = ({ user, handleEdit, handleDelete }) => {
   const [copied, setCopied] = useState("");
  
   const handleCopy = () => {
-    setCopied(post.prompt);
-    navigator.clipboard.writeText(post.prompt);
+    setCopied(user.email);
+    navigator.clipboard.writeText(user.email);
     setTimeout(() => setCopied(false), 3000);
   };
 
@@ -32,11 +32,11 @@ const UserDisplay = ({ user, handleEdit, handleDelete }) => {
         <div className='copy_btn' onClick={handleCopy}>
           <Image
             src={
-              copied === user.prompt
+              copied === user.email
                 ? "/assets/icons/tick.svg"
                 : "/assets/icons/copy.svg"
             }
-            alt={copied === user.prompt ? "tick_icon" : "copy_icon"}
+            alt={copied === user.email ? "tick_icon" : "copy_icon"}
             width={12}
             height={12}
           />
