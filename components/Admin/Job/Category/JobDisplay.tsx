@@ -5,15 +5,15 @@ import Image from "next/image";
 import { useSession } from "next-auth/react";
 import { usePathname, useRouter } from "next/navigation";
 
-const UserDisplay = ({ user, handleEdit, handleDelete }) => {
+const JobDisplay = ({ category, handleEdit, handleDelete }) => {
   const { data: session } = useSession();
   const pathName = usePathname();
   const router = useRouter();
   const [copied, setCopied] = useState("");
- 
+  console.log(category)
   const handleCopy = () => {
-    setCopied(post.prompt);
-    navigator.clipboard.writeText(post.prompt);
+    setCopied(category.CategoryName);
+    navigator.clipboard.writeText(category.CategoryName);
     setTimeout(() => setCopied(false), 3000);
   };
 
@@ -32,11 +32,11 @@ const UserDisplay = ({ user, handleEdit, handleDelete }) => {
         <div className='copy_btn' onClick={handleCopy}>
           <Image
             src={
-              copied === category.prompt
+              copied === category.CategoryName
                 ? "/assets/icons/tick.svg"
                 : "/assets/icons/copy.svg"
             }
-            alt={copied === category.prompt ? "tick_icon" : "copy_icon"}
+            alt={copied === category.CategoryName ? "tick_icon" : "copy_icon"}
             width={12}
             height={12}
           />
@@ -64,4 +64,4 @@ const UserDisplay = ({ user, handleEdit, handleDelete }) => {
   );
 };
 
-export default UserDisplay;
+export default JobDisplay;

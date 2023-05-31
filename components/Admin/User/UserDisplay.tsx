@@ -4,6 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import { useSession } from "next-auth/react";
 import { usePathname, useRouter } from "next/navigation";
+import moment from 'moment';
 
 const UserDisplay = ({ user, handleEdit, handleDelete }) => {
   const { data: session } = useSession();
@@ -25,7 +26,7 @@ const UserDisplay = ({ user, handleEdit, handleDelete }) => {
             {user.user_id}
           </h3>
           <p className='font-inter text-sm text-gray-500'>
-            {user.ModifiedDate}
+            {moment(user.ModifiedDate).utc().format('YYYY-MM-DD')}
           </p>
         </div>
 

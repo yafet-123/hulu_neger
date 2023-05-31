@@ -1,10 +1,10 @@
 "use client";
 import Image from 'next/image'
 import Form from "@/components/Admin/Job/Category/Form";
-import UserDisplay from "@/components/Admin/User/UserDisplay";
+import JobDisplay from "@/components/Admin/Job/Category/JobDisplay";
 import { useState,useEffect } from "react";
 import { useSession } from "next-auth/react";
-
+import { usePathname, useRouter } from "next/navigation";
 interface Category {
   Category:string;
 }
@@ -13,7 +13,7 @@ const JobCategoryCardList = ({ data }) => {
   return (
     <div className='mt-16 prompt_layout'>
       {data.map((category) => (
-        <UserDisplay
+        <JobDisplay
           key={category.user_id}
           category={category}
         />
@@ -23,6 +23,7 @@ const JobCategoryCardList = ({ data }) => {
 };
 
 export default function JobCategoryHome() {
+  const router = useRouter();
   const [submitting, setIsSubmitting] = useState(false);
   const [allJobCategory, setAllJobCategory] = useState([]);
   const [category, setCategory] = useState<Category>({ Category: "" });
