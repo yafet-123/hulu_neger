@@ -49,15 +49,15 @@ export default function NewsCategoryHome() {
     }
   };
 
-  const fetchJobCategory = async () => {
+  const fetchNewsCategory = async () => {
     const response = await fetch("/api/News/Category");
     const data = await response.json();
 
-    setAllJobCategory(data);
+    setAllNewsCategory(data);
   };
 
   useEffect(() => {
-    fetchJobCategory();
+    fetchNewsCategory();
   }, []);
   return (
     <section className='w-full box-border lg:pt-24'>
@@ -69,7 +69,7 @@ export default function NewsCategoryHome() {
         handleSubmit={createJobCategory}
       />
 
-      <JobCategoryCardList data={allJobCategory} />
+      <NewsCategoryCardList data={allJobCategory} />
     </section>
   )
 }
