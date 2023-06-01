@@ -5,7 +5,7 @@ import Image from "next/image";
 import { useSession } from "next-auth/react";
 import { usePathname, useRouter } from "next/navigation";
 
-const JobDisplay = ({ category, handleEdit, handleDelete }) => {
+const Display = ({ category, handleEdit, handleDelete }) => {
   const { data: session } = useSession();
   const pathName = usePathname();
   const router = useRouter();
@@ -64,4 +64,4 @@ const JobDisplay = ({ category, handleEdit, handleDelete }) => {
   );
 };
 
-export default JobDisplay;
+export default Display;
