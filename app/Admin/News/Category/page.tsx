@@ -66,10 +66,10 @@ export default function NewsCategoryHome() {
         category={category}
         setCategory={setCategory}
         submitting={submitting}
-        handleSubmit={createJobCategory}
+        handleSubmit={createNewsCategory}
       />
 
-      <NewsCategoryCardList data={allJobCategory} />
+      <NewsCategoryCardList data={allNewsCategory} />
     </section>
   )
 }
