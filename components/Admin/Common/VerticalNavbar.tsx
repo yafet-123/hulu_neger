@@ -22,7 +22,7 @@ const VerticalNavbar:React.FC = () => {
         { link: "/Admin/Blogs/Category",   name: "Blogs Category" },
         { link: "/Admin/Job/Display",   name: "Blogs" },
         { link: "/Admin/AiSearch/Category",   name: "AiSearch Category" },
-        { link: "/Admin/Job/Display",   name: "AiSearch" },
+        { link: "/Admin/AiSearch",   name: "AiSearch" },
     ];
     const pathname = usePathname();
     console.log(pathname)
