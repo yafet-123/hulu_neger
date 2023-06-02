@@ -7,7 +7,7 @@ export const POST = async (req: NextApiRequest, res: NextApiResponse) => {
     const {CategoryName , user_id}  = await req.json();
     try {
         console.log(CategoryName)
-        const data = await prisma.BlogsCategory.create({
+        const data = await prisma.AiCategory.create({
             data:{
                 CategoryName:CategoryName,
                 user_id:Number(user_id)

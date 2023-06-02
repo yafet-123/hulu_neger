@@ -10,7 +10,7 @@ export const POST = async (req: NextApiRequest, res: NextApiResponse) => {
         const data = await prisma.NewsCategory.create({
             data:{
                 CategoryName:CategoryName,
-                user_id:user_id
+                user_id:Number(user_id)
             },
         });
         console.log(data)

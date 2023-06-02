@@ -10,7 +10,7 @@ const VerticalNavbar:React.FC = () => {
         { link: "/Admin/Job/Add",  name: "Add Job" },
         { link: "/Admin/Job/Display",   name: "Display Job" },
         { link: "/Admin/Job/Category",   name: "Job Category" },
-        { link: "/Admin/Job/Display",   name: "Location" },
+        { link: "/Admin/Job/Display",   name: "Job Location" },
         { link: "/Admin/News/Category",   name: "News Category" },
         { link: "/Admin/Job/Display",   name: "News" },
         { link: "/Admin/Entertainment/Category",   name: "Entertainment Category" },
@@ -21,7 +21,7 @@ const VerticalNavbar:React.FC = () => {
         { link: "/Admin/Job/Display",   name: "Python Course" },
         { link: "/Admin/Blogs/Category",   name: "Blogs Category" },
         { link: "/Admin/Job/Display",   name: "Blogs" },
-        { link: "/Admin/Job/Display",   name: "AiSearch Category" },
+        { link: "/Admin/AiSearch/Category",   name: "AiSearch Category" },
         { link: "/Admin/Job/Display",   name: "AiSearch" },
     ];
     const pathname = usePathname();

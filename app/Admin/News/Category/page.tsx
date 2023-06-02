@@ -14,7 +14,7 @@ const NewsCategoryCardList = ({ data }) => {
     <div className='mt-16 prompt_layout'>
       {data.map((category) => (
         <Display
-          key={category.user_id}
+          key={category.category_id}
           category={category}
         />
       ))}

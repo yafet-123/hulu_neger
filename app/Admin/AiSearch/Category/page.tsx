@@ -9,7 +9,7 @@ interface Category {
   Category:string;
 }
 
-const JobCategoryCardList = ({ data }) => {
+const AiSearchCategoryCardList = ({ data }) => {
   return (
     <div className='mt-16 prompt_layout'>
       {data.map((category) => (
@@ -22,17 +22,17 @@ const JobCategoryCardList = ({ data }) => {
   );
 };
 
-export default function JobCategoryHome() {
+export default function AiSearchCategoryHome() {
   const router = useRouter();
   const [submitting, setIsSubmitting] = useState(false);
-  const [allJobCategory, setAllJobCategory] = useState([]);
+  const [allAiSearchCategory, setAllAiSearchCategory] = useState([]);
   const [category, setCategory] = useState<Category>({ Category: "" });
   const { data: session } = useSession();
-  const createJobCategory = async (e) => {
+  const createAiSearchCategory = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
     try {
-      const response = await fetch("/api/Job/Category/Add", {
+      const response = await fetch("/api/AiSearch/Category/Add", {
         method: "POST",
         body: JSON.stringify({
           CategoryName: category.Category,
@@ -49,28 +49,28 @@ export default function JobCategoryHome() {
     }
   };
 
-  const fetchJobCategory = async () => {
-    const response = await fetch("/api/Job/Category");
+  const fetchAiSearchCategory = async () => {
+    const response = await fetch("/api/AiSearch/Category");
     const data = await response.json();
 
-    setAllJobCategory(data);
+    setAllAiSearchCategory(data);
   };
 
   useEffect(() => {
-    fetchJobCategory();
+    fetchAiSearchCategory();
   }, []);
   return (
     <section className='w-full box-border lg:pt-24'>
       <Form
         type='Create'
-        typeofCategory="Job"
+        typeofCategory="AiSearch"
         category={category}
         setCategory={setCategory}
         submitting={submitting}
-        handleSubmit={createJobCategory}
+        handleSubmit={createAiSearchCategory}
       />
 
-      <JobCategoryCardList data={allJobCategory} />
+      <AiSearchCategoryCardList data={allAiSearchCategory} />
     </section>
   )
 }

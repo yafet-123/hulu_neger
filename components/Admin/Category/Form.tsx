@@ -4,7 +4,7 @@ const Form = ({ type, typeofCategory, category, setCategory, submitting, handleS
   return (
     <section className='w-full lg:px-20'>
       <h1 className='head_text text-left'>
-        <span className='blue_gradient'>{type} Job Category</span>
+        <span className='blue_gradient'>{type} {typeofCategory} Category</span>
       </h1>
       <p className='desc text-left max-w-md'>
         {type} the {typeofCategory} category that can be used to classify the {typeofCategory} by using the category
