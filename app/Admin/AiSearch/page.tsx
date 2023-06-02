@@ -54,7 +54,7 @@ export default function AiSearchHome() {
   };
 
   const fetchAiSearch = async () => {
-    const response = await fetch("/api/AiSearch/");
+    const response = await fetch("/api/AiSearch");
     const data = await response.json();
 
     setAllAiSearch(data);
