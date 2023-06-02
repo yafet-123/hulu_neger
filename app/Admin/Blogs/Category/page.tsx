@@ -63,6 +63,7 @@ export default function BlogsCategoryHome() {
     <section className='w-full box-border lg:pt-24'>
       <Form
         type='Create'
+        typeofCategory="Blogs"
         category={category}
         setCategory={setCategory}
         submitting={submitting}

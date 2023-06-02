@@ -63,6 +63,7 @@ export default function EntertainmentCategoryHome() {
     <section className='w-full box-border lg:pt-24'>
       <Form
         type='Create'
+        typeofCategory="Entertainment"
         category={category}
         setCategory={setCategory}
         submitting={submitting}

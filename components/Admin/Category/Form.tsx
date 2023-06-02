@@ -1,13 +1,13 @@
 import Link from "next/link";
 
-const Form = ({ type, category, setCategory, submitting, handleSubmit }) => {
+const Form = ({ type, typeofCategory, category, setCategory, submitting, handleSubmit }) => {
   return (
     <section className='w-full lg:px-20'>
       <h1 className='head_text text-left'>
         <span className='blue_gradient'>{type} Job Category</span>
       </h1>
       <p className='desc text-left max-w-md'>
-        {type} the job category that can be used to classify the jobs by using the category
+        {type} the {typeofCategory} category that can be used to classify the {typeofCategory} by using the category
       </p>
 
       <form

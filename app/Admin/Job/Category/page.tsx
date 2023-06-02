@@ -63,6 +63,7 @@ export default function JobCategoryHome() {
     <section className='w-full box-border lg:pt-24'>
       <Form
         type='Create'
+        typeofCategory="Job"
         category={category}
         setCategory={setCategory}
         submitting={submitting}

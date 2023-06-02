@@ -63,6 +63,7 @@ export default function NewsCategoryHome() {
     <section className='w-full box-border lg:pt-24'>
       <Form
         type='Create'
+        typeofCategory="News"
         category={category}
         setCategory={setCategory}
         submitting={submitting}
