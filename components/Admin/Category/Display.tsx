@@ -1,5 +1,6 @@
 "use client";
 
+import moment from 'moment';
 import { useState } from "react";
 import Image from "next/image";
 import { useSession } from "next-auth/react";
@@ -18,14 +19,14 @@ const Display = ({ category, handleEdit, handleDelete }) => {
   };
 
   return (
-    <div className='prompt_card'>
+    <div className='prompt_card lg:px-20'>
       <div className='flex justify-between items-start gap-5'>
         <div className='flex-1 flex justify-between items-center gap-3 cursor-pointer'>
           <h3 className='font-satoshi font-semibold text-gray-900'>
-            {category.user_id}
+            {category.category_id}
           </h3>
           <p className='font-inter text-sm text-gray-500'>
-            {category.ModifiedDate}
+            {moment(category.ModifiedDate).utc().format('YYYY-MM-DD')}
           </p>
         </div>
 
@@ -43,7 +44,7 @@ const Display = ({ category, handleEdit, handleDelete }) => {
         </div>
       </div>
 
-      <p className='my-4 font-satoshi text-sm text-gray-700'>{category.email}</p>
+      <p className='my-4 font-satoshi text-sm text-gray-700'>{category.CategoryName}</p>
       {session?.user.email === "yafetaddisu123@gmail.com" && pathName === "/profile" && (
         <div className='mt-5 flex-center gap-4 border-t border-gray-100 pt-3'>
           <p
