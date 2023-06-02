@@ -1,7 +1,7 @@
 "use client";
 import Image from 'next/image'
 import Form from "@/components/Admin/AiSearch/Form";
-import Display from "@/components/Admin/Category/Display";
+import Display from "@/components/Admin/AiSearch/Display";
 import { useState,useEffect } from "react";
 import { useSession } from "next-auth/react";
 import { usePathname, useRouter } from "next/navigation";

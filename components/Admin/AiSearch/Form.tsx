@@ -17,7 +17,7 @@ const Form = ({ type, typeofCategory, categories , aiSearch, setaiSearch, submit
         className='mt-10 w-full flex flex-col gap-7 glassmorphism'
       >
         <div className="flex flex-col my-10 w-full px-2">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 my-10 px-2">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 my-5 px-2">
             <div className="relative flex-1">
                 <input 
                   id="Header" 
@@ -53,38 +53,40 @@ const Form = ({ type, typeofCategory, categories , aiSearch, setaiSearch, submit
             </div>
           </div>
 
-          <div className="mb-10 ">
-            <Multiselect
-              displayValue="title"
-              placeholder = "Services"
-              className="z-40 w-full px-0 lg:px-3 text-md lg:text-xl !text-black bg-white py-4 border-2 border-black rounded-xl appearance-none dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-500 peer"
-              onKeyPressFn={function noRefCheck(){}}
-              onRemove={function noRefCheck(){}}
-              onSearch={function noRefCheck(){}}
-              onSelect={(e)=>{
-                e.map((data,index)=>(
-                    setaiSearch({ ...aiSearch, service: data.title })
-                ))
-              }}
-              options={ServiceData}
-            />
-          </div>
-
-          <div className="mb-10 ">
-            <Multiselect
-              displayValue="CategoryName"
-              placeholder = "Category"
-              className="z-30 w-full px-0 lg:px-3 text-md lg:text-xl !text-black bg-white py-4 border-2 border-black rounded-xl appearance-none dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-500 peer"
-              onKeyPressFn={function noRefCheck(){}}
-              onRemove={function noRefCheck(){}}
-              onSearch={function noRefCheck(){}}
-              onSelect={(e)=>{
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 my-5 px-2">
+            <div className="mb-10 ">
+              <Multiselect
+                displayValue="title"
+                placeholder = "Services"
+                className="z-40 w-full px-0 lg:px-3 text-md lg:text-xl !text-black bg-white py-4 border-2 border-black rounded-xl appearance-none dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-500 peer"
+                onKeyPressFn={function noRefCheck(){}}
+                onRemove={function noRefCheck(){}}
+                onSearch={function noRefCheck(){}}
+                onSelect={(e)=>{
                   e.map((data,index)=>(
-                      setaiSearch({ ...aiSearch, categoryId: data.category_id })
+                      setaiSearch({ ...aiSearch, service: data.title })
                   ))
-              }}
-              options={categories}
-            />
+                }}
+                options={ServiceData}
+              />
+            </div>
+
+            <div className="mb-10 ">
+              <Multiselect
+                displayValue="CategoryName"
+                placeholder = "Category"
+                className="z-30 w-full px-0 lg:px-3 text-md lg:text-xl !text-black bg-white py-4 border-2 border-black rounded-xl appearance-none dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-500 peer"
+                onKeyPressFn={function noRefCheck(){}}
+                onRemove={function noRefCheck(){}}
+                onSearch={function noRefCheck(){}}
+                onSelect={(e)=>{
+                    e.map((data,index)=>(
+                        setaiSearch({ ...aiSearch, categoryId: data.category_id })
+                    ))
+                }}
+                options={categories}
+              />
+            </div>
           </div>
 
           <div className="relative flex-1">
