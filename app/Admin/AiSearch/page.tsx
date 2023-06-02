@@ -78,7 +78,7 @@ export default function AiSearchHome() {
         typeof="AiSearch"
         aiSearch={aiSearch}
         setaiSearch={setaiSearch}
-        categories={categories}
+        categories={allAiSearchCategory}
         submitting={submitting}
         handleSubmit={createAiSearch}
       />
