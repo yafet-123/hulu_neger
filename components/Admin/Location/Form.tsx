@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 
 const Form = ({
   type,
@@ -8,6 +9,7 @@ const Form = ({
   submitting,
   handleSubmit,
 }) => {
+  const blob = new Blob([location.Image], { type: "image" });
   return (
     <section className="w-full lg:px-20">
       <h1 className="head_text text-left">
@@ -33,7 +35,9 @@ const Form = ({
               className="block w-full px-3 text-md lg:text-xl text-black bg-white py-4 border-2 border-black rounded-xl appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-500 peer"
               placeholder=" "
               value={location.LocationName}
-              onChange={(e) => setLocation({ ...location, LocationName: e.target.value })}
+              onChange={(e) =>
+                setLocation({ ...location, LocationName: e.target.value })
+              }
             />
             <label
               htmlFor="floating_outlined"
@@ -77,7 +81,9 @@ const Form = ({
                   id="dropzone-file"
                   type="file"
                   className="hidden"
-                  onChange={(e) => setLocation({ ...location, Image: e.target.files[0] })}
+                  onChange={(e) =>
+                    setLocation({ ...location, Image: e.target.files[0] })
+                  }
                 />
               </label>
             </div>
@@ -85,23 +91,23 @@ const Form = ({
 
           <div
             className={
-              location.Image == null
+              location.Image == ""
                 ? "hidden"
                 : "flex justify-center items-center mb-10"
             }
           >
             <Image
               src={
-                location.Image == null
-                  ? "/images/bgImage1.avif"
-                  : URL.createObjectURL(location.Image)
+                location.Image == ""
+                  ? "/images/logo1.png"
+                  : URL.createObjectURL(blob)
               }
-              width={500}
-              height={200}
+              width={300}
+              height={100}
               alt="image that will be displayed"
               className="w-full"
             />
-          </div>         
+          </div>
         </div>
 
         <div className="flex-end mx-3 mb-5 gap-4">

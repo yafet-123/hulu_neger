@@ -18,7 +18,7 @@ model Category {
   ModifiedDate DateTime?     @default(now()) @db.Timestamptz(6)
   User         User?         @relation(fields: [user_id], references: [user_id], onUpdate: NoAction)
   JobCategory  JobCategory[]
-}
+} 
   
 model Job {
   job_id          Int           @id @default(autoincrement())

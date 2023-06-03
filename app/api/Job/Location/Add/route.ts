@@ -4,13 +4,13 @@ import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
 
 export const POST = async (req: NextApiRequest, res: NextApiResponse) => {
-  const {LocationName , user_id, Image} = await req.json();
+  const { LocationName, user_id, Image } = await req.json();
   try {
-    console.log(CategoryName);
+    console.log(Image)
     const data = await prisma.Location.create({
       data: {
         LocationName: LocationName,
-        Image:Image,
+        Image: Image,
         user_id: Number(user_id),
       },
     });

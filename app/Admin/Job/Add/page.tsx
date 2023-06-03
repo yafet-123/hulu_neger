@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
-import Form from "@/components/Admin/Job/Form";
-import Display from "@/components/Admin/Job/Display";
+import Form from "@/components/Admin/Job/Add/Form";
+import Display from "@/components/Admin/Job/Add/Display";
 import { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
 import { usePathname, useRouter } from "next/navigation";
@@ -20,6 +20,7 @@ export default function JobHome() {
   const router = useRouter();
   const [submitting, setIsSubmitting] = useState(false);
   const [allJob, setAllJob] = useState([]);
+  const [allLocation, setAllLocation] = useState([]);
   const [allJobCategory, setAllJobCategory] = useState([]);
   const [job, setJob] = useState({
     CompanyName: "",
@@ -29,19 +30,40 @@ export default function JobHome() {
     Salary: "",
     Descreption: "",
     shortDescreption: "",
+    DeadLine:"",
     LocationId: [],
     categoryId: [],
   });
   const { data: session } = useSession();
+
+  async function imageUploadData() {
+    const formData = new FormData();
+    let imagesecureUrl = "";
+    formData.append("file", job.Image);
+
+    formData.append("upload_preset", "my_upload");
+
+    const imageUpload = await fetch(
+      `https://api.cloudinary.com/v1_1/df7hlpjcj/image/upload`,
+      {
+        method: "POST",
+        body: formData,
+      }
+    ).then((r) => r.json());
+    imagesecureUrl = imageUpload.secure_url;
+    return imagesecureUrl;
+  }
+
   const createJob = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
+    const imageData = await imageUploadData()
     try {
       const response = await fetch("/api/Job//Add", {
         method: "POST",
         body: JSON.stringify({
           CompanyName: job.CompanyName,
-          Image: job.imageData,
+          Image: imageData,
           JobsName: job.JobsName,
           CareerLevel: job.CareerLevel,
           Salary: job.Salary,
@@ -77,9 +99,17 @@ export default function JobHome() {
     setAllJobCategory(data);
   };
 
+  const fetchLocation = async () => {
+    const response = await fetch("/api/Job/Location");
+    const data = await response.json();
+
+    setAllLocation(data);
+  };
+
   useEffect(() => {
     fetchJob();
     fetchJobCategory();
+    fetchLocation();
   }, []);
   return (
     <section className="w-full box-border lg:pt-24">
@@ -88,6 +118,7 @@ export default function JobHome() {
         typeof="Job"
         job={job}
         setJob={setJob}
+        locations={allLocation}
         categories={allJobCategory}
         submitting={submitting}
         handleSubmit={createJob}

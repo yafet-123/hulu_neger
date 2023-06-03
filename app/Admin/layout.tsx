@@ -18,11 +18,11 @@ export default function AdminRootLayout({
   return (
     <div className="flex flex-col w-full">
       <Navbar />
-      <div className="flex flex-col lg:flex-row w-full">
-        <div className="">
+      <div className="flex flex-col lg:flex-row w-full h-full">
+        
           {/* @ts-ignore */}
           <VerticalNavbar />
-        </div>
+        
         <div className="w-full px-20">{children}</div>
       </div>
     </div>

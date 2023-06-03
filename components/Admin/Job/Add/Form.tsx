@@ -1,4 +1,11 @@
+"use client";
+import React, { useMemo, useRef } from "react"
 import Link from "next/link";
+import Multiselect from "multiselect-react-dropdown";
+import "react-quill/dist/quill.snow.css";
+import Image from "next/image";
+import ReactQuill from "react-quill";
+import 'react-quill/dist/quill.snow.css';
 
 const Form = ({
   type,
@@ -6,9 +13,60 @@ const Form = ({
   job,
   setJob,
   categories,
+  locations,
   submitting,
   handleSubmit,
 }) => {
+  const quillRef = useRef(null)
+  const blob = new Blob([location.Image], { type: "image" });
+  const modules = useMemo(
+    () => ({
+      toolbar: {
+        container: [
+          ["bold", "italic", "underline", "strike"], // toggled buttons
+          ["blockquote", "code-block"],
+
+          [{ header: 1 }, { header: 2 }], // custom button values
+          [{ list: "ordered" }, { list: "bullet" }],
+          [{ script: "sub" }, { script: "super" }], // superscript/subscript
+          [{ indent: "-1" }, { indent: "+1" }], // outdent/indent
+          [{ direction: "rtl" }], // text direction
+
+          [{ size: ["small", false, "large", "huge"] }], // custom dropdown
+          [{ header: [1, 2, 3, 4, 5, 6, false] }],
+
+          [{ color: [] }, { background: [] }], // dropdown with defaults from theme
+          [{ font: [] }],
+          [{ align: [] }],
+
+          ["link", "image", "video"],
+        ],
+        handlers: {
+          image: imageHandler,
+        },
+      },
+
+      clipboard: {
+        matchVisual: false,
+      },
+    }),
+    []
+  );
+
+  function imageHandler() {
+    console.log(quillRef);
+    if (!quillRef.current) return;
+
+    const editor = quillRef.current.getEditor();
+    const range = editor.getSelection();
+    const value = prompt("Please enter the image URL");
+    console.log(value);
+    console.log(range);
+    console.log(editor);
+    if (value && range) {
+      editor.insertEmbed(range.index, "image", value, "user");
+    }
+  }
   return (
     <section className="w-full lg:px-20">
       <h1 className="head_text text-left">
@@ -17,8 +75,8 @@ const Form = ({
         </span>
       </h1>
       <p className="desc text-left max-w-md">
-        {type} the {typeofCategory} category that can be used to classify the{" "}
-        {typeofCategory} by using the category
+        {type} the {typeofCategory} share amazing jobs with the hulu_neger, and
+        help millions of finder of job get jobs
       </p>
 
       <form
@@ -33,7 +91,7 @@ const Form = ({
               required
               className="block w-full px-3 text-md lg:text-xl text-black bg-white py-4 border-2 border-black rounded-xl appearance-none dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-500 peer"
               placeholder=" "
-              value={CareerLevel}
+              value={job.CareerLevel}
               onChange={(e) => setJob({ ...job, CareerLevel: e.target.value })}
             />
             <label
@@ -51,7 +109,7 @@ const Form = ({
               required
               className="block w-full px-3 texxt-md lg:text-xl text-black bg-white py-4 border-2 border-black rounded-xl appearance-none dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-500 peer"
               placeholder=" "
-              value={Salary}
+              value={job.Salary}
               onChange={(e) => setJob({ ...job, Salary: e.target.value })}
             />
             <label
@@ -69,7 +127,7 @@ const Form = ({
               required
               className="block w-full px-3 text-md lg:text-xl text-black bg-white py-4 border-2 border-black rounded-xl appearance-none dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-500 peer"
               placeholder=" "
-              value={DeadLine}
+              value={job.DeadLine}
               onChange={(e) => setJob({ ...job, DeadLine: e.target.value })}
               onClick={() => settypechange(false)}
             />
@@ -88,7 +146,7 @@ const Form = ({
             required
             className="block w-full px-3 text-md lg:text-xl text-black bg-white py-4 border-2 border-black rounded-xl appearance-none dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-500 peer"
             placeholder=" "
-            value={shortDescription}
+            value={job.shortDescription}
             rows="10"
             cols="50"
             onChange={(e) =>
@@ -108,9 +166,9 @@ const Form = ({
             Description
           </p>
 
-          <QuillNoSSRWrapper
-            forwardedRef={quillRef}
-            value={Description}
+          <ReactQuill
+            ref={quillRef}
+            value={job.Description}
             onChange={(e) => setJob({ ...job, Description: e.target.value })}
             modules={modules}
             className="!bg-white dark:!bg-white dark:!text-black !mx-2"
@@ -185,21 +243,23 @@ const Form = ({
               id="dropzone-file"
               type="file"
               className="hidden"
-              onChange={(e) => setJob({ ...job, Salary: e.target.files[0] })}
+              onChange={(e) => setJob({ ...job, Image: e.target.files[0] })}
             />
           </label>
         </div>
 
         <div
           className={
-            image == null ? "hidden" : "flex justify-center items-center mb-10"
+            job.Image == ""
+              ? "hidden"
+              : "flex justify-center items-center mb-10"
           }
         >
           <Image
             src={
-              image == null
+              job.Image == ""
                 ? "/images/bgImage1.avif"
-                : URL.createObjectURL(image)
+                : URL.createObjectURL(blob)
             }
             width={500}
             height={200}

@@ -10,9 +10,9 @@ const VerticalNavbar: React.FC = () => {
     { link: "/Admin/Job/Add", name: "Add Job" },
     { link: "/Admin/Job/Display", name: "Display Job" },
     { link: "/Admin/Job/Category", name: "Job Category" },
-    { link: "/Admin/Job/Display", name: "Job Location" },
+    { link: "/Admin/Job/Location", name: "Job Location" },
     { link: "/Admin/News/Category", name: "News Category" },
-    { link: "/Admin/Job/Display", name: "News" },
+    { link: "/Admin/News", name: "News" },
     { link: "/Admin/Entertainment/Category", name: "Entertainment Category" },
     { link: "/Admin/Job/Display", name: "Entertainment" },
     { link: "/Admin/Job/Display", name: "HTML Course" },
@@ -27,7 +27,7 @@ const VerticalNavbar: React.FC = () => {
   const pathname = usePathname();
   console.log(pathname);
   return (
-    <div className={`flex h-full sticky top-0 bottom-0 w-full lg:w-60 pt-24 `}>
+    <div className={`flex h-full w-full lg:w-60 pt-24 `}>
       <nav className="w-full lg:h-screen flex flex-col py-8 lg:px-4 dark:bg-[#02201D]">
         <div className="flex justify-between ml-2 lg:ml-5">
           <h1 className={`text-2xl font-bold text-black dark:text-white`}>
