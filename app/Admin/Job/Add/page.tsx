@@ -107,7 +107,7 @@ export default function JobHome() {
     <section className="w-full box-border lg:pt-24">
       <Form
         type="Create"
-        typeof="Job"
+        typeofCategory="Job"
         job={job}
         setJob={setJob}
         locations={allLocation}

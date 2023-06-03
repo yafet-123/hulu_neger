@@ -93,7 +93,7 @@ const Form = ({
     <section className="w-full lg:px-20">
       <h1 className="head_text text-left">
         <span className="blue_gradient">
-          {type} {typeofCategory} Category
+          {type} {typeofCategory}
         </span>
       </h1>
       <p className="desc text-left max-w-md">
