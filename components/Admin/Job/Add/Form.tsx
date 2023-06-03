@@ -1,11 +1,25 @@
 "use client";
-import React, { useMemo, useRef } from "react"
 import Link from "next/link";
 import Multiselect from "multiselect-react-dropdown";
 import "react-quill/dist/quill.snow.css";
 import Image from "next/image";
 import ReactQuill from "react-quill";
 import 'react-quill/dist/quill.snow.css';
+import React, { useMemo, useRef } from "react"
+import dynamic from 'next/dynamic'
+
+const QuillNoSSRWrapper = dynamic(
+  async () => {
+    const QuillNoSSRWrapper = (await import("react-quill")).default
+    function Imagehandle({ forwardedRef, ...rest }){
+        return <QuillNoSSRWrapper ref={forwardedRef} {...rest} />
+    }
+    return Imagehandle
+  },
+  {
+    ssr: false,
+  },
+)
 
 const Form = ({
   type,
@@ -14,11 +28,19 @@ const Form = ({
   setJob,
   categories,
   locations,
+  categoryId,
+  setCategoryId,
+  LocationId,
+  setLocationId,
+  Description,
+  typechange,
+  settypechange,
+  setDescription,
   submitting,
   handleSubmit,
-}) => {
+}) => { 
   const quillRef = useRef(null)
-  const blob = new Blob([location.Image], { type: "image" });
+  const blob = new Blob([job.Image], { type: "image" });
   const modules = useMemo(
     () => ({
       toolbar: {
@@ -166,8 +188,8 @@ const Form = ({
             Description
           </p>
 
-          <ReactQuill
-            ref={quillRef}
+          <QuillNoSSRWrapper
+            forwardedRef={quillRef}
             value={job.Description}
             onChange={(e) => setJob({ ...job, Description: e.target.value })}
             modules={modules}
@@ -186,7 +208,7 @@ const Form = ({
             onSearch={function noRefCheck() {}}
             onSelect={(e) => {
               e.map((data, index) =>
-                setJob({ ...job, LocationId: data.title })
+                setLocationId([...LocationId, data.location_id])
               );
             }}
             options={locations}
@@ -203,7 +225,7 @@ const Form = ({
             onSearch={function noRefCheck() {}}
             onSelect={(e) => {
               e.map((data, index) =>
-                setJob({ ...job, categoryId: data.title })
+                setCategoryId([...categoryId, data.category_id])
               );
             }}
             options={categories}

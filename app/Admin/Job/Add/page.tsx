@@ -6,21 +6,16 @@ import { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
 import { usePathname, useRouter } from "next/navigation";
 
-const JobCardList = ({ data }) => {
-  return (
-    <div className="mt-16 prompt_layout">
-      {data.map((data) => (
-        <Display key={data._id} Job={data} />
-      ))}
-    </div>
-  );
-};
 
 export default function JobHome() {
   const router = useRouter();
   const [submitting, setIsSubmitting] = useState(false);
   const [allJob, setAllJob] = useState([]);
   const [allLocation, setAllLocation] = useState([]);
+  const [categoryId,setCategoryId] = useState([])
+  const [LocationId, setLocationId] = useState([])
+  const [typechange , settypechange] = useState(true)
+  const [Description , setDescription] = useState("")
   const [allJobCategory, setAllJobCategory] = useState([]);
   const [job, setJob] = useState({
     CompanyName: "",
@@ -28,11 +23,8 @@ export default function JobHome() {
     JobsName: "",
     CareerLevel: "",
     Salary: "",
-    Descreption: "",
     shortDescreption: "",
     DeadLine:"",
-    LocationId: [],
-    categoryId: [],
   });
   const { data: session } = useSession();
 
@@ -70,8 +62,8 @@ export default function JobHome() {
           Descreption: job.Description,
           shortDescreption: job.shortDescription,
           DeadLine: job.DeadLine,
-          categoryId: job.categoryId,
-          LocationId: job.LocationId,
+          categoryId: categoryId,
+          LocationId: LocationId,
           user_id: session?.user.id,
         }),
       });
@@ -119,12 +111,19 @@ export default function JobHome() {
         job={job}
         setJob={setJob}
         locations={allLocation}
+        categoryId={categoryId}
+        typechange={typechange}
+        settypechange={settypechange}
+        setCategoryId={setCategoryId}
+        LocationId={LocationId}
+        setLocationId={setLocationId}
+        Description={Description}
+        setDescription={setDescription}
         categories={allJobCategory}
         submitting={submitting}
         handleSubmit={createJob}
       />
 
-      <JobCardList data={allJob} />
     </section>
   );
 }
