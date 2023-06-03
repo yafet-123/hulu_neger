@@ -34,7 +34,7 @@ const Form = ({
               className="block w-full px-3 text-md lg:text-xl text-black bg-white py-4 border-2 border-black rounded-xl appearance-none dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-500 peer"
               placeholder=" "
               value={CareerLevel}
-              onChange={(e) => setCareerLevel(e.target.value)}
+              onChange={(e) => setJob({ ...job, CareerLevel: e.target.value })}
             />
             <label
               htmlFor="floating_outlined"
@@ -52,7 +52,7 @@ const Form = ({
               className="block w-full px-3 texxt-md lg:text-xl text-black bg-white py-4 border-2 border-black rounded-xl appearance-none dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-500 peer"
               placeholder=" "
               value={Salary}
-              onChange={(e) => setSalary(e.target.value)}
+              onChange={(e) => setJob({ ...job, Salary: e.target.value })}
             />
             <label
               htmlFor="floating_outlined"
@@ -70,7 +70,7 @@ const Form = ({
               className="block w-full px-3 text-md lg:text-xl text-black bg-white py-4 border-2 border-black rounded-xl appearance-none dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-500 peer"
               placeholder=" "
               value={DeadLine}
-              onChange={(e) => setDeadLine(e.target.value)}
+              onChange={(e) => setJob({ ...job, DeadLine: e.target.value })}
               onClick={() => settypechange(false)}
             />
             <label
@@ -91,7 +91,9 @@ const Form = ({
             value={shortDescription}
             rows="10"
             cols="50"
-            onChange={(e) => setshortDescription(e.target.value)}
+            onChange={(e) =>
+              setJob({ ...job, shortDescription: e.target.value })
+            }
           />
           <label
             htmlFor="floating_outlined"
@@ -109,7 +111,7 @@ const Form = ({
           <QuillNoSSRWrapper
             forwardedRef={quillRef}
             value={Description}
-            onChange={setDescription}
+            onChange={(e) => setJob({ ...job, Description: e.target.value })}
             modules={modules}
             className="!bg-white dark:!bg-white dark:!text-black !mx-2"
             theme="snow"
@@ -126,7 +128,7 @@ const Form = ({
             onSearch={function noRefCheck() {}}
             onSelect={(e) => {
               e.map((data, index) =>
-                setLocationId([...LocationId, data.location_id])
+                setJob({ ...job, LocationId: data.title })
               );
             }}
             options={locations}
@@ -143,7 +145,7 @@ const Form = ({
             onSearch={function noRefCheck() {}}
             onSelect={(e) => {
               e.map((data, index) =>
-                setCategoryId([...categoryId, data.category_id])
+                setJob({ ...job, categoryId: data.title })
               );
             }}
             options={categories}
@@ -183,7 +185,7 @@ const Form = ({
               id="dropzone-file"
               type="file"
               className="hidden"
-              onChange={(e) => setImage(e.target.files[0])}
+              onChange={(e) => setJob({ ...job, Salary: e.target.files[0] })}
             />
           </label>
         </div>

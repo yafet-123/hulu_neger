@@ -81,7 +81,7 @@ const Form = ({
                 onSearch={function noRefCheck() {}}
                 onSelect={(e) => {
                   e.map((data, index) =>
-                    setaiSearch({ ...aiSearch, service: data.title })
+                    setaiSearch({ ...aiSearch, categoryId: data.title })
                   );
                 }}
                 options={ServiceData}
