@@ -1,41 +1,44 @@
 "use client";
 import Image from 'next/image'
-import Form from "@/components/Admin/Category/Form";
-import Display from "@/components/Admin/Category/Display";
+import Form from "@/components/Admin/Location/Form";
+import Display from "@/components/Admin/Location/Display";
 import { useState,useEffect } from "react";
 import { useSession } from "next-auth/react";
 import { usePathname, useRouter } from "next/navigation";
-interface Category {
-  Category:string;
+interface Location {
+  LocationName:string;
+  Image:string;
 }
 
-const AiSearchCategoryCardList = ({ data }) => {
+const LocationCardList = ({ data }) => {
   return (
     <div className='mt-16 prompt_layout'>
-      {data.map((category) => (
+      {data.map((location) => (
         <Display
-          key={category.category_id}
-          category={category}
+          key={location.category_id}
+          location={location}
         />
       ))}
     </div>
   );
 };
 
-export default function AiSearchCategoryHome() {
+
+export default function LocationCategoryHome() {
   const router = useRouter();
   const [submitting, setIsSubmitting] = useState(false);
-  const [allAiSearchCategory, setAllAiSearchCategory] = useState([]);
-  const [category, setCategory] = useState<Category>({ Category: "" });
+  const [allLocation, setAllLocation] = useState([]);
+  const [location, setLocation] = useState<Location>({ LocationName: "", Image:"" });
   const { data: session } = useSession();
-  const createAiSearchCategory = async (e) => {
+  const createLocation = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
     try {
-      const response = await fetch("/api/AiSearch/Category/Add", {
+      const response = await fetch("/api/Location/Add", {
         method: "POST",
         body: JSON.stringify({
-          CategoryName: category.Category,
+          LocationName: location.LocationName,
+          Image:location.Image
           user_id: session?.user.id,
         }),
       });
@@ -49,28 +52,28 @@ export default function AiSearchCategoryHome() {
     }
   };
 
-  const fetchAiSearchCategory = async () => {
-    const response = await fetch("/api/AiSearch/Category");
+  const fetchLocation = async () => {
+    const response = await fetch("/api/Location");
     const data = await response.json();
 
-    setAllAiSearchCategory(data);
+    setAllLocation(data);
   };
 
   useEffect(() => {
-    fetchAiSearchCategory();
+    fetchLocation();
   }, []);
   return (
     <section className='w-full box-border lg:pt-24'>
       <Form
         type='Create'
-        typeofCategory="AiSearch"
-        category={category}
-        setCategory={setCategory}
+        typeofCategory="Location"
+        location={location}
+        setLocation={setLocation}
         submitting={submitting}
-        handleSubmit={createAiSearchCategory}
+        handleSubmit={createLocation}
       />
 
-      <AiSearchCategoryCardList data={allAiSearchCategory} />
+      <LocationCardList data={allLocation} />
     </section>
   )
 }
