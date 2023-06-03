@@ -1,8 +1,8 @@
-import { useTheme } from 'next-themes';
-import { useState, useEffect } from 'react';
+import { useTheme } from "next-themes";
+import { useState, useEffect } from "react";
 import { BsFillPersonLinesFill, BsMoonStars, BsSun } from "react-icons/bs";
 
-const ThemeToggler:React.FC = () => {
+const ThemeToggler: React.FC = () => {
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
   useEffect(() => setMounted(true), []);
@@ -10,10 +10,10 @@ const ThemeToggler:React.FC = () => {
   return (
     <button
       className="bg-transparent flex items-center justify-center transition-all duration-300 focus:outline-none"
-      onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
+      onClick={() => setTheme(theme === "light" ? "dark" : "light")}
       aria-label="Toggle Dark Mode"
     >
-      {theme === 'light' ? (
+      {theme === "light" ? (
         <BsSun className="text-black dark:text-white w-5 h-5" />
       ) : (
         <BsMoonStars className="text-black dark:text-white w-5 h-5" />
