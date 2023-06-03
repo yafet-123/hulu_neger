@@ -80,7 +80,7 @@ export default function JobHome() {
       <Form
         type='Create'
         typeof="Job"
-        Job={Job}
+        job={job}
         setJob={setJob}
         categories={allJobCategory}
         submitting={submitting}
