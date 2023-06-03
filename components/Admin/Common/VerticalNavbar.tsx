@@ -14,7 +14,7 @@ const VerticalNavbar: React.FC = () => {
     { link: "/Admin/News/Category", name: "News Category" },
     { link: "/Admin/News", name: "News" },
     { link: "/Admin/Entertainment/Category", name: "Entertainment Category" },
-    { link: "/Admin/Job/Display", name: "Entertainment" },
+    { link: "/Admin/Entertainment", name: "Entertainment" },
     { link: "/Admin/Job/Display", name: "HTML Course" },
     { link: "/Admin/Job/Display", name: "CSS Course" },
     { link: "/Admin/Job/Display", name: "JavaScript Course" },
