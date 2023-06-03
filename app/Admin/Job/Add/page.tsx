@@ -1,20 +1,16 @@
 "use client";
-import Image from 'next/image'
+import Image from "next/image";
 import Form from "@/components/Admin/Job/Form";
 import Display from "@/components/Admin/Job/Display";
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
 import { usePathname, useRouter } from "next/navigation";
 
-
 const JobCardList = ({ data }) => {
   return (
-    <div className='mt-16 prompt_layout'>
+    <div className="mt-16 prompt_layout">
       {data.map((data) => (
-        <Display
-          key={data._id}
-          Job={data}
-        />
+        <Display key={data._id} Job={data} />
       ))}
     </div>
   );
@@ -25,7 +21,17 @@ export default function JobHome() {
   const [submitting, setIsSubmitting] = useState(false);
   const [allJob, setAllJob] = useState([]);
   const [allJobCategory, setAllJobCategory] = useState([]);
-  const [job, setJob] = useState({ CompanyName : "", Image:"", JobsName:"", CareerLevel:"", Salary:"", Descreption:"", shortDescreption:"", LocationId:[], categoryId:[]  });
+  const [job, setJob] = useState({
+    CompanyName: "",
+    Image: "",
+    JobsName: "",
+    CareerLevel: "",
+    Salary: "",
+    Descreption: "",
+    shortDescreption: "",
+    LocationId: [],
+    categoryId: [],
+  });
   const { data: session } = useSession();
   const createJob = async (e) => {
     e.preventDefault();
@@ -34,16 +40,16 @@ export default function JobHome() {
       const response = await fetch("/api/Job//Add", {
         method: "POST",
         body: JSON.stringify({
-          CompanyName:job.CompanyName,
-          Image:job.imageData,
-          JobsName:job.JobsName,
-          CareerLevel:job.CareerLevel,
-          Salary:job.Salary,
-          Descreption:job.Description,
-          shortDescreption:job.shortDescription,
-          DeadLine:job.DeadLine,
-          categoryId:job.categoryId,
-          LocationId:job.LocationId,
+          CompanyName: job.CompanyName,
+          Image: job.imageData,
+          JobsName: job.JobsName,
+          CareerLevel: job.CareerLevel,
+          Salary: job.Salary,
+          Descreption: job.Description,
+          shortDescreption: job.shortDescription,
+          DeadLine: job.DeadLine,
+          categoryId: job.categoryId,
+          LocationId: job.LocationId,
           user_id: session?.user.id,
         }),
       });
@@ -76,9 +82,9 @@ export default function JobHome() {
     fetchJobCategory();
   }, []);
   return (
-    <section className='w-full box-border lg:pt-24'>
+    <section className="w-full box-border lg:pt-24">
       <Form
-        type='Create'
+        type="Create"
         typeof="Job"
         job={job}
         setJob={setJob}
@@ -89,5 +95,5 @@ export default function JobHome() {
 
       <JobCardList data={allJob} />
     </section>
-  )
+  );
 }

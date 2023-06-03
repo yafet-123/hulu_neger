@@ -1,22 +1,19 @@
 "use client";
-import Image from 'next/image'
+import Image from "next/image";
 import Form from "@/components/Admin/Category/Form";
 import Display from "@/components/Admin/Category/Display";
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
 import { usePathname, useRouter } from "next/navigation";
 interface Category {
-  Category:string;
+  Category: string;
 }
 
 const AiSearchCategoryCardList = ({ data }) => {
   return (
-    <div className='mt-16 prompt_layout'>
+    <div className="mt-16 prompt_layout">
       {data.map((category) => (
-        <Display
-          key={category.category_id}
-          category={category}
-        />
+        <Display key={category.category_id} category={category} />
       ))}
     </div>
   );
@@ -60,9 +57,9 @@ export default function AiSearchCategoryHome() {
     fetchAiSearchCategory();
   }, []);
   return (
-    <section className='w-full box-border lg:pt-24'>
+    <section className="w-full box-border lg:pt-24">
       <Form
-        type='Create'
+        type="Create"
         typeofCategory="AiSearch"
         category={category}
         setCategory={setCategory}
@@ -72,5 +69,5 @@ export default function AiSearchCategoryHome() {
 
       <AiSearchCategoryCardList data={allAiSearchCategory} />
     </section>
-  )
+  );
 }

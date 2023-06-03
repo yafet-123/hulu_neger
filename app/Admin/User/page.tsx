@@ -1,22 +1,19 @@
 "use client";
-import Image from 'next/image'
+import Image from "next/image";
 import Form from "@/components/Admin/User/Form";
 import UserDisplay from "@/components/Admin/User/UserDisplay";
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
 
 interface User {
-  UserName:string;
-  email:string;
+  UserName: string;
+  email: string;
 }
 
 const UserCardList = ({ data }) => {
   return (
-    <div className='mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5'>
+    <div className="mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
       {data.map((user) => (
-        <UserDisplay
-          key={user.user_id}
-          user={user}
-        />
+        <UserDisplay key={user.user_id} user={user} />
       ))}
     </div>
   );
@@ -25,10 +22,10 @@ const UserCardList = ({ data }) => {
 export default function AdminUserHome() {
   const [submitting, setIsSubmitting] = useState(false);
   const [allUsers, setAllUsers] = useState([]);
-  const [user, setUser] = useState<User>({ UserName: "",email:"" });
+  const [user, setUser] = useState<User>({ UserName: "", email: "" });
   const createUser = async (e) => {
     e.preventDefault();
-    console.log(user.UserName)
+    console.log(user.UserName);
     setIsSubmitting(true);
     try {
       const response = await fetch("/api/User/Add", {
@@ -58,10 +55,10 @@ export default function AdminUserHome() {
   useEffect(() => {
     fetchUsers();
   }, []);
-  return(
-    <section className='w-full box-border lg:pt-24'>
+  return (
+    <section className="w-full box-border lg:pt-24">
       <Form
-        type='Create'
+        type="Create"
         user={user}
         setUser={setUser}
         submitting={submitting}
@@ -70,5 +67,5 @@ export default function AdminUserHome() {
 
       <UserCardList data={allUsers} />
     </section>
-  )
+  );
 }
