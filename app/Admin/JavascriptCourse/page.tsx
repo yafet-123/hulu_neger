@@ -1,66 +1,38 @@
 "use client";
 import Image from "next/image";
-import Form from "@/components/Admin/Entertainment/Form";
-import Display from "@/components/Admin/Entertainment/Display";
+import Form from "@/components/Admin/Course/Form";
+import Display from "@/components/Admin/Course/Display";
 import { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
 import { usePathname, useRouter } from "next/navigation";
 
-const EntertainmentCardList = ({ data }) => {
+const JavascriptCardList = ({ data }) => {
   return (
     <div className="mt-16 prompt_layout">
       {data.map((data) => (
-        <Display key={data.entertainment_id} entertainment={data} />
+        <Display key={data.course_id} course={data} />
       ))}
     </div>
   );
 };
 
-export default function EntertainmentHome() {
+export default function JavascriptHome() {
   const router = useRouter();
   const [submitting, setIsSubmitting] = useState(false);
-  const [allEntertainment, setAllEntertainment] = useState([]);
-  const [Description, setDescription] = useState("")
-  const [categoryId, setCategoryId] = useState([])
-  const [allEntertainmentCategory, setAllEntertainmentCategory] = useState([]);
-  const [entertainment, setEntertainment] = useState({
-    Header: "",
-    ShortDescription: "",
-    Image: "",
-  });
+  const [allJavascript, setAllJavascript] = useState([]);
+  const [title, settitle] = useState("")
+  const [content, setcontent] = useState("")
   const { data: session } = useSession();
-  console.log(categoryId)
-  async function imageUploadData() {
-    const formData = new FormData();
-    let imagesecureUrl = "";
-    formData.append("file", entertainment.Image);
 
-    formData.append("upload_preset", "my_upload");
-
-    const imageUpload = await fetch(
-      `https://api.cloudinary.com/v1_1/df7hlpjcj/image/upload`,
-      {
-        method: "POST",
-        body: formData,
-      }
-    ).then((r) => r.json());
-    imagesecureUrl = imageUpload.secure_url;
-    return imagesecureUrl;
-  }
-
-  const createEntertainment = async (e) => {
+  const createJavascript = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-    const imageData = await imageUploadData()
     try {
-      const response = await fetch("/api/Entertainment/Add", {
+      const response = await fetch("/api/Javascript/Add", {
         method: "POST",
         body: JSON.stringify({
-          Header: entertainment.Header,
-          Image: imageData,
-          ShortDescription: entertainment.ShortDescription,
-          Description: Description,
-          categoryId: categoryId,
+          title: title,
+          content:content,
           user_id: session?.user.id,
         }),
       });
@@ -74,41 +46,30 @@ export default function EntertainmentHome() {
     }
   };
 
-  const fetchEntertainment = async () => {
-    const response = await fetch("/api/Entertainment");
+  const fetchJavascript = async () => {
+    const response = await fetch("/api/Javascript");
     const data = await response.json();
 
-    setAllEntertainment(data);
-  };
-
-  const fetchEntertainmentCategory = async () => {
-    const response = await fetch("/api/Entertainment/Category");
-    const data = await response.json();
-
-    setAllEntertainmentCategory(data);
+    setAllJavascript(data);
   };
 
   useEffect(() => {
-    fetchEntertainment();
-    fetchEntertainmentCategory();
+    fetchJavascript();
   }, []);
   return (
     <section className="w-full h-full lg:pt-24">
       <Form
         type="Create"
-        typeofCategory="Entertainment"
-        entertainment={entertainment}
-        setEntertainment={setEntertainment}
-        Description={Description}
-        setDescription={setDescription}
-        categoryId={categoryId}
-        setCategoryId={setCategoryId}
-        categories={allEntertainmentCategory}
+        typeofCategory="Javascript"
+        title={title}
+        settitle={settitle}
+        content={content}
+        setcontent={setcontent}
         submitting={submitting}
-        handleSubmit={createEntertainment}
+        handleSubmit={createJavascript}
       />
 
-      <EntertainmentCardList data={allEntertainment} />
+      <JavascriptCardList data={allJavascript} />
     </section>
   );
 }
