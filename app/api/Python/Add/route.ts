@@ -10,14 +10,14 @@ export const POST = async (req: NextApiRequest, res: NextApiResponse) => {
     user_id
   } = await req.json();
   try {
-    const htmldata = await prisma.HTMLCourse.create({
+    const pythondata = await prisma.PythonCourse.create({
     data:{
       title,
       content,
       user_id:Number(user_id)
     }
   });
-    return new Response(JSON.stringify(htmldata), { status: 201 });
+    return new Response(JSON.stringify(pythondata), { status: 201 });
   } catch (error) {
     return new Response("Failed to create a new Job Category", { status: 500 });
   }
