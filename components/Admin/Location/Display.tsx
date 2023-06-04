@@ -48,12 +48,7 @@ const Display = ({ location, handleEdit, handleDelete }) => {
         <p className="my-4 font-satoshi text-sm text-gray-700">
           {location.LocationName}
         </p>
-        <Image
-            src={location.Image}
-            alt="news Image"
-            width={100}
-            height={100}
-          />
+        <Image src={location.Image} alt="news Image" width={100} height={100} />
       </div>
       {session?.user.email === "yafetaddisu123@gmail.com" &&
         pathName === "/profile" && (

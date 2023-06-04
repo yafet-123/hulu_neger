@@ -4,22 +4,22 @@ import Multiselect from "multiselect-react-dropdown";
 import "react-quill/dist/quill.snow.css";
 import Image from "next/image";
 import ReactQuill from "react-quill";
-import 'react-quill/dist/quill.snow.css';
-import React, { useMemo, useRef } from "react"
-import dynamic from 'next/dynamic'
+import "react-quill/dist/quill.snow.css";
+import React, { useMemo, useRef } from "react";
+import dynamic from "next/dynamic";
 
 const QuillNoSSRWrapper = dynamic(
   async () => {
-    const QuillNoSSRWrapper = (await import("react-quill")).default
-    function Imagehandle({ forwardedRef, ...rest }){
-        return <QuillNoSSRWrapper ref={forwardedRef} {...rest} />
+    const QuillNoSSRWrapper = (await import("react-quill")).default;
+    function Imagehandle({ forwardedRef, ...rest }) {
+      return <QuillNoSSRWrapper ref={forwardedRef} {...rest} />;
     }
-    return Imagehandle
+    return Imagehandle;
   },
   {
     ssr: false,
-  },
-)
+  }
+);
 
 const Form = ({
   type,
@@ -38,8 +38,8 @@ const Form = ({
   setDescription,
   submitting,
   handleSubmit,
-}) => { 
-  const quillRef = useRef(null)
+}) => {
+  const quillRef = useRef(null);
   const blob = new Blob([job.Image], { type: "image" });
   const modules = useMemo(
     () => ({

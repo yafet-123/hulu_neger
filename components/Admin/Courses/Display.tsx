@@ -44,7 +44,7 @@ const Display = ({ course, handleEdit, handleDelete }) => {
         </div>
       </div>
 
-      <p className='my-4 font-satoshi text-sm text-gray-700'>{course.title}</p>
+      <p className="my-4 font-satoshi text-sm text-gray-700">{course.title}</p>
       {session?.user.email === "yafetaddisu123@gmail.com" &&
         pathName === "/profile" && (
           <div className="mt-5 flex-center gap-4 border-t border-gray-100 pt-3">

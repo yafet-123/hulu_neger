@@ -4,22 +4,22 @@ import Multiselect from "multiselect-react-dropdown";
 import "react-quill/dist/quill.snow.css";
 import Image from "next/image";
 import ReactQuill from "react-quill";
-import 'react-quill/dist/quill.snow.css';
-import React, { useMemo, useRef } from "react"
-import dynamic from 'next/dynamic'
+import "react-quill/dist/quill.snow.css";
+import React, { useMemo, useRef } from "react";
+import dynamic from "next/dynamic";
 
 const QuillNoSSRWrapper = dynamic(
   async () => {
-    const QuillNoSSRWrapper = (await import("react-quill")).default
-    function Imagehandle({ forwardedRef, ...rest }){
-        return <QuillNoSSRWrapper ref={forwardedRef} {...rest} />
+    const QuillNoSSRWrapper = (await import("react-quill")).default;
+    function Imagehandle({ forwardedRef, ...rest }) {
+      return <QuillNoSSRWrapper ref={forwardedRef} {...rest} />;
     }
-    return Imagehandle
+    return Imagehandle;
   },
   {
     ssr: false,
-  },
-)
+  }
+);
 
 const Form = ({
   type,
@@ -31,7 +31,7 @@ const Form = ({
   submitting,
   handleSubmit,
 }) => {
-  const quillRef = useRef(null)
+  const quillRef = useRef(null);
   const blob = new Blob([entertainment.Image], { type: "image" });
   const modules = useMemo(
     () => ({
@@ -89,8 +89,8 @@ const Form = ({
         </span>
       </h1>
       <p className="desc text-left max-w-md">
-        {type} the {typeofCategory} share amazing entertainment with the hulu_neger, and
-        help millions of connect with the worlds.
+        {type} the {typeofCategory} share amazing entertainment with the
+        hulu_neger, and help millions of connect with the worlds.
       </p>
 
       <form
@@ -98,37 +98,37 @@ const Form = ({
         className="mt-10 w-full flex flex-col gap-7 glassmorphism"
       >
         <div className="relative flex-1 my-5">
-                        <input  
-                            id="title" 
-                            type="text" 
-                            required
-                            className="block w-full px-3 text-md lg:text-xl text-black bg-white py-4 border-2 border-black rounded-xl appearance-none dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-500 peer" placeholder=" "
-                            value={title}
-                            onChange={(e) => settitle(e.target.value)}
-                        />
-                        <label 
-                            htmlFor="floating_outlined" 
-                            className="absolute text-md lg:text-xl text-black duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
-                        >
-                            Title
-                        </label>
-                    </div>
+          <input
+            id="title"
+            type="text"
+            required
+            className="block w-full px-3 text-md lg:text-xl text-black bg-white py-4 border-2 border-black rounded-xl appearance-none dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-500 peer"
+            placeholder=" "
+            value={title}
+            onChange={(e) => settitle(e.target.value)}
+          />
+          <label
+            htmlFor="floating_outlined"
+            className="absolute text-md lg:text-xl text-black duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
+          >
+            Title
+          </label>
+        </div>
 
-                    <div className="mb-10 ">
-                        <p  
-                            className="text-md lg:text-xl text-black dark:text-white mb-5 mx-5"
-                        >
-                            Content
-                        </p>
+        <div className="mb-10 ">
+          <p className="text-md lg:text-xl text-black dark:text-white mb-5 mx-5">
+            Content
+          </p>
 
-                        <QuillNoSSRWrapper 
-                            forwardedRef={quillRef} 
-                            value={content} 
-                            onChange={setcontent} 
-                            modules={modules} className="!bg-white dark:!bg-white dark:!text-black !mx-2 !my-5" 
-                            theme="snow" 
-                        />
-                    </div>
+          <QuillNoSSRWrapper
+            forwardedRef={quillRef}
+            value={content}
+            onChange={setcontent}
+            modules={modules}
+            className="!bg-white dark:!bg-white dark:!text-black !mx-2 !my-5"
+            theme="snow"
+          />
+        </div>
 
         <div className="flex-end mx-3 mb-5 gap-4">
           <Link href="/Admin" className="text-gray-500 text-sm">

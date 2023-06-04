@@ -45,17 +45,14 @@ const Display = ({ news, handleEdit, handleDelete }) => {
       </div>
 
       <div className="flex justify-between items-center">
-        <p className='my-4 font-satoshi text-sm text-gray-700'>{news.Header}</p>
-        <Image
-            src={news.Image}
-            alt="news Image"
-            width={100}
-            height={100}
-          />
+        <p className="my-4 font-satoshi text-sm text-gray-700">{news.Header}</p>
+        <Image src={news.Image} alt="news Image" width={100} height={100} />
       </div>
 
-      <p className='my-4 font-satoshi text-sm text-gray-700'>{news.ShortDescription}</p>
-      
+      <p className="my-4 font-satoshi text-sm text-gray-700">
+        {news.ShortDescription}
+      </p>
+
       {session?.user.email === "yafetaddisu123@gmail.com" &&
         pathName === "/profile" && (
           <div className="mt-5 flex-center gap-4 border-t border-gray-100 pt-3">

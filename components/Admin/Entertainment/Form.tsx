@@ -4,22 +4,22 @@ import Multiselect from "multiselect-react-dropdown";
 import "react-quill/dist/quill.snow.css";
 import Image from "next/image";
 import ReactQuill from "react-quill";
-import 'react-quill/dist/quill.snow.css';
-import React, { useMemo, useRef } from "react"
-import dynamic from 'next/dynamic'
+import "react-quill/dist/quill.snow.css";
+import React, { useMemo, useRef } from "react";
+import dynamic from "next/dynamic";
 
 const QuillNoSSRWrapper = dynamic(
   async () => {
-    const QuillNoSSRWrapper = (await import("react-quill")).default
-    function Imagehandle({ forwardedRef, ...rest }){
-        return <QuillNoSSRWrapper ref={forwardedRef} {...rest} />
+    const QuillNoSSRWrapper = (await import("react-quill")).default;
+    function Imagehandle({ forwardedRef, ...rest }) {
+      return <QuillNoSSRWrapper ref={forwardedRef} {...rest} />;
     }
-    return Imagehandle
+    return Imagehandle;
   },
   {
     ssr: false,
-  },
-)
+  }
+);
 
 const Form = ({
   type,
@@ -34,7 +34,7 @@ const Form = ({
   submitting,
   handleSubmit,
 }) => {
-  const quillRef = useRef(null)
+  const quillRef = useRef(null);
   const blob = new Blob([entertainment.Image], { type: "image" });
   const modules = useMemo(
     () => ({
@@ -92,8 +92,8 @@ const Form = ({
         </span>
       </h1>
       <p className="desc text-left max-w-md">
-        {type} the {typeofCategory} share amazing entertainment with the hulu_neger, and
-        help millions of connect with the worlds.
+        {type} the {typeofCategory} share amazing entertainment with the
+        hulu_neger, and help millions of connect with the worlds.
       </p>
 
       <form
@@ -109,7 +109,9 @@ const Form = ({
               className="block w-full px-3 text-md lg:text-xl text-black bg-white py-4 border-2 border-black rounded-xl appearance-none dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-500 peer"
               placeholder=" "
               value={entertainment.Header}
-              onChange={(e) => setEntertainment({ ...entertainment, Header: e.target.value })}
+              onChange={(e) =>
+                setEntertainment({ ...entertainment, Header: e.target.value })
+              }
             />
             <label
               htmlFor="floating_outlined"
@@ -130,7 +132,7 @@ const Form = ({
             onSearch={function noRefCheck() {}}
             onSelect={(e) => {
               e.map((data, index) =>
-                setCategoryId([...categoryId, data.category_id]) 
+                setCategoryId([...categoryId, data.category_id])
               );
             }}
             options={categories}
@@ -147,7 +149,10 @@ const Form = ({
             rows="10"
             cols="40"
             onChange={(e) =>
-              setEntertainment({ ...entertainment, ShortDescription: e.target.value })
+              setEntertainment({
+                ...entertainment,
+                ShortDescription: e.target.value,
+              })
             }
           />
           <label
@@ -207,7 +212,12 @@ const Form = ({
                 id="dropzone-file"
                 type="file"
                 className="hidden"
-                onChange={(e) => setEntertainment({ ...entertainment, Image: e.target.files[0] })}
+                onChange={(e) =>
+                  setEntertainment({
+                    ...entertainment,
+                    Image: e.target.files[0],
+                  })
+                }
               />
             </label>
           </div>

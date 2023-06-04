@@ -24,8 +24,8 @@ const QuillNoSSRWrapper = dynamic(
 const Form = ({
   type,
   typeofCategory,
-  news,
-  setNews,
+  blogs,
+  setBlogs,
   Description,
   setDescription,
   categoryId,
@@ -35,7 +35,7 @@ const Form = ({
   handleSubmit,
 }) => {
   const quillRef = useRef(null);
-  const blob = new Blob([news.Image], { type: "image" });
+  const blob = new Blob([blogs.Image], { type: "image" });
   const modules = useMemo(
     () => ({
       toolbar: {
@@ -108,8 +108,8 @@ const Form = ({
               required
               className="block w-full px-3 text-md lg:text-xl text-black bg-white py-4 border-2 border-black rounded-xl appearance-none dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-500 peer"
               placeholder=" "
-              value={news.Header}
-              onChange={(e) => setNews({ ...news, Header: e.target.value })}
+              value={blogs.Header}
+              onChange={(e) => setBlogs({ ...blogs, Header: e.target.value })}
             />
             <label
               htmlFor="floating_outlined"
@@ -143,11 +143,11 @@ const Form = ({
             required
             className="block w-full px-3 text-md lg:text-xl text-black bg-white py-4 border-2 border-black rounded-xl appearance-none dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-500 peer"
             placeholder=" "
-            value={news.ShortDescription}
+            value={blogs.ShortDescription}
             rows="10"
             cols="40"
             onChange={(e) =>
-              setNews({ ...news, ShortDescription: e.target.value })
+              setBlogs({ ...blogs, ShortDescription: e.target.value })
             }
           />
           <label
@@ -207,7 +207,7 @@ const Form = ({
                 id="dropzone-file"
                 type="file"
                 className="hidden"
-                onChange={(e) => setNews({ ...news, Image: e.target.files[0] })}
+                onChange={(e) => setBlogs({ ...blogs, Image: e.target.files[0] })}
               />
             </label>
           </div>
@@ -215,14 +215,14 @@ const Form = ({
 
         <div
           className={
-            news.Image == ""
+            blogs.Image == ""
               ? "hidden"
               : "flex justify-center items-center mb-10"
           }
         >
           <Image
             src={
-              news.Image == ""
+              blogs.Image == ""
                 ? "/images/bgImage1.avif"
                 : URL.createObjectURL(blob)
             }

@@ -6,7 +6,7 @@ import bcrypt from "bcryptjs";
 export const POST = async (req: NextApiRequest, res: NextApiResponse) => {
   const { LocationName, user_id, Image } = await req.json();
   try {
-    console.log(Image)
+    console.log(Image);
     const data = await prisma.Location.create({
       data: {
         LocationName: LocationName,

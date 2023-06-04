@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
-import Form from "@/components/Admin/Course/Form";
-import Display from "@/components/Admin/Course/Display";
+import Form from "@/components/Admin/Courses/Form";
+import Display from "@/components/Admin/Courses/Display";
 import { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
 import { usePathname, useRouter } from "next/navigation";
