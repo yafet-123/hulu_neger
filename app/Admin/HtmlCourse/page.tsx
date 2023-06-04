@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
-import Form from "@/components/Admin/Html/Form";
-import Display from "@/components/Admin/Html/Display";
+import Form from "@/components/Admin/Course/Form";
+import Display from "@/components/Admin/Course/Display";
 import { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
 import { usePathname, useRouter } from "next/navigation";
@@ -10,7 +10,7 @@ const HtmlCardList = ({ data }) => {
   return (
     <div className="mt-16 prompt_layout">
       {data.map((data) => (
-        <Display key={data.course_id} data={data} />
+        <Display key={data.course_id} course={data} />
       ))}
     </div>
   );
@@ -20,7 +20,6 @@ export default function HtmlHome() {
   const router = useRouter();
   const [submitting, setIsSubmitting] = useState(false);
   const [allHtml, setAllHtml] = useState([]);
-  const [allHtmlCategory, setAllHtmlCategory] = useState([]);
   const [title, settitle] = useState("")
   const [content, setcontent] = useState("")
   const { data: session } = useSession();
@@ -54,12 +53,6 @@ export default function HtmlHome() {
     setAllHtml(data);
   };
 
-  const fetchHtmlCategory = async () => {
-    const response = await fetch("/api/Html/Category");
-    const data = await response.json();
-
-    setAllHtmlCategory(data);
-  };
 
   useEffect(() => {
     fetchHtml();
