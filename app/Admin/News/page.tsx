@@ -60,7 +60,7 @@ export default function NewsHome() {
           Image: imageData,
           ShortDescription: news.ShortDescription,
           Description: Description,
-          categoryId: news.categoryId,
+          categoryId: categoryId,
           user_id: session?.user.id,
         }),
       });

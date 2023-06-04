@@ -130,7 +130,7 @@ const Form = ({
             onSearch={function noRefCheck() {}}
             onSelect={(e) => {
               e.map((data, index) =>
-                setCategoryId([...categoryId, data.category_id])
+                setCategoryId([...categoryId, data.category_id]) 
               );
             }}
             options={categories}
