@@ -67,7 +67,7 @@ const UserDisplay = ({ user }) => {
       </div>
 
       <p className="my-4 font-satoshi text-sm text-gray-700">{user.email}</p>
-      
+        {session?.user.email === "yafetaddisu123@gmail.com" && (
         <div className="mt-5 flex-center gap-4 border-t border-gray-100 pt-3">
           <p
             className="font-inter text-sm green_gradient cursor-pointer"
@@ -82,7 +82,7 @@ const UserDisplay = ({ user }) => {
             Delete
           </p>
         </div>
-
+        )}
     </div>
   );
 };
