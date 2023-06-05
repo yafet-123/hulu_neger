@@ -1,38 +1,13 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import prisma from "@/utils/db.server";
-import jwt from "jsonwebtoken";
-import bcrypt from "bcryptjs";
 
-export const POST = async (req: NextApiRequest, res: NextApiResponse) => {
-  const { Header, description, like, link, service, categoryId, user_id } =
-    await req.json();
-
+export const GET = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
-    console.log(CategoryName);
-    let createAiSearchCategory = [];
-
-    for (let j = 0; j < categoryId.length; j++) {
-      createAiSearchCategory.push({
-        user_id: Number(user_id),
-        category_id: Number(categoryId[j]),
-      });
-    }
-
-    const aisearchdata = await prisma.Detail.create({
-      data: {
-        Header,
-        description,
-        like,
-        link,
-        service,
-        user_id: Number(user_id),
-        DetailCategory: {
-          create: createAiSearchCategory,
-        },
-      },
+    const aisearch = await prisma.Detail.findMany({
+      orderBy: { ModifiedDate: "desc" },
     });
-    return new Response(JSON.stringify(aisearchdata), { status: 201 });
+    return new Response(JSON.stringify(aisearch), { status: 200 });
   } catch (error) {
-    return new Response("Failed to create a new Job Category", { status: 500 });
+    return new Response("Failed to fetch all prompts", { status: 500 });
   }
 };

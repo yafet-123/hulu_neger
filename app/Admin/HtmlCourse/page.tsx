@@ -56,7 +56,6 @@ export default function HtmlHome() {
 
   useEffect(() => {
     fetchHtml();
-    fetchHtmlCategory();
   }, []);
   return (
     <section className="w-full h-full lg:pt-24">

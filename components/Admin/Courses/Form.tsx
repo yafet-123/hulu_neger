@@ -32,7 +32,6 @@ const Form = ({
   handleSubmit,
 }) => {
   const quillRef = useRef(null);
-  const blob = new Blob([entertainment.Image], { type: "image" });
   const modules = useMemo(
     () => ({
       toolbar: {

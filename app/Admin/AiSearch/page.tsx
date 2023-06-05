@@ -34,7 +34,7 @@ export default function AiSearchHome() {
     e.preventDefault();
     setIsSubmitting(true);
     try {
-      const response = await fetch("/api/AiSearch//Add", {
+      const response = await fetch("/api/AiSearch/Add", {
         method: "POST",
         body: JSON.stringify({
           Header: Header,
