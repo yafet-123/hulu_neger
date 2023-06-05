@@ -23,7 +23,7 @@ export default function HtmlHome() {
   const [title, settitle] = useState("")
   const [content, setcontent] = useState("")
   const { data: session } = useSession();
-
+  console.log(allHtml)
   const createHtml = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);

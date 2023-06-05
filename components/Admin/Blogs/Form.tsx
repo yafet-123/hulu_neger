@@ -207,7 +207,9 @@ const Form = ({
                 id="dropzone-file"
                 type="file"
                 className="hidden"
-                onChange={(e) => setBlogs({ ...blogs, Image: e.target.files[0] })}
+                onChange={(e) =>
+                  setBlogs({ ...blogs, Image: e.target.files[0] })
+                }
               />
             </label>
           </div>

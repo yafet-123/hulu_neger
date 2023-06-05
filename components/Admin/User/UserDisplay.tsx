@@ -6,7 +6,7 @@ import { useSession } from "next-auth/react";
 import { usePathname, useRouter } from "next/navigation";
 import moment from "moment";
 
-const UserDisplay = ({ user, handleEdit, handleDelete }) => {
+const UserDisplay = ({ user }) => {
   const { data: session } = useSession();
   const pathName = usePathname();
   const router = useRouter();
@@ -16,6 +16,31 @@ const UserDisplay = ({ user, handleEdit, handleDelete }) => {
     setCopied(user.email);
     navigator.clipboard.writeText(user.email);
     setTimeout(() => setCopied(false), 3000);
+  };
+
+  const handleEdit = (user_id) => {
+    console.log(user_id)
+    router.push(`/Admin/User/Update?id=${user_id}`);
+  };
+
+  const handleDelete = async (user) => {
+    // const hasConfirmed = confirm(
+    //   "Are you sure you want to delete this prompt?"
+    // );
+
+    // if (hasConfirmed) {
+    //   try {
+    //     await fetch(`/api/prompt/${user._id.toString()}`, {
+    //       method: "DELETE",
+    //     });
+
+    //     const filteredPosts = myPosts.filter((item) => item._id !== user._id);
+
+    //     setMyPosts(filteredPosts);
+    //   } catch (error) {
+    //     console.log(error);
+    //   }
+    // }
   };
 
   return (
@@ -45,23 +70,22 @@ const UserDisplay = ({ user, handleEdit, handleDelete }) => {
       </div>
 
       <p className="my-4 font-satoshi text-sm text-gray-700">{user.email}</p>
-      {session?.user.email === "yafetaddisu123@gmail.com" &&
-        pathName === "/profile" && (
-          <div className="mt-5 flex-center gap-4 border-t border-gray-100 pt-3">
-            <p
-              className="font-inter text-sm green_gradient cursor-pointer"
-              onClick={handleEdit}
-            >
-              Edit
-            </p>
-            <p
-              className="font-inter text-sm orange_gradient cursor-pointer"
-              onClick={handleDelete}
-            >
-              Delete
-            </p>
-          </div>
-        )}
+      
+        <div className="mt-5 flex-center gap-4 border-t border-gray-100 pt-3">
+          <p
+            className="font-inter text-sm green_gradient cursor-pointer"
+            onClick={() => handleEdit(user.user_id)}
+          >
+            Edit
+          </p>
+          <p
+            className="font-inter text-sm orange_gradient cursor-pointer"
+            onClick={() => handleDelete(user.user_id)}
+          >
+            Delete
+          </p>
+        </div>
+
     </div>
   );
 };

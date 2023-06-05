@@ -3,6 +3,7 @@ import Image from "next/image";
 import Form from "@/components/Admin/User/Form";
 import UserDisplay from "@/components/Admin/User/UserDisplay";
 import { useState, useEffect } from "react";
+import { useSession } from "next-auth/react";
 
 interface User {
   UserName: string;
@@ -20,9 +21,11 @@ const UserCardList = ({ data }) => {
 };
 
 export default function AdminUserHome() {
+  const { data: session } = useSession();
   const [submitting, setIsSubmitting] = useState(false);
   const [allUsers, setAllUsers] = useState([]);
   const [user, setUser] = useState<User>({ UserName: "", email: "" });
+  console.log(allUsers)
   const createUser = async (e) => {
     e.preventDefault();
     console.log(user.UserName);
@@ -57,13 +60,19 @@ export default function AdminUserHome() {
   }, []);
   return (
     <section className="w-full box-border lg:pt-24">
-      <Form
-        type="Create"
-        user={user}
-        setUser={setUser}
-        submitting={submitting}
-        handleSubmit={createUser}
-      />
+      {session?.user.email === "yafetaddisu123@gmail.com" ? (
+        <Form
+          type="Create"
+          user={user}
+          setUser={setUser}
+          submitting={submitting}
+          handleSubmit={createUser}
+        />
+      ):
+      <div className="flex justify-center items-center lg:pt-20">
+        <h1 className="font-bold text-lg lg:text-3xl">You are not allowed to add user.</h1>
+      </div>
+    }
 
       <UserCardList data={allUsers} />
     </section>

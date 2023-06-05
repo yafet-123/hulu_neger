@@ -6,8 +6,9 @@ import bcrypt from "bcryptjs";
 export const POST = async (req: NextApiRequest, res: NextApiResponse) => {
   const { UserName, email } = await req.json();
   try {
-    console.log("role");
-    const data = await prisma.User.create({
+    console.log(email);
+    console.log(UserName);
+    const data = await prisma.user.create({
       data: {
         UserName: UserName,
         email: email,
