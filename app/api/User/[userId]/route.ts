@@ -18,39 +18,42 @@ export const GET = async (request, { params }) => {
 }
 
 export const PATCH = async (request, { params }) => {
-    const { prompt, tag } = await request.json();
+    const {UserName,email} = await request.json();
 
     try {
-        await connectToDB();
+        const existingUser = await prisma.User.findUnique({
+            where:{
+                news_id: Number(params.userId),
+            }
+        });;
 
-        // Find the existing prompt by ID
-        const existingPrompt = await Prompt.findById(params.id);
-
-        if (!existingPrompt) {
-            return new Response("Prompt not found", { status: 404 });
+        if (!existingUser) {
+            return new Response("User not found", { status: 404 });
         }
 
         // Update the prompt with new data
-        existingPrompt.prompt = prompt;
-        existingPrompt.tag = tag;
+        const data = await prisma.User.update({
+            where:{user_id:Number(params.userId)},
+            data:{
+                UserName,
+                email
+            },
+        });
 
-        await existingPrompt.save();
-
-        return new Response("Successfully updated the Prompts", { status: 200 });
+        return new Response("Successfully updated the User", { status: 200 });
     } catch (error) {
-        return new Response("Error Updating Prompt", { status: 500 });
+        return new Response("Error Updating User", { status: 500 });
     }
 };
 
-// export const DELETE = async (request, { params }) => {
-//     try {
-//         await connectToDB();
+export const DELETE = async (request, { params }) => {
+    try {
+        const data = await prisma.User.delete({
+            where:{user_id:Number(params.userId)},
+        });
 
-//         // Find the prompt by ID and remove it
-//         await Prompt.findByIdAndRemove(params.id);
-
-//         return new Response("Prompt deleted successfully", { status: 200 });
-//     } catch (error) {
-//         return new Response("Error deleting prompt", { status: 500 });
-//     }
-// };
+        return new Response("Prompt deleted successfully", { status: 200 });
+    } catch (error) {
+        return new Response("Error deleting prompt", { status: 500 });
+    }
+};

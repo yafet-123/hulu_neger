@@ -24,23 +24,20 @@ const UserDisplay = ({ user }) => {
   };
 
   const handleDelete = async (user) => {
-    // const hasConfirmed = confirm(
-    //   "Are you sure you want to delete this prompt?"
-    // );
+    const hasConfirmed = confirm(
+      "Are you sure you want to delete this User?"
+    );
 
-    // if (hasConfirmed) {
-    //   try {
-    //     await fetch(`/api/prompt/${user._id.toString()}`, {
-    //       method: "DELETE",
-    //     });
+    if (hasConfirmed) {
+      try {
+        await fetch(`/api/user/${userId}`, {
+          method: "DELETE",
+        });
 
-    //     const filteredPosts = myPosts.filter((item) => item._id !== user._id);
-
-    //     setMyPosts(filteredPosts);
-    //   } catch (error) {
-    //     console.log(error);
-    //   }
-    // }
+      } catch (error) {
+        console.log(error);
+      }
+    }
   };
 
   return (
