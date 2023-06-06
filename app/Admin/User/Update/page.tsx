@@ -12,10 +12,10 @@ const Update = () => {
 
   const [user, setUser] = useState({ UserName: "", email: "" });
   const [submitting, setIsSubmitting] = useState(false);
-
+  console.log(user)
   useEffect(() => {
     const getUserDetails = async () => {
-      const response = await fetch(`/api/user/${userId}`);
+      const response = await fetch(`/api/User/${userId}`);
       const data = await response.json();
 
       setUser({
@@ -34,7 +34,7 @@ const Update = () => {
     if (!userId) return alert("Missing UserId!");
 
     try {
-      const response = await fetch(`/api/user/${userId}`, {
+      const response = await fetch(`/api/User/${userId}`, {
         method: "PATCH",
         body: JSON.stringify({
           UserName: user.UserName,
@@ -43,7 +43,7 @@ const Update = () => {
       });
 
       if (response.ok) {
-        router.push("/");
+        router.push("/Admin/User");
       }
     } catch (error) {
       console.log(error);
@@ -53,13 +53,15 @@ const Update = () => {
   };
 
   return (
-    <Form
-      type='Edit'
-      user={user}
-      setUser={setUser}
-      submitting={submitting}
-      handleSubmit={updatePrompt}
-    />
+    <section className="w-full h-full lg:pt-24">
+      <Form
+        type='Edit'
+        user={user}
+        setUser={setUser}
+        submitting={submitting}
+        handleSubmit={updatePrompt}
+      />
+    </section>
   );
 };
 

@@ -3,14 +3,16 @@ import prisma from "@/utils/db.server";
 
 export const GET = async (request, { params }) => {
     try {
+        console.log(params.userId)
         const data = await prisma.User.findUnique({
             where:{
-                news_id: Number(params.userId),
+                user_id: Number(params.userId),
             }
         });
+        console.log(data)
         if (!data) return new Response("Prompt Not Found", { status: 404 });
 
-        return new Response(JSON.stringify(prompt), { status: 200 })
+        return new Response(JSON.stringify(data), { status: 200 })
 
     } catch (error) {
         return new Response("Internal Server Error", { status: 500 });
@@ -23,7 +25,7 @@ export const PATCH = async (request, { params }) => {
     try {
         const existingUser = await prisma.User.findUnique({
             where:{
-                news_id: Number(params.userId),
+                user_id: Number(params.userId),
             }
         });;
 

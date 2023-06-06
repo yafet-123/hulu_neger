@@ -23,17 +23,19 @@ const UserDisplay = ({ user }) => {
     router.push(`/Admin/User/Update?id=${user_id}`);
   };
 
-  const handleDelete = async (user) => {
+  const handleDelete = async (user_id) => {
     const hasConfirmed = confirm(
       "Are you sure you want to delete this User?"
     );
 
     if (hasConfirmed) {
       try {
-        await fetch(`/api/user/${userId}`, {
+       const response = await fetch(`/api/User/${user_id}`, {
           method: "DELETE",
         });
-
+        if (response.ok) {
+          router.push("/Admin/User");
+        }
       } catch (error) {
         console.log(error);
       }
@@ -66,7 +68,10 @@ const UserDisplay = ({ user }) => {
         </div>
       </div>
 
-      <p className="my-4 font-satoshi text-sm text-gray-700">{user.email}</p>
+      <div className="flex items-center justify-between">
+        <p className="my-4 font-satoshi text-sm text-gray-700">{user.UserName}</p>
+        <p className="my-4 font-satoshi text-sm text-gray-700">{user.email}</p>
+      </div>
         {session?.user.email === "yafetaddisu123@gmail.com" && (
         <div className="mt-5 flex-center gap-4 border-t border-gray-100 pt-3">
           <p
