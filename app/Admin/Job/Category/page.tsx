@@ -65,7 +65,7 @@ export default function JobCategoryHome() {
 
     if (hasConfirmed) {
       try {
-       const response = await fetch(`/api/User/${category_id}`, {
+       const response = await fetch(`/api/Job/Category/${category_id}`, {
           method: "DELETE",
         });
         if (response.ok) {
