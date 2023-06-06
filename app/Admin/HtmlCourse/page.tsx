@@ -46,6 +46,13 @@ export default function HtmlHome() {
     }
   };
 
+  const handleEdit = (user_id) => {
+    console.log(user_id)
+    router.push(`/Admin/HtmlCourse/Update?id=${user_id}`);
+  };
+
+
+
   const fetchHtml = async () => {
     const response = await fetch("/api/Html");
     const data = await response.json();

@@ -15,7 +15,7 @@ const BlogsCardList = ({ data }) => {
     </div>
   );
 };
-
+ 
 export default function BlogsHome() {
   const router = useRouter();
   const [submitting, setIsSubmitting] = useState(false);
