@@ -18,7 +18,7 @@ const JobCategoryCardList = ({ data , handleEdit, handleDelete }) => {
     </div>
   );
 };
-
+ 
 export default function JobCategoryHome() {
   const router = useRouter();
   const [submitting, setIsSubmitting] = useState(false);
