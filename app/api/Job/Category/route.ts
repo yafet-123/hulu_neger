@@ -19,7 +19,7 @@ export const GET = async (req: NextApiRequest, res: NextApiResponse) => {
       CategoryName:data.CategoryName,
       CreatedDate:data.CreatedDate,
       ModifiedDate:data.ModifiedDate,
-      userName:data.User.email
+      email:data.User.email
     }))
 
     return new Response(JSON.stringify(Allcategories), { status: 200 });
