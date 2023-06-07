@@ -20,7 +20,7 @@ const QuillNoSSRWrapper = dynamic(
     ssr: false,
   }
 );
-
+ 
 const Form = ({
   type,
   typeofCategory,
@@ -190,8 +190,8 @@ const Form = ({
 
           <QuillNoSSRWrapper
             forwardedRef={quillRef}
-            value={job.Description}
-            onChange={(e) => setJob({ ...job, Description: e.target.value })}
+            value={Description} 
+            onChange={setDescription}
             modules={modules}
             className="!bg-white dark:!bg-white dark:!text-black !mx-2"
             theme="snow"

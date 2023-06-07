@@ -15,7 +15,7 @@ const Update = () => {
   console.log(category)
   useEffect(() => {
     const getCategoryDetails = async () => {
-      const response = await fetch(`/api/Entertainment/Category/${categoryId}`);
+      const response = await fetch(`/api/News/Category/${categoryId}`);
       const data = await response.json();
 
       setCategory({
@@ -33,7 +33,7 @@ const Update = () => {
     if (!categoryId) return alert("Missing Category Id!");
 
     try {
-      const response = await fetch(`/api/Entertainment/Category/${categoryId}`, {
+      const response = await fetch(`/api/News/Category/${categoryId}`, {
         method: "PATCH",
         body: JSON.stringify({
           CategoryName: category.Category,
@@ -41,7 +41,7 @@ const Update = () => {
       });
 
       if (response.ok) {
-        router.push("/Admin/Entertainment/Category");
+        router.push("/Admin/News/Category");
       }
     } catch (error) {
       console.log(error);

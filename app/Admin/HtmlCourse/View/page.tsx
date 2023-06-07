@@ -18,57 +18,7 @@ const HtmlCardList = ({ data, handleEdit , handleDelete}) => {
 
 export default function HtmlHome() {
   const router = useRouter();
-  const [submitting, setIsSubmitting] = useState(false);
-  const [allHtml, setAllHtml] = useState([]);
-  const [title, settitle] = useState("")
-  const [content, setcontent] = useState("")
   const { data: session } = useSession();
-  console.log(allHtml)
-  const createHtml = async (e) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    try {
-      const response = await fetch("/api/Html/Add", {
-        method: "POST",
-        body: JSON.stringify({
-          title: title,
-          content:content,
-          user_id: session?.user.id,
-        }),
-      });
-      if (response.ok) {
-        router.push("/Admin");
-      }
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
-
-  const handleEdit = (course_id) => {
-    console.log(course_id)
-    router.push(`/Admin/HtmlCourse/Update?id=${course_id}`);
-  };
-
-  const handleDelete = async (course_id) => {
-    const hasConfirmed = confirm(
-      "Are you sure you want to delete this User?"
-    );
-
-    if (hasConfirmed) {
-      try {
-       const response = await fetch(`/api/Html/${course_id}`, {
-          method: "DELETE",
-        });
-        if (response.ok) {
-          router.push("/Admin/HtmlCourse");
-        }
-      } catch (error) {
-        console.log(error);
-      }
-    }
-  };
 
   const fetchHtml = async () => {
     const response = await fetch("/api/Html");

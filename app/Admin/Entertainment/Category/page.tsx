@@ -62,7 +62,7 @@ export default function EntertainmentCategoryHome() {
     const hasConfirmed = confirm(
       "Are you sure you want to delete this User?"
     );
-
+  
     if (hasConfirmed) {
       try {
        const response = await fetch(`/api/Entertainment/Category/${category_id}`, {

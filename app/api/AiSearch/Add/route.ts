@@ -30,6 +30,7 @@ export const POST = async (req: NextApiRequest, res: NextApiResponse) => {
         },
       },
     });
+    console.log(aisearchdata);
     return new Response(JSON.stringify(aisearchdata), { status: 201 });
   } catch (error) {
     return new Response("Failed to create a new Job Category", { status: 500 });

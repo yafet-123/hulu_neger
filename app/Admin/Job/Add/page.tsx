@@ -6,6 +6,16 @@ import { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
 import { usePathname, useRouter } from "next/navigation";
 
+const JobsCardList = ({ data }) => {
+  return (
+    <div className="mt-16 prompt_layout">
+      {data.map((data) => (
+        <Display key={data.job_id} jobs={data} />
+      ))}
+    </div>
+  );
+};
+
 
 export default function JobHome() {
   const router = useRouter();
@@ -124,6 +134,7 @@ export default function JobHome() {
         handleSubmit={createJob}
       />
 
+      <JobsCardList data={allJob} />
     </section>
   );
 }

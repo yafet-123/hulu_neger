@@ -11,10 +11,10 @@ const Display = ({ category, handleEdit, handleDelete }) => {
   const pathName = usePathname();
   const router = useRouter();
   const [copied, setCopied] = useState("");
-  console.log(category);
+  console.log(jobs);
   const handleCopy = () => {
-    setCopied(category.CategoryName);
-    navigator.clipboard.writeText(category.CategoryName);
+    setCopied(jobs.CompanyName);
+    navigator.clipboard.writeText(jobs.CompanyName);
     setTimeout(() => setCopied(false), 3000);
   };
 
@@ -23,32 +23,52 @@ const Display = ({ category, handleEdit, handleDelete }) => {
       <div className="flex justify-between items-start gap-5">
         <div className="flex-1 flex justify-between items-center gap-3 cursor-pointer">
           <h3 className="font-satoshi font-semibold text-gray-900">
-            {category.category_id}
+            {jobs.job_id}
           </h3>
           <p className="font-inter text-sm text-gray-500">
-            {moment(category.ModifiedDate).utc().format("YYYY-MM-DD")}
+            {moment(jobs.ModifiedDate).utc().format("YYYY-MM-DD")}
           </p>
         </div>
 
         <div className="copy_btn" onClick={handleCopy}>
           <Image
             src={
-              copied === category.CategoryName
+              copied === jobs.CompanyName
                 ? "/assets/icons/tick.svg"
                 : "/assets/icons/copy.svg"
             }
-            alt={copied === category.CategoryName ? "tick_icon" : "copy_icon"}
+            alt={copied === jobs.CompanyName ? "tick_icon" : "copy_icon"}
             width={12}
             height={12}
           />
         </div>
       </div>
 
-      <p className="my-4 font-satoshi text-sm text-gray-700">
-        {category.CategoryName}
-      </p>
-      {session?.user.email === "yafetaddisu123@gmail.com" &&
-        pathName === "/profile" && (
+      <div className="flex flex-col lg:flex-row justify-between items-center my-5">
+        <p className="my-4 font-satoshi text-sm text-gray-700">
+          {jobs.CompanyName}
+        </p>
+        <Image src={jobs.Image} alt="news Image" width={100} height={100} />
+      </div>
+
+      <div className="flex flex-col lg:flex-row justify-between items-center my-5">
+        <p className="my-4 font-satoshi text-sm text-gray-700">
+          {jobs.JobsName}
+        </p>
+        <p className="my-4 font-satoshi text-sm text-gray-700">
+          {jobs.CareerLevel}
+        </p>
+      </div>
+
+      <div className="flex items-center justify-between mt-5">
+        <p
+          className="font-inter text-sm green_gradient cursor-pointer"
+          onClick={handleView}
+        >
+          View
+        </p>
+
+        {session?.user.email === jobs.email && pathName === "/profile" && (
           <div className="mt-5 flex-center gap-4 border-t border-gray-100 pt-3">
             <p
               className="font-inter text-sm green_gradient cursor-pointer"
@@ -64,6 +84,7 @@ const Display = ({ category, handleEdit, handleDelete }) => {
             </p>
           </div>
         )}
+      </div>
     </div>
   );
 };

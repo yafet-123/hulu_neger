@@ -19,18 +19,16 @@ const UserDisplay = ({ user }) => {
   };
 
   const handleEdit = (user_id) => {
-    console.log(user_id)
+    console.log(user_id);
     router.push(`/Admin/User/Update?id=${user_id}`);
   };
 
   const handleDelete = async (user_id) => {
-    const hasConfirmed = confirm(
-      "Are you sure you want to delete this User?"
-    );
+    const hasConfirmed = confirm("Are you sure you want to delete this User?");
 
     if (hasConfirmed) {
       try {
-       const response = await fetch(`/api/User/${user_id}`, {
+        const response = await fetch(`/api/User/${user_id}`, {
           method: "DELETE",
         });
         if (response.ok) {
@@ -69,10 +67,12 @@ const UserDisplay = ({ user }) => {
       </div>
 
       <div className="flex items-center justify-between">
-        <p className="my-4 font-satoshi text-sm text-gray-700">{user.UserName}</p>
+        <p className="my-4 font-satoshi text-sm text-gray-700">
+          {user.UserName}
+        </p>
         <p className="my-4 font-satoshi text-sm text-gray-700">{user.email}</p>
       </div>
-        {session?.user.email === "yafetaddisu123@gmail.com" && (
+      {session?.user.email === "yafetaddisu123@gmail.com" && (
         <div className="mt-5 flex-center gap-4 border-t border-gray-100 pt-3">
           <p
             className="font-inter text-sm green_gradient cursor-pointer"
@@ -87,7 +87,7 @@ const UserDisplay = ({ user }) => {
             Delete
           </p>
         </div>
-        )}
+      )}
     </div>
   );
 };

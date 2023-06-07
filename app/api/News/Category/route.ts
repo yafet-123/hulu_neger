@@ -5,16 +5,24 @@ export const GET = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     const newsCategory = await prisma.NewsCategory.findMany({
       orderBy: { ModifiedDate: "desc" },
-      include:{
-        User:{
-          select:{
-              email:true
-          }
-        }
+      include: {
+        User: {
+          select: {
+            email: true,
+          },
+        },
       },
     });
-    
-    return new Response(JSON.stringify(newsCategory), { status: 200 });
+
+    const Allcategories = newsCategory.map((data) => ({
+      category_id: data.category_id,
+      CategoryName: data.CategoryName,
+      CreatedDate: data.CreatedDate,
+      ModifiedDate: data.ModifiedDate,
+      email: data.User?.email,
+    }));
+
+    return new Response(JSON.stringify(Allcategories), { status: 200 });
   } catch (error) {
     return new Response("Failed to fetch all prompts", { status: 500 });
   }

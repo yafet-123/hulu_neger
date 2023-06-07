@@ -16,14 +16,14 @@ export default function AdminRootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="flex flex-col w-full">
+    <div className="flex flex-col">
       <Navbar />
-      <div className="flex flex-col lg:flex-row w-full h-full">
+      <div className="flex flex-col lg:flex-row">
         
           {/* @ts-ignore */}
           <VerticalNavbar />
         
-        <div className="w-full px-20">{children}</div>
+        <div className="w-full px-2 lg:px-20">{children}</div>
       </div>
     </div>
   );

@@ -9,7 +9,7 @@ interface Category {
   Category: string;
 }
  
-const BlogsCategoryCardList = ({ data, , handleEdit, handleDelete }) => {
+const BlogsCategoryCardList = ({ data, handleEdit, handleDelete }) => {
   return (
     <div className="mt-16 prompt_layout">
       {data.map((category) => (

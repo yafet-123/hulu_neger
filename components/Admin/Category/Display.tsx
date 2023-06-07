@@ -12,6 +12,7 @@ const Display = ({ category, handleEdit, handleDelete }) => {
   const router = useRouter();
   const [copied, setCopied] = useState("");
   console.log(category);
+  console.log(category.User?.email);
   const handleCopy = () => {
     setCopied(category.CategoryName);
     navigator.clipboard.writeText(category.CategoryName);
@@ -55,22 +56,22 @@ const Display = ({ category, handleEdit, handleDelete }) => {
       <p className="my-4 font-satoshi text-sm text-gray-700">
         {category.CategoryName}
       </p>
-      {session?.user.email === category.User.email && (
-          <div className="mt-5 flex-center gap-4 border-t border-gray-100 pt-3">
-            <p
-              className="font-inter text-sm green_gradient cursor-pointer"
-              onClick={handleClickForUpdate}
-            >
-              Edit
-            </p>
-            <p
-              className="font-inter text-sm orange_gradient cursor-pointer"
-              onClick={handleClickForDelete}
-            >
-              Delete
-            </p>
-          </div>
-        )}
+      {session?.user.email === category.email && (
+        <div className="mt-5 flex-center gap-4 border-t border-gray-100 pt-3">
+          <p
+            className="font-inter text-sm green_gradient cursor-pointer"
+            onClick={handleClickForUpdate}
+          >
+            Edit
+          </p>
+          <p
+            className="font-inter text-sm orange_gradient cursor-pointer"
+            onClick={handleClickForDelete}
+          >
+            Delete
+          </p>
+        </div>
+      )}
     </div>
   );
 };

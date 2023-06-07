@@ -10,19 +10,19 @@ export const GET = async (req: NextApiRequest, res: NextApiResponse) => {
       include: {
         User: {
           select: {
-            UserName: true,
+            email: true,
           },
         },
       },
     });
 
-    const Allcourses = courses.map((data) => ({
+    const Allcourses = html.map((data) => ({
       course_id: data.course_id,
       title: data.title,
       content: data.content,
       CreatedDate: data.CreatedDate,
       ModifiedDate: data.ModifiedDate,
-      userName: data.User.UserName,
+      email: data.User?.email,
     }));
     console.log(Allcourses);
     return new Response(JSON.stringify(Allcourses), { status: 200 });

@@ -6,11 +6,11 @@ import { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
 import { usePathname, useRouter } from "next/navigation";
 
-const CssCardList = ({ data }) => {
+const CssCardList = ({ data, handleEdit , handleDelete }) => {
   return (
     <div className="mt-16 prompt_layout">
       {data.map((data) => (
-        <Display key={data.course_id} course={data} />
+        <Display key={data.course_id} course={data} handleDelete={handleDelete} handleEdit={handleEdit} />
       ))}
     </div>
   );
@@ -46,6 +46,30 @@ export default function CssHome() {
     }
   };
 
+  const handleEdit = (course_id) => {
+    console.log(course_id)
+    router.push(`/Admin/CssCourse/Update?id=${course_id}`);
+  };
+
+  const handleDelete = async (course_id) => {
+    const hasConfirmed = confirm(
+      "Are you sure you want to delete this User?"
+    );
+
+    if (hasConfirmed) {
+      try {
+       const response = await fetch(`/api/Css/${course_id}`, {
+          method: "DELETE",
+        });
+        if (response.ok) {
+          router.push("/Admin/CssCourse");
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  };
+
   const fetchCss = async () => {
     const response = await fetch("/api/Css");
     const data = await response.json();
@@ -69,7 +93,7 @@ export default function CssHome() {
         handleSubmit={createCss}
       />
 
-      <CssCardList data={allCss} />
+      <CssCardList data={allCss} handleDelete={handleDelete} handleEdit={handleEdit}  />
     </section>
   );
 }

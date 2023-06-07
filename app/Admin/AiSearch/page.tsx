@@ -10,7 +10,7 @@ const AiSearchCardList = ({ data }) => {
   return (
     <div className="mt-16 prompt_layout">
       {data.map((data) => (
-        <Display key={data._id} aiSearch={data} />
+        <Display key={data.detail_id} aiSearch={data} />
       ))}
     </div>
   );
@@ -20,14 +20,14 @@ export default function AiSearchHome() {
   const router = useRouter();
   const [submitting, setIsSubmitting] = useState(false);
   const [allAiSearch, setAllAiSearch] = useState([]);
+  const [categoryId, setCategoryId] = useState([])
+  const [service, setService] = useState([])
   const [allAiSearchCategory, setAllAiSearchCategory] = useState([]);
   const [aiSearch, setaiSearch] = useState({
     Header: "",
     description: "",
     like: "",
     link: "",
-    service: [],
-    categoryId: [],
   });
   const { data: session } = useSession();
   const createAiSearch = async (e) => {
@@ -37,10 +37,10 @@ export default function AiSearchHome() {
       const response = await fetch("/api/AiSearch/Add", {
         method: "POST",
         body: JSON.stringify({
-          Header: Header,
-          description: description,
+          Header: aiSearch.Header,
+          description: aiSearch.description,
           like: 0,
-          link: link,
+          link: aiSearch.link,
           service: service,
           categoryId: categoryId,
           user_id: session?.user.id,
@@ -81,6 +81,10 @@ export default function AiSearchHome() {
         typeof="AiSearch"
         aiSearch={aiSearch}
         setaiSearch={setaiSearch}
+        categoryId = {categoryId}
+        setCategoryId = {setCategoryId}
+        service = {service}
+        setService = {setService}
         categories={allAiSearchCategory}
         submitting={submitting}
         handleSubmit={createAiSearch}

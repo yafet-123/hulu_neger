@@ -7,6 +7,10 @@ const Form = ({
   typeofCategory,
   categories,
   aiSearch,
+  categoryId,
+  setCategoryId,
+  service,
+  setService,
   setaiSearch,
   submitting,
   handleSubmit,
@@ -80,9 +84,7 @@ const Form = ({
                 onRemove={function noRefCheck() {}}
                 onSearch={function noRefCheck() {}}
                 onSelect={(e) => {
-                  e.map((data, index) =>
-                    setaiSearch({ ...aiSearch, categoryId: data.title })
-                  );
+                  e.map((data, index) => setService([...service, data.title]));
                 }}
                 options={ServiceData}
               />
@@ -98,7 +100,7 @@ const Form = ({
                 onSearch={function noRefCheck() {}}
                 onSelect={(e) => {
                   e.map((data, index) =>
-                    setaiSearch({ ...aiSearch, categoryId: data.category_id })
+                    setCategoryId([...categoryId, data.category_id])
                   );
                 }}
                 options={categories}

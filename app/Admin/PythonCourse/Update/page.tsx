@@ -15,7 +15,7 @@ const Update = () => {
   const [submitting, setIsSubmitting] = useState(false);
   useEffect(() => {
     const getcourseDetails = async () => {
-      const response = await fetch(`/api/Html/${courseId}`);
+      const response = await fetch(`/api/Python/${courseId}`);
       const data = await response.json();
       settitle(data.title)
       setcontent(data.content)
@@ -31,7 +31,7 @@ const Update = () => {
     if (!courseId) return alert("Missing course Id!");
 
     try {
-      const response = await fetch(`/api/Html/${courseId}`, {
+      const response = await fetch(`/api/Python/${courseId}`, {
         method: "PATCH",
         body: JSON.stringify({
           title: title,
@@ -40,7 +40,7 @@ const Update = () => {
       });
 
       if (response.ok) {
-        router.push("/Admin/HtmlCourse");
+        router.push("/Admin/PythonCourse");
       }
     } catch (error) {
       console.log(error);

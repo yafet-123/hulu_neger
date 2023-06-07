@@ -12,7 +12,6 @@ const Update = () => {
 
   const [category, setCategory] = useState({ Category: "" });
   const [submitting, setIsSubmitting] = useState(false);
-  console.log(category)
   useEffect(() => {
     const getCategoryDetails = async () => {
       const response = await fetch(`/api/Job/Category/${categoryId}`);
@@ -39,6 +38,8 @@ const Update = () => {
           CategoryName: category.Category,
         }),
       });
+
+      console.log(response)
 
       if (response.ok) {
         router.push("/Admin/Job/Category");
