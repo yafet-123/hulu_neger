@@ -6,11 +6,11 @@ import { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
 import { usePathname, useRouter } from "next/navigation";
 
-const CssCardList = ({ data, handleEdit , handleDelete }) => {
+const CssCardList = ({ data, handleEdit , handleDelete, handleView }) => {
   return (
     <div className="mt-16 prompt_layout">
       {data.map((data) => (
-        <Display key={data.course_id} course={data} handleDelete={handleDelete} handleEdit={handleEdit} />
+        <Display key={data.course_id} course={data} handleDelete={handleDelete} handleEdit={handleEdit} handleView={handleView} />
       ))}
     </div>
   );
@@ -70,6 +70,9 @@ export default function CssHome() {
     }
   };
 
+   const handleView = (course_id) => {
+    router.push(`/Admin/CssCourse/View/${course_id}`);
+  };
   const fetchCss = async () => {
     const response = await fetch("/api/Css");
     const data = await response.json();
@@ -93,7 +96,7 @@ export default function CssHome() {
         handleSubmit={createCss}
       />
 
-      <CssCardList data={allCss} handleDelete={handleDelete} handleEdit={handleEdit}  />
+      <CssCardList data={allCss} handleDelete={handleDelete} handleEdit={handleEdit} handleView={handleView}  />
     </section>
   );
 }

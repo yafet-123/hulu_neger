@@ -6,7 +6,7 @@ import Image from "next/image";
 import { useSession } from "next-auth/react";
 import { usePathname, useRouter } from "next/navigation";
 
-const Display = ({ course, handleEdit, handleDelete }) => {
+const Display = ({ course, handleEdit, handleDelete, handleView }) => {
   const { data: session } = useSession();
   const pathName = usePathname();
   const router = useRouter();
@@ -26,9 +26,10 @@ const Display = ({ course, handleEdit, handleDelete }) => {
     handleDelete(course.course_id);
   };
 
-  const handleView = () => {
-    router.push(`/Admin/HtmlCourse/View?courseId=${course.course_id}`);
-  };
+
+  const handleClickForView = () =>{
+    handleView(course.course_id)
+  }
 
   return (
     <div className="prompt_card lg:px-20">
@@ -60,7 +61,7 @@ const Display = ({ course, handleEdit, handleDelete }) => {
       <div className="flex items-center justify-between mt-5">
         <p
           className="font-inter text-sm green_gradient cursor-pointer"
-          onClick={handleView}
+          onClick={handleClickForView}
         >
           View
         </p>

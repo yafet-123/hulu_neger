@@ -6,11 +6,11 @@ import { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
 import { usePathname, useRouter } from "next/navigation";
 
-const JavascriptCardList = ({ data, handleEdit , handleDelete }) => {
+const JavascriptCardList = ({ data, handleEdit , handleDelete, handleView }) => {
   return (
     <div className="mt-16 prompt_layout">
       {data.map((data) => (
-        <Display key={data.course_id} course={data} handleDelete={handleDelete} handleEdit={handleEdit} />
+        <Display key={data.course_id} course={data} handleDelete={handleDelete} handleEdit={handleEdit} handleView={handleView} />
       ))}
     </div>
   );
@@ -70,7 +70,9 @@ export default function JavascriptHome() {
     }
   };
 
-
+   const handleView = (course_id) => {
+    router.push(`/Admin/JavascriptCourse/View/${course_id}`);
+  };
   const fetchJavascript = async () => {
     const response = await fetch("/api/Javascript");
     const data = await response.json();
@@ -94,7 +96,7 @@ export default function JavascriptHome() {
         handleSubmit={createJavascript}
       />
 
-      <JavascriptCardList data={allJavascript} handleDelete={handleDelete} handleEdit={handleEdit} />
+      <JavascriptCardList data={allJavascript} handleDelete={handleDelete} handleEdit={handleEdit} handleView={handleView} />
     </section>
   );
 }
