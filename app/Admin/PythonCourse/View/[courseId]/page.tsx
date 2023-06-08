@@ -2,7 +2,13 @@ import Image from "next/image";
 import DisplayAll from "@/components/Admin/Courses/DisplayAll";
 
 const fetchCourse = async(courseId : string) => {
-  const data = await fetch(process.env.URL + `/api/Python/${courseId}`);
+  const data = await fetch(process.env.URL + `/api/Python/${courseId}`,
+    {   
+      next: {
+        revalidate: 60,
+      },
+    }
+  );
   const course = await data.json();
   return course
 }
