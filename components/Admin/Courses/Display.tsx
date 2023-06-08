@@ -27,7 +27,7 @@ const Display = ({ course, handleEdit, handleDelete }) => {
   };
 
   const handleView = () => {
-    router.push(`/Admin/HtmlCourse/View?id=${course_id}`);
+    router.push(`/Admin/HtmlCourse/View?courseId=${course_id}`);
   };
 
   return (

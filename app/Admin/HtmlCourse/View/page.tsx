@@ -16,35 +16,22 @@ const HtmlCardList = ({ data, handleEdit , handleDelete}) => {
   );
 };
 
-export default function HtmlHome() {
+export default function HtmlView({params : {courseId} }) {
   const router = useRouter();
   const { data: session } = useSession();
 
-  const fetchHtml = async () => {
-    const response = await fetch("/api/Html");
-    const data = await response.json();
-
-    setAllHtml(data);
-  };
-
-
-  useEffect(() => {
-    fetchHtml();
-  }, []);
   return (
     <section className="w-full h-full lg:pt-24">
-      <Form
-        type="Create"
-        typeofCategory="Html"
-        title={title}
-        settitle={settitle}
-        content={content}
-        setcontent={setcontent}
-        submitting={submitting}
-        handleSubmit={createHtml}
-      />
-
       <HtmlCardList data={allHtml} handleDelete={handleDelete} handleEdit={handleEdit} />
     </section>
   );
 }
+
+export async function generateStaticParams() {
+  const htmlview = await fetch('/api/Html').then((res) => res.json());
+ 
+  return htmlview.map((html) => ({
+    courseId: html.course_id.toString(),
+  }));
+}
+
