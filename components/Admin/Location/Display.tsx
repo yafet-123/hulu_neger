@@ -6,16 +6,54 @@ import Image from "next/image";
 import { useSession } from "next-auth/react";
 import { usePathname, useRouter } from "next/navigation";
 
-const Display = ({ location, handleEdit, handleDelete }) => {
+const Display = ({ location, handleEdit }) => {
   const { data: session } = useSession();
   const pathName = usePathname();
   const router = useRouter();
   const [copied, setCopied] = useState("");
-  console.log(location);
+  const locationId = location.location_id;
+  console.log(location.Image);
   const handleCopy = () => {
     setCopied(location.LocationName);
     navigator.clipboard.writeText(location.LocationName);
     setTimeout(() => setCopied(false), 3000);
+  };
+
+  async function imageDeleteData() {
+    const cloudinaryUrl = `https://api.cloudinary.com/v1_1/${process.env.CLOUDINARY_CLOUD_NAME}/resources/image/${location.Image}`;
+    const apiKey = process.env.CLOUDAPIKEY;
+    const apiSecret = process.env.CLOUDINARYSECRET;
+
+    try {
+      const res = await fetch(cloudinaryUrl, {
+        
+      });
+      if (response.status === 200) {
+        router.push("/Admin/Job/Location");
+      } else {
+        res.status(response.status).json({ error: "Failed to delete image" });
+      }
+    } catch(error){
+      console.log(error)
+    }
+  }
+
+  const handleDelete = async () => {
+    const hasConfirmed = confirm(
+      "Are you sure you want to delete this Location for Jobs?"
+    );
+    if (hasConfirmed) {
+      try {
+        const response = await fetch(`/api/Job/Location/${locationId}`, {
+          method: "DELETE",
+        });
+        if (response.ok) {
+          imageDeleteData();
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    }
   };
 
   return (
@@ -48,25 +86,24 @@ const Display = ({ location, handleEdit, handleDelete }) => {
         <p className="my-4 font-satoshi text-sm text-gray-700">
           {location.LocationName}
         </p>
-        <Image src={location.Image} alt="news Image" width={100} height={100} />
+        <Image src={location.Image == "" || location.Image == null ? "/images/logo2.png" : location.Image} alt="location Image" width={100} height={100} />
       </div>
-      {session?.user.email === "yafetaddisu123@gmail.com" &&
-        pathName === "/profile" && (
-          <div className="mt-5 flex-center gap-4 border-t border-gray-100 pt-3">
-            <p
-              className="font-inter text-sm green_gradient cursor-pointer"
-              onClick={handleEdit}
-            >
-              Edit
-            </p>
-            <p
-              className="font-inter text-sm orange_gradient cursor-pointer"
-              onClick={handleDelete}
-            >
-              Delete
-            </p>
-          </div>
-        )}
+      {session?.user.email === location.email && (
+        <div className="mt-5 flex-center gap-4 border-t border-gray-100 pt-3">
+          <p
+            className="font-inter text-sm green_gradient cursor-pointer"
+            onClick={handleEdit}
+          >
+            Edit
+          </p>
+          <p
+            className="font-inter text-sm orange_gradient cursor-pointer"
+            onClick={handleDelete}
+          >
+            Delete
+          </p>
+        </div>
+      )}
     </div>
   );
 };

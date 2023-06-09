@@ -38,7 +38,7 @@ export default function LocationCategoryHome() {
     formData.append("upload_preset", "my_upload");
 
     const imageUpload = await fetch(
-      `https://api.cloudinary.com/v1_1/df7hlpjcj/image/upload`,
+      `https://api.cloudinary.com/v1_1/${process.env.CLOUDNAME}/image/upload`,
       {
         method: "POST",
         body: formData,

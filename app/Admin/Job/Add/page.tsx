@@ -6,21 +6,10 @@ import { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
 import { usePathname, useRouter } from "next/navigation";
 
-const JobsCardList = ({ data }) => {
-  return (
-    <div className="mt-16 prompt_layout">
-      {data.map((data) => (
-        <Display key={data.job_id} jobs={data} />
-      ))}
-    </div>
-  );
-};
-
 
 export default function JobHome() {
   const router = useRouter();
   const [submitting, setIsSubmitting] = useState(false);
-  const [allJob, setAllJob] = useState([]);
   const [allLocation, setAllLocation] = useState([]);
   const [categoryId,setCategoryId] = useState([])
   const [LocationId, setLocationId] = useState([])
@@ -37,7 +26,7 @@ export default function JobHome() {
     DeadLine:"",
   });
   const { data: session } = useSession();
-
+  console.log(job)
   async function imageUploadData() {
     const formData = new FormData();
     let imagesecureUrl = "";
@@ -55,7 +44,7 @@ export default function JobHome() {
     imagesecureUrl = imageUpload.secure_url;
     return imagesecureUrl;
   }
-
+  
   const createJob = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
@@ -78,20 +67,13 @@ export default function JobHome() {
         }),
       });
       if (response.ok) {
-        router.push("/Admin");
+        router.push("/Admin/Job/Display");
       }
     } catch (error) {
       console.log(error);
     } finally {
       setIsSubmitting(false);
     }
-  };
-
-  const fetchJob = async () => {
-    const response = await fetch("/api/Job");
-    const data = await response.json();
-
-    setAllJob(data);
   };
 
   const fetchJobCategory = async () => {
@@ -109,7 +91,6 @@ export default function JobHome() {
   };
 
   useEffect(() => {
-    fetchJob();
     fetchJobCategory();
     fetchLocation();
   }, []);
@@ -134,7 +115,6 @@ export default function JobHome() {
         handleSubmit={createJob}
       />
 
-      <JobsCardList data={allJob} />
     </section>
   );
 }

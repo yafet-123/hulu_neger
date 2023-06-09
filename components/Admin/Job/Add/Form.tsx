@@ -20,7 +20,7 @@ const QuillNoSSRWrapper = dynamic(
     ssr: false,
   }
 );
- 
+
 const Form = ({
   type,
   typeofCategory,
@@ -105,6 +105,44 @@ const Form = ({
         onSubmit={handleSubmit}
         className="mt-10 w-full flex flex-col gap-7 glassmorphism"
       >
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 my-5 px-2">
+          <div className="relative mb-5">
+            <input
+              id="CompanyName"
+              type="text"
+              required
+              className="block w-full px-3 text-md lg:text-xl text-black bg-white py-4 border-2 border-black rounded-xl appearance-none dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-500 peer"
+              placeholder=" "
+              value={job.CompanyName}
+              onChange={(e) => setJob({ ...job, CompanyName: e.target.value })}
+            />
+            <label
+              htmlFor="floating_outlined"
+              className="absolute text-md lg:text-xl text-black duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
+            >
+              Company Name
+            </label>
+          </div>
+
+          <div className="relative mb-5">
+            <input
+              id="JobsName"
+              type="text"
+              required
+              className="block w-full px-3 text-md lg:text-xl text-black bg-white py-4 border-2 border-black rounded-xl appearance-none dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-500 peer"
+              placeholder=" "
+              value={job.JobsName}
+              onChange={(e) => setJob({ ...job, JobsName: e.target.value })}
+            />
+            <label
+              htmlFor="floating_outlined"
+              className="absolute text-md lg:text-xl text-black duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
+            >
+              Job Name
+            </label>
+          </div>
+        </div>
+
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-5 my-10 px-2">
           <div className="relative mb-5">
             <input
@@ -190,7 +228,7 @@ const Form = ({
 
           <QuillNoSSRWrapper
             forwardedRef={quillRef}
-            value={Description} 
+            value={Description}
             onChange={setDescription}
             modules={modules}
             className="!bg-white dark:!bg-white dark:!text-black !mx-2"

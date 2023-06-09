@@ -6,16 +6,41 @@ import Image from "next/image";
 import { useSession } from "next-auth/react";
 import { usePathname, useRouter } from "next/navigation";
 
-const Display = ({ jobs, handleEdit, handleDelete }) => {
+const Display = ({ jobs }) => {
   const { data: session } = useSession();
   const pathName = usePathname();
   const router = useRouter();
   const [copied, setCopied] = useState("");
-  console.log(jobs);
+  const jobsId = jobs.job_id;
   const handleCopy = () => {
     setCopied(jobs.CompanyName);
     navigator.clipboard.writeText(jobs.CompanyName);
     setTimeout(() => setCopied(false), 3000);
+  };
+
+  const handleEdit = () => {
+    // console.log(course_id)
+    // router.push(`/Admin/HtmlCourse/Update?id=${course_id}`);
+  };
+
+  const handleDelete = async () => {
+    const hasConfirmed = confirm("Are you sure you want to delete this Job?");
+    if (hasConfirmed) {
+      try {
+        const response = await fetch(`/api/Job/${course_id}`, {
+          method: "DELETE",
+        });
+        if (response.ok) {
+          router.push("/Admin/Job/Display");
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  };
+
+  const handleView = () => {
+    router.push(`/Admin/Job/Display/${jobsId}`);
   };
 
   return (
@@ -48,7 +73,7 @@ const Display = ({ jobs, handleEdit, handleDelete }) => {
         <p className="my-4 font-satoshi text-sm text-gray-700">
           {jobs.CompanyName}
         </p>
-        <Image src={jobs.Image} alt="news Image" width={100} height={100} />
+        <Image src={jobs.image} alt="news Image" width={100} height={100} />
       </div>
 
       <div className="flex flex-col lg:flex-row justify-between items-center my-5">
@@ -67,9 +92,8 @@ const Display = ({ jobs, handleEdit, handleDelete }) => {
         >
           View
         </p>
-
-        {session?.user.email === jobs.email && pathName === "/profile" && (
-          <div className="mt-5 flex-center gap-4 border-t border-gray-100 pt-3">
+        {session?.user.email === jobs.email && (
+          <div className="flex items-center justify-between gap-4 border-t border-gray-100">
             <p
               className="font-inter text-sm green_gradient cursor-pointer"
               onClick={handleEdit}

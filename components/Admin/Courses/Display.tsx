@@ -26,10 +26,9 @@ const Display = ({ course, handleEdit, handleDelete, handleView }) => {
     handleDelete(course.course_id);
   };
 
-
-  const handleClickForView = () =>{
-    handleView(course.course_id)
-  }
+  const handleClickForView = () => {
+    handleView(course.course_id);
+  };
 
   return (
     <div className="prompt_card lg:px-20">

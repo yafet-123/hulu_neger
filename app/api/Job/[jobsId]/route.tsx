@@ -1,11 +1,12 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import prisma from "@/utils/db.server";
 
-export const GET = async (req: NextApiRequest, res: NextApiResponse) => {
+export const GET = async (request, { params }) => {
   try {
-    const jobs = await prisma.Job.findMany({
-      orderBy: {
-        job_id: "asc",
+    console.log(params.jobsId);
+    const jobs = await prisma.Job.findUnique({
+      where: {
+        course_id: Number(params.jobsId),
       },
       include: {
         User: {
@@ -36,7 +37,9 @@ export const GET = async (req: NextApiRequest, res: NextApiResponse) => {
       },
     });
 
-    const Alljobs = jobs.map((data) => ({
+    if (!jobs) return new Response("Course Not Found", { status: 404 });
+
+     const job = jobs.map((data) => ({
       job_id: data.job_id,
       CompanyName: data.CompanyName,
       image: data.Image,
@@ -55,10 +58,20 @@ export const GET = async (req: NextApiRequest, res: NextApiResponse) => {
       Location: data.JobLocation,
     }));
 
-    console.log(Alljobs);
-
-    return new Response(JSON.stringify(Alljobs), { status: 200 });
+    return new Response(JSON.stringify(job), { status: 200 });
   } catch (error) {
-    return new Response("Failed to fetch all prompts", { status: 500 });
+    return new Response("Internal Server Error", { status: 500 });
+  }
+};
+
+export const DELETE = async (request, { params }) => {
+  try {
+    const data = await prisma.Job.delete({
+      where: { job_id: Number(params.jobsId) },
+    });
+
+    return new Response("Job deleted successfully", { status: 200 });
+  } catch (error) {
+    return new Response("Error deleting Job", { status: 500 });
   }
 };
