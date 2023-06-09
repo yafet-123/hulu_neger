@@ -20,6 +20,8 @@
     "autoprefixer": "10.4.14",
     "bcrypt": "^5.1.0",
     "bcryptjs": "^2.4.3",
+    "cloudinary": "^1.37.1",
+    "coffee-script": "^1.12.7",
     "eslint": "8.41.0",
     "eslint-config-next": "13.4.3",
     "font-awesome": "^4.7.0",
@@ -38,8 +40,10 @@
     "react-dom": "18.2.0",
     "react-icons": "^4.8.0",
     "react-quill": "^2.0.0",
+    "stream": "^0.0.2",
     "tailwindcss": "3.3.2",
     "typescript": "5.0.4",
+    "vm2": "^3.9.19",
     "yup": "^1.2.0"
   }
 }

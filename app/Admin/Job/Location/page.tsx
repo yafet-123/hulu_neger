@@ -32,20 +32,14 @@ export default function LocationCategoryHome() {
   console.log(location)
   async function imageUploadData() {
     const formData = new FormData();
-    let imagesecureUrl = "";
     formData.append("file", location.Image);
 
-    formData.append("upload_preset", "my_upload");
+    const response = await fetch('/api/Job/Location/ImageUpload', {
+      method: 'POST',
+      body: formData,
+    });
 
-    const imageUpload = await fetch(
-      `https://api.cloudinary.com/v1_1/${process.env.CLOUDNAME}/image/upload`,
-      {
-        method: "POST",
-        body: formData,
-      }
-    ).then((r) => r.json());
-    imagesecureUrl = imageUpload.secure_url;
-    return imagesecureUrl;
+    
   }
 
   const createLocation = async (e) => {

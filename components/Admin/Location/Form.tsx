@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import { Cloudinary } from 'cloudinary';
 
 const Form = ({
   type,
@@ -102,7 +103,7 @@ const Form = ({
                   ? "/images/logo1.png"
                   : URL.createObjectURL(blob)
               }
-              width={300}
+              width={100}
               height={100}
               alt="image that will be displayed"
               className="w-full"
