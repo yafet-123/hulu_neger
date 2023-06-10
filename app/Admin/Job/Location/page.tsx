@@ -38,7 +38,7 @@ export default function LocationCategoryHome() {
       method: 'POST',
       body: formData,
     });
-
+    console.log(response)
     
   }
 
