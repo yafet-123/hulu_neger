@@ -12,7 +12,6 @@ const Display = ({ location, handleEdit }) => {
   const router = useRouter();
   const [copied, setCopied] = useState("");
   const locationId = location.location_id;
-  console.log(location.Image);
   const handleCopy = () => {
     setCopied(location.LocationName);
     navigator.clipboard.writeText(location.LocationName);

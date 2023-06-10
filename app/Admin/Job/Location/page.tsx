@@ -29,41 +29,43 @@ export default function LocationCategoryHome() {
     Image: "",
   });
   const { data: session } = useSession();
-  console.log(location)
+  
   async function imageUploadData() {
     const formData = new FormData();
+    console.log(location.Image)
+    let imagesecureUrl = "";
     formData.append("file", location.Image);
-
-    const response = await fetch('/api/Job/Location/ImageUpload', {
-      method: 'POST',
-      body: formData,
-    });
-    console.log(response)
-    
+    formData.append("upload_preset", "my_upload");
+   
+    console.log(formData)
+    // const response = await fetch('/api/Job/Location/ImageUpload', {
+    //   method: 'POST',
+    //   body: JSON.stringify({
+    //       formData
+    //   }),
+    // });
   }
 
   const createLocation = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
     const imageData = await imageUploadData()
-    
-    try {
-      const response = await fetch("/api/Job/Location/Add", {
-        method: "POST",
-        body: JSON.stringify({
-          LocationName: location.LocationName,
-          Image: imageData,
-          user_id: session?.user.id,
-        }),
-      });
-      if (response.ok) {
-        router.push("/Admin");
-      }
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setIsSubmitting(false);
-    }
+    setIsSubmitting(false);
+    // try {
+    //   const response = await fetch("/api/Job/Location/Add", {
+    //     method: "POST",
+    //     body: JSON.stringify({
+    //       LocationName: location.LocationName,
+    //       Image: imageData,
+    //       user_id: session?.user.id,
+    //     }),
+    //   });
+      
+    // } catch (error) {
+    //   console.log(error);
+    // } finally {
+    //   setIsSubmitting(false);
+    // }
   };
 
   const fetchLocation = async () => {
