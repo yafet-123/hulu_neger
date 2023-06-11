@@ -29,7 +29,7 @@ export default function NewsHome() {
     Image: "",
   });
   const { data: session } = useSession();
-  console.log(news)
+  console.log(news.Image)
   async function imageUploadData() {
     const formData = new FormData();
     let imagesecureUrl = "";
@@ -37,41 +37,43 @@ export default function NewsHome() {
 
     formData.append("upload_preset", "my_upload");
 
-    const imageUpload = await fetch(
-      `https://api.cloudinary.com/v1_1/df7hlpjcj/image/upload`,
-      {
-        method: "POST",
-        body: formData,
-      }
-    ).then((r) => r.json());
-    imagesecureUrl = imageUpload.secure_url;
-    return imagesecureUrl;
+    console.log(formData.get("file"))
+
+    // const imageUpload = await fetch(
+    //   `https://api.cloudinary.com/v1_1/df7hlpjcj/image/upload`,
+    //   {
+    //     method: "POST",
+    //     body: formData,
+    //   }
+    // ).then((r) => r.json());
+    // imagesecureUrl = imageUpload.secure_url;
+    // return imagesecureUrl;
   }
 
   const createNews = async (e) => {
     e.preventDefault();
-    setIsSubmitting(true);
+    // setIsSubmitting(true);
     const imageData = await imageUploadData()
-    try {
-      const response = await fetch("/api/News//Add", {
-        method: "POST",
-        body: JSON.stringify({
-          Header: news.Header,
-          Image: imageData,
-          ShortDescription: news.ShortDescription,
-          Description: Description,
-          categoryId: categoryId,
-          user_id: session?.user.id,
-        }),
-      });
-      if (response.ok) {
-        router.push("/Admin");
-      }
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setIsSubmitting(false);
-    }
+    // try {
+    //   const response = await fetch("/api/News//Add", {
+    //     method: "POST",
+    //     body: JSON.stringify({
+    //       Header: news.Header,
+    //       Image: imageData,
+    //       ShortDescription: news.ShortDescription,
+    //       Description: Description,
+    //       categoryId: categoryId,
+    //       user_id: session?.user.id,
+    //     }),
+    //   });
+    //   if (response.ok) {
+    //     router.push("/Admin");
+    //   }
+    // } catch (error) {
+    //   console.log(error);
+    // } finally {
+    //   setIsSubmitting(false);
+    // }
   };
 
   const fetchNews = async () => {
