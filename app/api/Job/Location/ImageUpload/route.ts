@@ -6,33 +6,27 @@ export const POST = async (req: NextApiRequest, res: NextApiResponse) => {
   const cloudName = process.env.CLOUDNAME;
   const apiKey = process.env.CLOUDAPIKEY;
   const apiSecret = process.env.CLOUDINARYSECRET;
+  const url = process.env.CLOUDINARYURL
   const auth = Buffer.from(`${apiKey}:${apiSecret}`).toString('base64');
-  const form = new formidable.IncomingForm();
-
-  form.parse(req, async  (err, fields, files) => {
-    if (err) {
-      console.error(err);
-      res.status(500).json({ error: 'An error occurred while parsing the form data.' });
-    } else {
-      try{
-        const { formData } = files;
-        console.log(formData)
-        const imageUpload = await fetch(
-          `https://api.cloudinary.com/v1_1/${CLOUDNAME}/image/upload`,
-            {
-              method: "POST",
-              headers: {
-                Authorization: `Basic ${auth}`,
-              },
-              body: formData,
-            },  
-        ).then((r) => r.json());
-
-        console.log(imageUpload)
-        return new Response(JSON.stringify(imageUpload), { status: 201 });
-      }catch (error) {
-        return new Response(JSON.stringify("failed to fetch the images"), { status: 500 });
-      }
-    } 
-  })
+  const file = req.body.file;
+  console.log(file)
+   try{
+    
+    // const formData = new FormData();
+    // formData.append("file", location.Image);
+    // formData.append("upload_preset", "my_upload");
+    // console.log(formData)
+    // const imageUpload = await fetch(
+    //    `https://api.cloudinary.com/v1_1/df7hlpjcj/image/upload`,
+    //      {
+    //        method: "POST",
+           
+    //        body: file,
+    //      },  
+    //  ).then((r) => r.json())
+    // console.log(imageUpload)
+    return new Response(JSON.stringify(imageUpload), { status: 201 });
+    }catch (error) {
+      return new Response(JSON.stringify("failed to fetch the images"), { status: 500 });
+    }
 }

@@ -40,22 +40,22 @@ export default function LocationCategoryHome() {
     let imagesecureUrl = "";
     formData.append("file", location.Image);
     formData.append("upload_preset", "my_upload");
-   
+
     // const response = await fetch('/api/Job/Location/ImageUpload', {
     //   method: 'POST',
     //   body: formData,
     // });
 
     const imageUpload = await fetch(
-          `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`,
-            {
-              method: "POST",
-              
-              body: formData,
-            },  
-        ).then((r) => r.json());
-
-    console.log(response)
+      `https://api.cloudinary.com/v1_1/df7hlpjcj/image/upload`,
+        {
+          method: "POST",
+          
+          body: formData,
+        },  
+    ).then((r) => r.json());
+    imagesecureUrl = imageUpload.secure_url;
+    return imagesecureUrl;
   }
 
   const createLocation = async (e) => {
@@ -63,21 +63,21 @@ export default function LocationCategoryHome() {
     setIsSubmitting(true);
     const imageData = await imageUploadData()
     setIsSubmitting(false);
-    // try {
-    //   const response = await fetch("/api/Job/Location/Add", {
-    //     method: "POST",
-    //     body: JSON.stringify({
-    //       LocationName: location.LocationName,
-    //       Image: imageData,
-    //       user_id: session?.user.id,
-    //     }),
-    //   });
+    try {
+      const response = await fetch("/api/Job/Location/Add", {
+        method: "POST",
+        body: JSON.stringify({
+          LocationName: location.LocationName,
+          Image: imageData,
+          user_id: session?.user.id,
+        }),
+      });
       
-    // } catch (error) {
-    //   console.log(error);
-    // } finally {
-    //   setIsSubmitting(false);
-    // }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const fetchLocation = async () => {
