@@ -72,7 +72,9 @@ export default function LocationCategoryHome() {
           user_id: session?.user.id,
         }),
       });
-      
+      if (response.ok) {
+        router.push("/Admin/Job/Location");
+      }
     } catch (error) {
       console.log(error);
     } finally {
