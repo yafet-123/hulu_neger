@@ -9,8 +9,7 @@ import DisplayLocation from "@/components/Home/DisplayLocation";
 
 async function fetchLocation() {
   const response = await fetch(
-    // fetch from our code repository
-    process.env.URL + "/api/Job/Location",
+    "/api/Job/Location",
     {
       next: {
         revalidate: 60,
@@ -24,8 +23,7 @@ async function fetchLocation() {
 
 async function fetchCategories() {
   const response = await fetch(
-    // fetch from our code repository
-    process.env.URL + "/api/Job/Category",
+    "/api/Job/Category",
     {
       next: {
         revalidate: 60,
@@ -41,6 +39,7 @@ export default async function SearchJobs() {
   const [jobs, setJobs] = useState("category");
   const locations = await fetchLocation();
   const categories = await fetchCategories();
+  console.log(locations)
   return (
     <div className="flex flex-col w-full h-full py-20 px-0 md:px-32">
       <h1 className="font-semibold text-[#009688] dark:text-white text-md md:text-3xl lg:text-4xl capitalize w-full">
