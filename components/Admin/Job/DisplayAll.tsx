@@ -6,7 +6,7 @@ import { usePathname, useRouter } from "next/navigation";
 
 const Display = ({ job }) => {
   const location = job.Location;
-  const des = job.Descreption
+  const des = job.Descreption;
   // console.log(job)
   return (
     <div className="flex flex-col p-5 pb-20">
@@ -84,7 +84,7 @@ const Display = ({ job }) => {
       <div className="flex flex-col justify-between mt-10">
         <div
           className="pl-10 bg-transparent text-black dark:!text-white mt-5 ql-editor ql-snow ql-video"
-          dangerouslySetInnerHTML={{ __html: job.Descreption || '' }}
+          dangerouslySetInnerHTML={{ __html: job.Descreption || "" }}
         />
       </div>
     </div>

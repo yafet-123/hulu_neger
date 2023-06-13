@@ -6,9 +6,9 @@ export const GET = async (request, { params }) => {
     console.log(params.jobsId);
 
     const updateview = await prisma.Job.update({
-      where:{job_id : Number(params.jobsId),},
-      data: { view: { increment: 1 }, },
-    })
+      where: { job_id: Number(params.jobsId) },
+      data: { view: { increment: 1 } },
+    });
 
     const jobs = await prisma.Job.findUnique({
       where: {
@@ -46,22 +46,22 @@ export const GET = async (request, { params }) => {
     if (!jobs) return new Response("Jobs Not Found", { status: 404 });
 
     const onedata = {
-      job_id:jobs.job_id,
-      CompanyName:jobs.CompanyName,
-      image:jobs.Image,
-      JobsName:jobs.JobsName,
-      CareerLevel:jobs.CareerLevel,
-      Salary:jobs.Salary,
-      Descreption:jobs.Descreption,
-      shortDescreption:jobs.shortDescreption,
-      DeadLine:jobs.DeadLine,
-      Apply:jobs.Apply,
-      view:jobs.view,
-      userName:jobs.User.UserName,
-      CreatedDate:jobs.CreatedDate,
-      ModifiedDate:jobs.ModifiedDate,
-      Location:jobs.JobLocation,
-    }
+      job_id: jobs.job_id,
+      CompanyName: jobs.CompanyName,
+      image: jobs.Image,
+      JobsName: jobs.JobsName,
+      CareerLevel: jobs.CareerLevel,
+      Salary: jobs.Salary,
+      Descreption: jobs.Descreption,
+      shortDescreption: jobs.shortDescreption,
+      DeadLine: jobs.DeadLine,
+      Apply: jobs.Apply,
+      view: jobs.view,
+      userName: jobs.User.UserName,
+      CreatedDate: jobs.CreatedDate,
+      ModifiedDate: jobs.ModifiedDate,
+      Location: jobs.JobLocation,
+    };
     return new Response(JSON.stringify(onedata), { status: 200 });
   } catch (error) {
     return new Response("Internal Server Error", { status: 500 });

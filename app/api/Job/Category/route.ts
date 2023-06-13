@@ -13,6 +13,11 @@ export const GET = async (req: NextApiRequest, res: NextApiResponse) => {
             email: true,
           },
         },
+        _count:{
+        select:{
+          JobCategory:true
+        }
+      },
       },
     });
 

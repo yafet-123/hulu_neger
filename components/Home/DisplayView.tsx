@@ -2,7 +2,7 @@ import moment from "moment";
 import Image from "next/image";
 import Link from "next/link";
 
-const Display = ({ jobs }) => {
+const DisplayView = ({ jobs }) => {
   const jobsId = jobs.job_id;
   return (
     <Link
@@ -38,4 +38,4 @@ const Display = ({ jobs }) => {
   );
 };
 
-export default Display;
+export default DisplayView;

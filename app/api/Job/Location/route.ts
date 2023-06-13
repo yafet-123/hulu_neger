@@ -6,6 +6,11 @@ export const GET = async (req: NextApiRequest, res: NextApiResponse) => {
     const location = await prisma.Location.findMany({
       orderBy: { ModifiedDate: "desc" },
       include: {
+        _count: {
+          select: {
+            JobLocation: true,
+          },
+        },
         User: {
           select: {
             email: true,

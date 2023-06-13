@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { AiOutlineClockCircle } from "react-icons/ai";
-import DisplayView from '@/components/Home/DisplayView'
+import DisplayView from "@/components/Home/DisplayView";
 async function fetchLatestJobs() {
   const response = await fetch(
     // fetch from our code repository
