@@ -13,11 +13,11 @@ export const GET = async (req: NextApiRequest, res: NextApiResponse) => {
             email: true,
           },
         },
-        _count:{
-        select:{
-          JobCategory:true
-        }
-      },
+        _count: {
+          select: {
+            JobCategory: true,
+          },
+        },
       },
     });
 
@@ -27,7 +27,7 @@ export const GET = async (req: NextApiRequest, res: NextApiResponse) => {
       CreatedDate: data.CreatedDate,
       ModifiedDate: data.ModifiedDate,
       email: data.User?.email,
-      count:data._count.JobCategory,
+      count: data._count.JobCategory,
     }));
 
     return new Response(JSON.stringify(Allcategories), { status: 200 });

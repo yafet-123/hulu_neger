@@ -26,7 +26,7 @@ export const GET = async (req: NextApiRequest, res: NextApiResponse) => {
       CreatedDate: data.CreatedDate,
       ModifiedDate: data.ModifiedDate,
       email: data.User.email,
-      count:data._count.JobLocation,
+      count: data._count.JobLocation,
     }));
     return new Response(JSON.stringify(Alllocations), { status: 200 });
   } catch (error) {

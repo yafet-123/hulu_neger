@@ -5,6 +5,7 @@ import 'react-quill/dist/quill.snow.css';
 import { EntertainmentSharing } from './EntertainmentSharing';
 import { AiOutlineShareAlt, AiOutlineEye } from 'react-icons/ai'
 import 'react-quill/dist/quill.snow.css';
+import BottomDisplayfrom './BottomDisplay'
 
 export function DisplayIndvidualentertainment({entertainment,entertainmentCategory, Allcategoryet,shareUrl,quotes}) {
   	return (
@@ -45,37 +46,7 @@ export function DisplayIndvidualentertainment({entertainment,entertainmentCatego
 	        	<h1 className="text-lg lg:text-3xl font-extrabold dark:text-white text-black tracking-wide leading-snug hover:text-[#009688]">Related Topics</h1>
 	        	<div className="grid grid-cols-1 md:grid-cols-2 gap-5">
 	        		{ Allcategoryet.map((data, index)=>(
-	        			<div key={index}>
-	        				<button 
-	              				onClick = {()=>{
-	                				router.push({
-	                  					pathname:"/DisplayEntertemiment",
-	                  					query:{entertainment_id:data.Entertainment.entertainment_id}
-	                				})
-	              				}}
-	              				id={data.Entertainment.entertainment_id} className="flex flex-col w-full group pt-5"
-	            			>
-	            				<div className="w-full !h-52 lg:!h-72 relative">
-	                				<Image src={data.Entertainment.Image} fill className="!bg-cover w-full !h-full border rounded-xl" alt="latest news image"/>
-	              				</div>
-
-	              				<h1 className="text-left group-hover:text-[#009688] group-hover:underline text-lg lg:text-xl font-extrabold dark:text-[#009688] text-slate-600 tracking-wide leading-snug">
-	                  				{data.Entertainment.Header}
-	                			</h1>
-	                			<div  className="text-lg group-hover:text-[#009688] bg-transparent text-black dark:!text-white text-left mt-2" dangerouslySetInnerHTML={{ __html: data.Entertainment.ShortDescription }} />
-	            			</button>
-
-	            			<div className="flex items-center justify-between text-sm"> 
-	            				<h3 className="text-left font-normal text-sm lg:text-md dark:text-white text-slate-600">
-                                  {moment(data.CreatedDate).utc().format('MMMM, Do YYYY')}
-                                </h3>
-
-	              				<p className="flex flex-row items-center text-black dark:text-white hover:text-[#009688] font-bold py-2 hover:scale-110 duration-1000 ease-in-out rounded ">
-	                				<AiOutlineEye size={32} />
-	                				<span className="ml-3">{data.Entertainment.view}</span>
-	              				</p>
-	            			</div>
-	        			</div>
+	        			<BottomDisplay key={index} entertainment={data} />
 	        		))}
 	        	</div>
 	        </div>

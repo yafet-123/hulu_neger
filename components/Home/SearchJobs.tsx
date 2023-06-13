@@ -8,28 +8,22 @@ import DisplayCategories from "@/components/Home/DisplayCategories";
 import DisplayLocation from "@/components/Home/DisplayLocation";
 
 async function fetchLocation() {
-  const response = await fetch(
-    "/api/Job/Location",
-    {
-      next: {
-        revalidate: 60,
-      },
-    }
-  );
+  const response = await fetch("/api/Job/Location", {
+    next: {
+      revalidate: 60,
+    },
+  });
 
   const locations = await response.json(); // change file response json file
   return locations;
 }
 
 async function fetchCategories() {
-  const response = await fetch(
-    "/api/Job/Category",
-    {
-      next: {
-        revalidate: 60,
-      },
-    }
-  );
+  const response = await fetch("/api/Job/Category", {
+    next: {
+      revalidate: 60,
+    },
+  });
 
   const categories = await response.json(); // change file response json file
   return categories;
@@ -39,7 +33,7 @@ export default async function SearchJobs() {
   const [jobs, setJobs] = useState("category");
   const locations = await fetchLocation();
   const categories = await fetchCategories();
-  console.log(locations)
+  console.log(locations);
   return (
     <div className="flex flex-col w-full h-full py-20 px-0 md:px-32">
       <h1 className="font-semibold text-[#009688] dark:text-white text-md md:text-3xl lg:text-4xl capitalize w-full">

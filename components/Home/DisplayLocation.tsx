@@ -7,7 +7,7 @@ const DisplayLocation = ({ location }) => {
   const image = location.Image;
   const howMany = location.count;
   const locationName = location.LocationName;
-  console.log(locationName)
+  console.log(locationName);
   return (
     <Link
       className="w-full flex items-center mb-3 group hover:bg-[#009688] px-2 lg:px-4 py-2"
