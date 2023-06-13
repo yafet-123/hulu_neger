@@ -12,7 +12,7 @@ export const GET = async (request, { params }) => {
 
     const jobs = await prisma.Job.findUnique({
       where: {
-        course_id: Number(params.jobsId),
+        job_id: Number(params.jobsId),
       },
       include: {
         User: {
@@ -62,7 +62,7 @@ export const GET = async (request, { params }) => {
       ModifiedDate:jobs.ModifiedDate,
       Location:jobs.JobLocation,
     }
-
+    console.log(jobs)
     return new Response(JSON.stringify(jobs), { status: 200 });
   } catch (error) {
     return new Response("Internal Server Error", { status: 500 });

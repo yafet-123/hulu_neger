@@ -13,7 +13,7 @@ const fetchJobs = async(jobsId : string) => {
 
 export default async function DisplayHomePage({params : {jobsId}}) {
   const job  = await fetchJobs(jobsId);
-  // console.log(job)
+  console.log(job)
   return (
     <section className="w-full h-full lg:pt-24">
       <DisplayAll job={job} />
