@@ -5,11 +5,10 @@ import Link from "next/link";
 const DisplayCategories = ({ category }) => {
   const categoryId = category.category_id;
   const categoryName = category.CategoryName;
-  const howMany = category._count.JobCategory;
+  const howMany = category.count;
   return (
     <Link
       className="flex justify-between items-center mb-3 group hover:bg-[#009688] px-2 lg:px-4 py-2 w-full"
-      key={index}
       type="button"
       href={`Job/Category/${categoryId}/${categoryName}/${howMany}`}
     >

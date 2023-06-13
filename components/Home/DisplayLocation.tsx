@@ -5,12 +5,12 @@ import Link from "next/link";
 const DisplayLocation = ({ location }) => {
   const locationId = location.location_id;
   const image = location.Image;
-  const howMany = location._count.JobLocation;
+  const howMany = location.count;
   const locationName = location.LocationName;
+  console.log(locationName)
   return (
     <Link
       className="w-full flex items-center mb-3 group hover:bg-[#009688] px-2 lg:px-4 py-2"
-      key={index}
       type="button"
       href={`Job/Location/${locationId}/${image}/${howMany}/${locationName}`}
     >
