@@ -1,4 +1,4 @@
-import DisplayAll from "@/components/Admin/Job/DisplayAll";
+import DisplayAll from "@/components/Admin/Entertainment/DisplayAll";
 
 const fetchEntertemiment = async(entertemimentId : string) => {
   const response = await fetch(process.env.URL + `/api/Entertainment/${entertemimentId}`,
