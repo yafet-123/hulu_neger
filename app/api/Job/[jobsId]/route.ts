@@ -62,7 +62,6 @@ export const GET = async (request, { params }) => {
       ModifiedDate:jobs.ModifiedDate,
       Location:jobs.JobLocation,
     }
-    console.log(onedata)
     return new Response(JSON.stringify(onedata), { status: 200 });
   } catch (error) {
     return new Response("Internal Server Error", { status: 500 });
