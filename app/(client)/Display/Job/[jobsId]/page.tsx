@@ -1,14 +1,19 @@
 import DisplayAll from "@/components/Admin/Job/DisplayAll";
 
 const fetchJobs = async(jobsId : string) => {
-  const data = await fetch(process.env.URL + `/api/Job/${jobsId}`,
+  const response = await fetch(process.env.URL + `/api/Job/${jobsId}`,
     {   
       next: {
         revalidate: 60,
       },
     }
   );
-  return data
+  if (!response.ok) {
+    throw new Error('Failed to fetch job data');
+  }
+
+  const data = await response.json();
+  return data;
 }
 
 export default async function DisplayHomePage({params : {jobsId}}) {
