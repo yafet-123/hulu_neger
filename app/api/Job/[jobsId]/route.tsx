@@ -4,6 +4,12 @@ import prisma from "@/utils/db.server";
 export const GET = async (request, { params }) => {
   try {
     console.log(params.jobsId);
+
+    const updateview = await prisma.Job.update({
+      where:{job_id : Number(params.jobsId),},
+      data: { view: { increment: 1 }, },
+    })
+
     const jobs = await prisma.Job.findUnique({
       where: {
         course_id: Number(params.jobsId),
@@ -37,28 +43,27 @@ export const GET = async (request, { params }) => {
       },
     });
 
-    if (!jobs) return new Response("Course Not Found", { status: 404 });
+    if (!jobs) return new Response("Jobs Not Found", { status: 404 });
 
-     const job = jobs.map((data) => ({
-      job_id: data.job_id,
-      CompanyName: data.CompanyName,
-      image: data.Image,
-      JobsName: data.JobsName,
-      CareerLevel: data.CareerLevel,
-      Salary: data.Salary,
-      Descreption: data.Descreption,
-      shortDescreption: data.shortDescreption,
-      DeadLine: data.DeadLine,
-      Apply: data.Apply,
-      view: data.view,
-      email: data.User.email,
-      CreatedDate: data.CreatedDate,
-      ModifiedDate: data.ModifiedDate,
-      categories: data.JobCategory,
-      Location: data.JobLocation,
-    }));
+    const onedata = {
+      job_id:jobs.job_id,
+      CompanyName:jobs.CompanyName,
+      image:jobs.Image,
+      JobsName:jobs.JobsName,
+      CareerLevel:jobs.CareerLevel,
+      Salary:jobs.Salary,
+      Descreption:jobs.Descreption,
+      shortDescreption:jobs.shortDescreption,
+      DeadLine:jobs.DeadLine,
+      Apply:jobs.Apply,
+      view:jobs.view,
+      userName:jobs.User.UserName,
+      CreatedDate:jobs.CreatedDate,
+      ModifiedDate:jobs.ModifiedDate,
+      Location:jobs.JobLocation,
+    }
 
-    return new Response(JSON.stringify(job), { status: 200 });
+    return new Response(JSON.stringify(jobs), { status: 200 });
   } catch (error) {
     return new Response("Internal Server Error", { status: 500 });
   }

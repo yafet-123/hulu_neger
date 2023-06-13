@@ -24,16 +24,14 @@ const Display = ({ location, handleEdit }) => {
     const apiSecret = process.env.CLOUDINARYSECRET;
 
     try {
-      const res = await fetch(cloudinaryUrl, {
-        
-      });
+      const res = await fetch(cloudinaryUrl, {});
       if (response.status === 200) {
         router.push("/Admin/Job/Location");
       } else {
         res.status(response.status).json({ error: "Failed to delete image" });
       }
-    } catch(error){
-      console.log(error)
+    } catch (error) {
+      console.log(error);
     }
   }
 
@@ -85,7 +83,16 @@ const Display = ({ location, handleEdit }) => {
         <p className="my-4 font-satoshi text-sm text-gray-700">
           {location.LocationName}
         </p>
-        <Image src={location.Image == "" || location.Image == null ? "/images/logo2.png" : location.Image} alt="location Image" width={100} height={100} />
+        <Image
+          src={
+            location.Image == "" || location.Image == null
+              ? "/images/logo2.png"
+              : location.Image
+          }
+          alt="location Image"
+          width={100}
+          height={100}
+        />
       </div>
       {session?.user.email === location.email && (
         <div className="mt-5 flex-center gap-4 border-t border-gray-100 pt-3">

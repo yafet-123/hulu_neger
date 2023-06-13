@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { Cloudinary } from 'cloudinary';
+import { Cloudinary } from "cloudinary";
 
 const Form = ({
   type,
