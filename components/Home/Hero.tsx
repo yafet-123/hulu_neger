@@ -2,9 +2,9 @@
 import React, {useState} from "react";
 import { AiOutlineSearch } from "react-icons/ai";
 import Image from 'next/future/image'
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/navigation'
 
-export function Hero() {
+export default function Hero() {
   const [search,setsearch] = useState("job")
   const router = useRouter();
   const [searchValue, setsearchValue] = useState("")

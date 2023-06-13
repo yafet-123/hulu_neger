@@ -25,7 +25,7 @@ const DisplayLocation = ({ location }) => {
           jobs in {location.LocationName}
         </h1>
         <h1 className="text-black dark:text-white text-left text-[#009688] font-bold text-xs md:text-lg lg:text-xl group-hover:text-white group-hover:border-orange-200">
-          {location._count.JobLocation}
+          {location.count}
         </h1>
       </div>
     </Link>

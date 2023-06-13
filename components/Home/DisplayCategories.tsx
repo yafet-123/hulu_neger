@@ -17,7 +17,7 @@ const DisplayCategories = ({ category }) => {
         {category.CategoryName}
       </h1>
       <h1 className="w-1/4 px-2 lg:px-5 py-2 text-black dark:text-white border rounded-xl border-[#009688] text-[#009688] font-bold text-xs md:text-lg lg:text-xl group-hover:text-white group-hover:text-white group-hover:border-white">
-        {category._count.JobCategory}
+        {category.count}
       </h1>
     </Link>
   );

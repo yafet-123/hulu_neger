@@ -27,9 +27,9 @@ export const GET = async (req: NextApiRequest, res: NextApiResponse) => {
       CreatedDate: data.CreatedDate,
       ModifiedDate: data.ModifiedDate,
       email: data.User?.email,
+      count:data._count.JobCategory,
     }));
 
-    console.log(Allcategories);
     return new Response(JSON.stringify(Allcategories), { status: 200 });
   } catch (error) {
     return new Response("Failed to fetch all prompts", { status: 500 });
