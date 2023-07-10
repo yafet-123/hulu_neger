@@ -50,5 +50,8 @@
     "typescript": "5.0.4",
     "vm2": "^3.9.19",
     "yup": "^1.2.0"
+  },
+  "devDependencies": {
+    "prisma": "^4.16.2"
   }
 }
