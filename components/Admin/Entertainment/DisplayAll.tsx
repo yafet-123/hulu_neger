@@ -2,7 +2,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import moment from 'moment';
 import 'react-quill/dist/quill.snow.css';
-import { EntertainmentSharing } from './EntertainmentSharing';
+// import { EntertainmentSharing } from './EntertainmentSharing';
 import { AiOutlineShareAlt, AiOutlineEye } from 'react-icons/ai'
 import 'react-quill/dist/quill.snow.css';
 
@@ -39,7 +39,7 @@ export default function DisplayIndvidualentertainment({entertainment,entertainme
 	            <div className="bg-transparent text-black dark:!text-white mt-5 ql-editor ql-snow ql-video" dangerouslySetInnerHTML={{ __html: entertainment.Description }} />
 	        </div>
 
-	        <EntertainmentSharing shareUrl={shareUrl} quotes={quotes}/>
+	        {/*<EntertainmentSharing shareUrl={shareUrl} quotes={quotes}/>*/}
 
 	        <div className="flex flex-col">
 	        	<h1 className="text-lg lg:text-3xl font-extrabold dark:text-white text-black tracking-wide leading-snug hover:text-[#009688]">Related Topics</h1>
