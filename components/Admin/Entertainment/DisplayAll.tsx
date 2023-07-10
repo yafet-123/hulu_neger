@@ -7,7 +7,7 @@ import { AiOutlineShareAlt, AiOutlineEye } from 'react-icons/ai'
 import 'react-quill/dist/quill.snow.css';
 import BottomDisplayfrom './BottomDisplay'
 
-export function DisplayIndvidualentertainment({entertainment,entertainmentCategory, Allcategoryet,shareUrl,quotes}) {
+export default function DisplayIndvidualentertainment({entertainment,entertainmentCategory, Allcategoryet,shareUrl,quotes}) {
   	return (
 	    <div className="flex flex-col flex-1 pb-20 w-full lg:w-[72%]">
 		    <h1 className="text-lg lg:text-4xl font-extrabold dark:text-white text-black tracking-wide leading-snug mb-5 hover:text-[#009688]">
