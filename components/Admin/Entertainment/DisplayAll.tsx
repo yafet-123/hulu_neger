@@ -5,7 +5,7 @@ import 'react-quill/dist/quill.snow.css';
 import { EntertainmentSharing } from './EntertainmentSharing';
 import { AiOutlineShareAlt, AiOutlineEye } from 'react-icons/ai'
 import 'react-quill/dist/quill.snow.css';
-import BottomDisplayfrom './BottomDisplay'
+import BottomDisplay './BottomDisplay'
 
 export default function DisplayIndvidualentertainment({entertainment,entertainmentCategory, Allcategoryet,shareUrl,quotes}) {
   	return (
