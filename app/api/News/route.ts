@@ -5,6 +5,13 @@ export const GET = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     const news = await prisma.News.findMany({
       orderBy: { ModifiedDate: "desc" },
+      include: {
+        User: {
+          select: {
+            email: true,
+          },
+        },
+      },
     });
     return new Response(JSON.stringify(news), { status: 200 });
   } catch (error) {
