@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import prisma from "@/utils/db.server";
-
+ 
 export const GET = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     const location = await prisma.Location.findMany({
@@ -18,7 +18,7 @@ export const GET = async (req: NextApiRequest, res: NextApiResponse) => {
         },
       },
     });
-
+    console.log(location)
     const Alllocations = location.map((data) => ({
       location_id: data.location_id,
       LocationName: data.LocationName,
@@ -28,7 +28,8 @@ export const GET = async (req: NextApiRequest, res: NextApiResponse) => {
       email: data.User.email,
       count: data._count.JobLocation,
     }));
-    return new Response(JSON.stringify(Alllocations), { status: 200 });
+    console.log()
+    return new Response(JSON.stringify(location), { status: 200 });
   } catch (error) {
     return new Response("Failed to fetch all prompts", { status: 500 });
   }
